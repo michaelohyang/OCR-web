@@ -10,6 +10,7 @@ class App extends React.Component {
     this.numFiles = 0;
     this.imageCollection = new Array();
     this.numAddedFiles = 0;
+    this.formData = new FormData();
     this.state = {
       // Initially, no file is selected
       selectedFile: null
@@ -27,44 +28,35 @@ class App extends React.Component {
     this.setState({ selectedFile: event.target.files });
   };
 
-  printSelectedFile = () => {
-    if (this.state.selectedFile) {
-      for (var i = 0; i < this.state.selectedFile.length; i++) {
-        this.imageCollection[this.numFiles] = this.state.selectedFile[i].name;
-        this.numFiles++;
-        console.log("numFiles: " + this.numFiles);
-      }
-    }
-    console.log(this.imageCollection);
-  };
-
   onFileUpload = () => {
-    // Create an object of formData
-    const formData = new FormData();
-    // Update the formData object
-    formData.append(
-      "myFile",
-      this.state.selectedFile,
-      this.state.selectedFile.name
-    );
+    // Object.values(this.state.selectedFile).forEach(function (selectedFile, index) {
+    //   this.formData.append(index, selectedFile);
+    // });
     // Details of the uploaded file
     console.log(this.state.selectedFile);
-    // Request made to the backend api
-    // Send formData object
-    axios.post("api/uploadfile", formData);
+    for (let [title, fileContent] of this.formData) {
+      console.log(title);
+      console.log(fileContent);
+    }
+    // axios.post("api/uploadfile", this.formData);
   };
 
   fileData = () => { 
     if (this.state.selectedFile) {
       for (var i = 0; i < this.numAddedFiles; i++) {
-        this.imageCollection[this.numFiles] = this.state.selectedFile[i].name;
+        this.imageCollection[this.numFiles] = this.state.selectedFile[i];
         this.numFiles++;
         console.log("numFiles: " + this.numFiles);
+
+        this.formData.append(
+          "Medical Record", 
+          this.state.selectedFile[i], 
+          this.state.selectedFile[i].name
+          );
       }
       console.log(this.imageCollection);
       this.numAddedFiles = 0;
     }
-
 
     if (this.imageCollection.length > 0) {
        return (
@@ -73,7 +65,7 @@ class App extends React.Component {
         return (
             <div key="{this.numFiles - 1}">
               <h2>File Details:</h2>
-              <p>File Name: {imageFile}</p> 
+              <p>File Name: {imageFile.name}</p> 
             </div> 
         )
       })} 
