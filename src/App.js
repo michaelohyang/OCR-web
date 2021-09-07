@@ -4,23 +4,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-class ChildComp extends React.Component {
-
-  componentDidMount() {
-    console.log('componentDidMount() lifecycle')
-  }
-
-  render() {
-    console.log('render() lifecycle')
-    return <h1>{this.props.number} number of files</h1>;
-  }
-}
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.numFiles = 0;
     this.imageCollection = new Array();
+    this.numAddedFiles = 0;
     this.state = {
       // Initially, no file is selected
       selectedFile: null
@@ -32,8 +21,10 @@ class App extends React.Component {
 
   onFileChange = event => {
     // Update the state
-    console.log(event.target.files);
-    this.setState({ selectedFile: event.target.files }, this.printSelectedFile, this.render());
+    console.log(event.target.files.length);
+    this.numAddedFiles = event.target.files.length;
+    // this.setState({ selectedFile: event.target.files }, this.printSelectedFile, this.render());
+    this.setState({ selectedFile: event.target.files });
   };
 
   printSelectedFile = () => {
@@ -64,6 +55,17 @@ class App extends React.Component {
   };
 
   fileData = () => { 
+    if (this.state.selectedFile) {
+      for (var i = 0; i < this.numAddedFiles; i++) {
+        this.imageCollection[this.numFiles] = this.state.selectedFile[i].name;
+        this.numFiles++;
+        console.log("numFiles: " + this.numFiles);
+      }
+      console.log(this.imageCollection);
+      this.numAddedFiles = 0;
+    }
+
+
     if (this.imageCollection.length > 0) {
        return (
        <React.Fragment>
@@ -101,7 +103,6 @@ class App extends React.Component {
                 <button onClick={this.onFileUpload}>
                   Upload!
                 </button>
-                <ChildComp key={this.numFiles} number={this.numFiles} />
             </div>
           {this.fileData()}
         </div>
