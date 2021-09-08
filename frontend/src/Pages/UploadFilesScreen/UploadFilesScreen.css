@@ -1,0 +1,46 @@
+.bodyContainer {
+  height: 57.8em;
+  background: #ffd580;
+}
+
+.bodyText {
+  font-size: larger;
+  text-align: center;
+  font-weight: bold;
+  font-size: larger;
+  padding-top: 3em;
+}
+
+.uploadBtnText {
+  font-weight: bolder;
+  font-size: larger;
+}
+
+.uploadBtn {
+  background: white;
+  border-radius: 10em;
+  height: 5em;
+  width: 10em;
+  padding-left: 10em;
+  padding-right: 10em;
+  top: 15em;
+  position: absolute;
+  cursor: pointer;
+}
+
+.descriptionText {
+  font-weight: 1000;
+  font-size: larger;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.descriptionContainer {
+  display: flex;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
