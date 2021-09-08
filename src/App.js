@@ -9,20 +9,30 @@ import axios from 'axios';
 
 class App extends React.Component {
     fileArray = [];
-  constructor(props) {
-    super(props);
-    this.numFiles = 0;
-    this.imageCollection = new Array();
-    this.numAddedFiles = 0;
-    this.formData = new FormData();
-    this.state = {
-      // Initially, no file is selected
-      file: [null]
+
+    
+    constructor(props) {
+        super(props);
+        this.numFiles = 0;
+        this.imageCollection = new Array();
+        this.numAddedFiles = 0;
+        this.formData = new FormData();
+        this.state = {
+        // Initially, no file is selected
+        file: [null]
+        };
+        // This binding is necessary to make `this` work in the callback
+        this.onFileChange = this.onFileChange.bind(this);
+        this.onFileUpload = this.onFileUpload.bind(this);
+        this.removeImage = this.removeImage.bind(this);
+    }
+
+    removeImage = (id) => {
+        this.fileArray = this.fileArray.filter((item) => item.id !== id);
+        this.formData.delete(id); 
+        this.setState({ file: this.fileArray})
     };
-    // This binding is necessary to make `this` work in the callback
-    this.onFileChange = this.onFileChange.bind(this);
-    this.onFileUpload = this.onFileUpload.bind(this);
-  }
+    
 
   onFileChange = e => {
     for (let i = 0; i < e.target.files.length; i++) {
@@ -34,7 +44,7 @@ class App extends React.Component {
       for (let i = 0; i < e.target.files.length; i++) {
           //this.formData.append(`${patient_name}_${i}`, e.target.files[i])// TODO: FIX this when patient name is available and uncomment the line below
           this.formData.append(`patient_name_${i}`, e.target.files[i])
-          this.fileArray.push(URL.createObjectURL(e.target.files[i]))
+          this.fileArray.push({id: `patient_name_${i}`, image: URL.createObjectURL(e.target.files[i])})
           console.log(e.target.files[i])
       }
     this.setState({ file: this.fileArray })
@@ -65,7 +75,7 @@ class App extends React.Component {
 
         this.formData.append(
           "Medical Record", 
-          this.state.selectedFile[i], 
+          this.state.selectedFile[i],
           this.state.selectedFile[i].name
           );
       }
@@ -107,7 +117,10 @@ class App extends React.Component {
             </h3>
             <div className="form-group images-preview">
                       {(this.fileArray || []).map(url => (
-                          <img src={url} alt="..." />
+                        <>
+                        <img src={url.image} alt="..." />
+                        <button onClick={() => this.removeImage(url.id)}>x</button>
+                        </>
                       ))}
             </div>
             <div>
