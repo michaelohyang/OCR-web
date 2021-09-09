@@ -4,7 +4,6 @@ on:
   # Trigger on push to branch 'main'
   push:
     branches: [main]
-  # Trigger on pull request from 'main'
 
 jobs:
   build_test:
