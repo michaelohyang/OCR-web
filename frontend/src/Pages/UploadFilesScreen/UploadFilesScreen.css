@@ -24,8 +24,12 @@
   padding-left: 10em;
   padding-right: 10em;
   top: 15em;
-  position: absolute;
+  position: relative;
   cursor: pointer;
+}
+
+.uploadBtn:hover {
+  background: #f0f0f0;
 }
 
 .descriptionText {
