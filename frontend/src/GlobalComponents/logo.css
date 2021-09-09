@@ -1,3 +1,4 @@
+/* this method used for  logo style */
 .header {
   display: block;
   margin: 0;
@@ -7,6 +8,7 @@
   left: 10%;
 }
 
+/* this method used for  header middle text */
 .centerword {
   position: relative;
   margin: 0;
@@ -16,6 +18,7 @@
   text-shadow: 0px 1px, 1px 0px, 1px 1px;
 }
 
+/* this method used for  header whole div */
 .container {
   background: linear-gradient(
     90deg,
@@ -28,6 +31,7 @@
   box-shadow: 0.5px 0.5px gray;
 }
 
+/* this method used for menu button style */
 .menu {
   position: absolute;
   right: 0%;
