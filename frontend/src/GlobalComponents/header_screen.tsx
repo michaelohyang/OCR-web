@@ -9,7 +9,7 @@ import Menufunc from "./Menu1";
 import Buttonfuc from "./Button1";
 
 function abc(): void {
-    alert("trevor 大帅哥");
+    alert("trevor 是大帅哥");
 }
 
 export default class Header_screen extends Component {
@@ -26,7 +26,7 @@ export default class Header_screen extends Component {
                         <Menufunc />
                     </div>
                 </HStack>
-                <Buttonfuc txtname={"fuckthisproject"} onClickFunc={abc}/>
+                <Buttonfuc txtname={"trevor is sooooo awesome!"} onClickFunc={abc}/>
             </div>
         )
     };

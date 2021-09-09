@@ -1,13 +1,9 @@
 
-import logo from './logo.svg';
 import '../App.css';
-import logo1 from './logo.jpg';
-import { Stack, HStack, VStack, Flex, Heading, Img, Box,Menu,MenuButton, MenuList,MenuItem,extendTheme} from "@chakra-ui/react";
-import { ChakraProvider } from "@chakra-ui/react";
+import { HStack,Menu,MenuButton, MenuList,MenuItem } from "@chakra-ui/react";
 import * as React from "react";
 import { IconButton} from "@chakra-ui/react";
 import {HamburgerIcon} from '@chakra-ui/icons';
-import { Button, ButtonGroup} from "@chakra-ui/react";
 import "./logo.css";
 
 export default function Menufunc() {
