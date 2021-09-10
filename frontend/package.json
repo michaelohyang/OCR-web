@@ -46,6 +46,6 @@
     "@types/react-router-dom": "^5.1.8",
     "css-loader": "^6.2.0",
     "style-loader": "^3.2.1",
-    "webpack": "~4.42.0"
+    "webpack": "~4.44.2"
   }
 }
