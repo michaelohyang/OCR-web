@@ -1,0 +1,31 @@
+name: Build and Test React OCR Backend
+
+on:
+  # Trigger on push to branch 'main'
+  push:
+    branches:
+      - main
+  # Trigger on pull request against 'main'
+  pull_request:
+    branches:
+      - main
+
+defaults:
+  run:
+    working-directory: backend
+
+jobs:
+  build_client:
+    name: Build and Test Backend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node Env
+        uses: "actions/setup-node@v1"
+        with:
+          node-version: 14
+
+      - name: Install Dependencies
+        run: npm ci
