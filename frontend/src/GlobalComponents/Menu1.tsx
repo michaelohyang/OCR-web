@@ -6,6 +6,7 @@ import { IconButton} from "@chakra-ui/react";
 import {HamburgerIcon} from '@chakra-ui/icons';
 import "./logo.css";
 
+//This is the function design layout of the menu button function
 export default function Menufunc() {
   return <HStack>
     <Menu >
