@@ -8,6 +8,8 @@ import logo1 from "./logo.jpg";
 import Menufunc from "./Menu1";
 import Buttonfuc from "./Button1";
 
+
+// This is the function that display the header page which contains menu button, logo and basic text. 
 function abc(): void {
   alert("trevor 是大帅哥");
 }

@@ -3,6 +3,7 @@ import logo1 from "./logo.jpg";
 import { HStack, Image, Text } from "@chakra-ui/react";
 import * as React from "react";
 
+// This is the function used for combine the logo and company name
 export default function Logofunc() {
   return (
     <HStack>
