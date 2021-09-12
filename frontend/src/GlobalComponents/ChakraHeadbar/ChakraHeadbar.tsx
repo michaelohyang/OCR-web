@@ -1,4 +1,3 @@
-import { Component } from "react";
 import * as React from "react";
 import Logofunc from "./logo";
 import "../App.css";
@@ -6,15 +5,14 @@ import "./logo.css";
 import { HStack, Image, Text, Center } from "@chakra-ui/react";
 import logo1 from "./logo.jpg";
 import Menufunc from "./Menu1";
-import Buttonfuc from "./Button1";
+import DesignedButton from "../ChakraButton";
 
-
-// This is the function that display the header page which contains menu button, logo and basic text. 
+// This is the function that display the header page which contains menu button, logo and basic text.
 function abc(): void {
   alert("trevor 是大帅哥");
 }
 
-export default class Header_screen extends Component {
+export default class ChakraHeadbar extends React.Component {
   render() {
     return (
       <div>
@@ -30,7 +28,11 @@ export default class Header_screen extends Component {
             <Menufunc />
           </div>
         </HStack>
-        <Buttonfuc txtname={"trevor is sooooo awesome!"} onClickFunc={abc} />
+        <DesignedButton
+          txtname={"trevor is sooooo awesome!"}
+          onClickFunc={abc}
+          cssDesign={""}
+        />
       </div>
     );
   }
