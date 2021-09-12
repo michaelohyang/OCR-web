@@ -31,6 +31,7 @@
 
 .descriptionContainer {
   display: flex;
+  padding-top: 5em;
 }
 
 .BtnContainer {
@@ -38,6 +39,12 @@
   justify-content: center;
   align-items: center;
   gap: 2.5em;
-  padding-top: 4em;
   flex-wrap: wrap;
+  padding-top: 3em;
+}
+
+.img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

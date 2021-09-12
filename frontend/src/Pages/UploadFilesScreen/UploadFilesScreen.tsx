@@ -10,7 +10,7 @@ class UploadFilesScreen extends Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      formData: FormData,
+      formData: new FormData(),
       arrayOfFiles: [],
       numberOfAddedFiles: 0,
     };
@@ -24,16 +24,15 @@ class UploadFilesScreen extends Component<any, any> {
   };
 
   chooseFiles = (e: any) => {
-    console.log("hi");
     let arrNewFiles = this.state.arrayOfFiles;
     let formDataCopy = this.state.formData;
-    let fileLength = e.target.file.length;
-    for (let i of fileLength) {
+    let fileLength = e.target.files.length;
+    for (let i = 0; i < fileLength; i++) {
       if (e.target.files[i]["type"].split("/")[0] !== "image") {
         return;
       }
     }
-    for (let i of fileLength) {
+    for (let i = 0; i < fileLength; i++) {
       //this.formData.append(`${patient_name}_${i}`, e.target.files[i])// TODO: FIX this when patient name is available and uncomment the line below
       formDataCopy.append("medical", e.target.files[i]);
       arrNewFiles.push(URL.createObjectURL(e.target.files[i]));
@@ -55,14 +54,16 @@ class UploadFilesScreen extends Component<any, any> {
           <NavBar />
         </div>
         <div className="bodyContainer">
-          <Grid templateRows="repeat(3, 1fr)" height="45em" gap={3}>
+          <Grid templateRows="repeat(3, 2fr)" height="45em" gap={3}>
             <Box>
               <p className="bodyText">
                 No Limits On How Many Files You Can Upload!
               </p>
             </Box>
             <Box>
-              <DisplayFileImage fileArray={this.state.arrayOfFiles} />
+              <div className="img">
+                <DisplayFileImage fileArray={this.state.arrayOfFiles} />
+              </div>
             </Box>
             <Box>
               <div className="BtnContainer">
@@ -75,7 +76,7 @@ class UploadFilesScreen extends Component<any, any> {
                   type="file"
                   name="medical"
                   multiple
-                  onChange={(e: any) => this.chooseFiles}
+                  onChange={(e: any) => this.chooseFiles(e)}
                 />
                 <ChakraButton
                   txtname={"Upload"}
