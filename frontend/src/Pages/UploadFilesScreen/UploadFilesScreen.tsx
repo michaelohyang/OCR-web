@@ -33,7 +33,6 @@ class UploadFilesScreen extends Component<any, any> {
       }
     }
     for (let i = 0; i < fileLength; i++) {
-      //this.formData.append(`${patient_name}_${i}`, e.target.files[i])// TODO: FIX this when patient name is available and uncomment the line below
       formDataCopy.append("medical", e.target.files[i]);
       arrNewFiles.push(URL.createObjectURL(e.target.files[i]));
     }
@@ -66,18 +65,16 @@ class UploadFilesScreen extends Component<any, any> {
               </div>
             </Box>
             <Box>
-              <div className="BtnContainer">
-                {/* <ChakraButton
-                  txtname={"Choose Files"}
-                  onChange={(e: any) => this.chooseFiles}
-                  cssDesign={"uploadBtn"}
-                /> */}
-                <input
-                  type="file"
-                  name="medical"
-                  multiple
-                  onChange={(e: any) => this.chooseFiles(e)}
-                />
+              <div className="btnContainer">
+                <label className={"chooseBtnContainer"}>
+                  <input
+                    type="file"
+                    name="medical"
+                    multiple
+                    onChange={(e: any) => this.chooseFiles(e)}
+                  />
+                  <p className={"chooseBtnText"}>Choose Files</p>
+                </label>
                 <ChakraButton
                   txtname={"Upload"}
                   onClickFunc={this.uploadFilesFunction}
