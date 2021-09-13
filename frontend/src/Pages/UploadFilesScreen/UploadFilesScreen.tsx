@@ -17,14 +17,27 @@ class UploadFilesScreen extends Component<any, any> {
 
     this.uploadFilesFunction = this.uploadFilesFunction.bind(this);
     this.chooseFiles = this.chooseFiles.bind(this);
+    this.removeImage = this.removeImage.bind(this);
   }
 
   uploadFilesFunction = () => {
     axios.post("http://localhost:8080/upload", this.state.formData);
+    alert("Images Successfully Uploaded to The Database");
+  };
+
+  removeImage = (id: any) => {
+    console.log(id);
+    let tempArrFiles = this.state.arrayOfFiles.filter(
+      (item: any) => item.id !== id
+    );
+    this.setState({
+      arrayOfFiles: tempArrFiles,
+    });
+    this.setState({ formData: this.state.formData.delete(id) });
   };
 
   chooseFiles = (e: any) => {
-    let arrNewFiles = this.state.arrayOfFiles;
+    let arrNewFiles = [];
     let formDataCopy = this.state.formData;
     let fileLength = e.target.files.length;
     for (let i = 0; i < fileLength; i++) {
@@ -34,7 +47,10 @@ class UploadFilesScreen extends Component<any, any> {
     }
     for (let i = 0; i < fileLength; i++) {
       formDataCopy.append("medical", e.target.files[i]);
-      arrNewFiles.push(URL.createObjectURL(e.target.files[i]));
+      arrNewFiles.push({
+        id: `patient_name_${i}`,
+        image: URL.createObjectURL(e.target.files[i]),
+      });
     }
     // update the arrray that contains the current files we have
     this.setState({ arrayOfFiles: arrNewFiles });
@@ -61,7 +77,10 @@ class UploadFilesScreen extends Component<any, any> {
             </Box>
             <Box>
               <div className="img">
-                <DisplayFileImage fileArray={this.state.arrayOfFiles} />
+                <DisplayFileImage
+                  fileArray={this.state.arrayOfFiles}
+                  removeImage={this.removeImage}
+                />
               </div>
             </Box>
             <Box>
