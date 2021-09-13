@@ -1,11 +1,67 @@
-import { EmailIcon } from "@chakra-ui/icons";
-import { Box, Grid, GridItem } from "@chakra-ui/layout";
-import { Button } from "@chakra-ui/react";
+import { Box, Grid } from "@chakra-ui/layout";
+import axios from "axios";
 import { Component } from "react";
-import NavBar from "./Components/NavBar";
+import ChakraButton from "../../GlobalComponents/ChakraButton";
+import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
+import NavBar from "./Components/NavBar/NavBar";
 import "./UploadFilesScreen.css";
 
-class UploadFilesScreen extends Component {
+class UploadFilesScreen extends Component<any, any> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      formData: new FormData(),
+      arrayOfFiles: [],
+      numberOfAddedFiles: 0,
+    };
+
+    this.uploadFilesFunction = this.uploadFilesFunction.bind(this);
+    this.chooseFiles = this.chooseFiles.bind(this);
+    this.removeImage = this.removeImage.bind(this);
+  }
+
+  uploadFilesFunction = () => {
+    axios.post("http://localhost:8080/upload", this.state.formData);
+    alert("Images Successfully Uploaded to The Database");
+  };
+
+  removeImage = (id: any) => {
+    console.log(id);
+    let tempArrFiles = this.state.arrayOfFiles.filter(
+      (item: any) => item.id !== id
+    );
+    this.setState({
+      arrayOfFiles: tempArrFiles,
+    });
+    this.setState({ formData: this.state.formData.delete(id) });
+  };
+
+  chooseFiles = (e: any) => {
+    let arrNewFiles = [];
+    let formDataCopy = this.state.formData;
+    let fileLength = e.target.files.length;
+    for (let i = 0; i < fileLength; i++) {
+      if (e.target.files[i]["type"].split("/")[0] !== "image") {
+        return;
+      }
+    }
+    for (let i = 0; i < fileLength; i++) {
+      formDataCopy.append("medical", e.target.files[i]);
+      arrNewFiles.push({
+        id: `patient_name_${i}`,
+        image: URL.createObjectURL(e.target.files[i]),
+      });
+    }
+    // update the arrray that contains the current files we have
+    this.setState({ arrayOfFiles: arrNewFiles });
+
+    // update the formData
+    this.setState({ formData: formDataCopy });
+
+    // Update the literal number of files added
+    this.setState({ numberOfAddedFiles: fileLength });
+  };
+
   render() {
     return (
       <div>
@@ -13,37 +69,56 @@ class UploadFilesScreen extends Component {
           <NavBar />
         </div>
         <div className="bodyContainer">
-          <Grid h="50em" gap={4}>
-            <GridItem>
+          <Grid templateRows="repeat(3, 2fr)" height="45em" gap={3}>
+            <Box>
               <p className="bodyText">
                 No Limits On How Many Files You Can Upload!
               </p>
-            </GridItem>
-            <GridItem>
-              <div className="buttonContainer">
-                <Button leftIcon={<EmailIcon />} className="uploadBtn">
-                  <p className="uploadBtnText">Upload</p>
-                </Button>
+            </Box>
+            <Box>
+              <div className="img">
+                <DisplayFileImage
+                  fileArray={this.state.arrayOfFiles}
+                  removeImage={this.removeImage}
+                />
               </div>
-            </GridItem>
-            <Grid
-              templateColumns="repeat(4, 1fr)"
-              gap={6}
-              className="descriptionContainer"
-            >
-              <Box className="descriptionText">
-                ① Click on the files you want to upload
-              </Box>
-              <Box className="descriptionText">
-                ② View your files on this page
-              </Box>
-              <Box className="descriptionText">
-                ③ Finalize your changes on the files you want
-              </Box>
-              <Box className="descriptionText">
-                ④ Sit back and watch the magic!
-              </Box>
-            </Grid>
+            </Box>
+            <Box>
+              <div className="btnContainer">
+                <label className={"chooseBtnContainer"}>
+                  <input
+                    type="file"
+                    name="medical"
+                    multiple
+                    onChange={(e: any) => this.chooseFiles(e)}
+                  />
+                  <p className={"chooseBtnText"}>Choose Files</p>
+                </label>
+                <ChakraButton
+                  txtname={"Upload"}
+                  onClickFunc={this.uploadFilesFunction}
+                  cssDesign={"uploadBtn"}
+                />
+              </div>
+            </Box>
+          </Grid>
+          <Grid
+            templateColumns="repeat(4, 1fr)"
+            gap={6}
+            className="descriptionContainer"
+          >
+            <Box className="descriptionText">
+              ① Click on the files you want to upload
+            </Box>
+            <Box className="descriptionText">
+              ② View your files on this page
+            </Box>
+            <Box className="descriptionText">
+              ③ Finalize your changes on the files you want
+            </Box>
+            <Box className="descriptionText">
+              ④ Sit back and watch the magic!
+            </Box>
           </Grid>
         </div>
       </div>

@@ -11,21 +11,35 @@
   padding-top: 3em;
 }
 
-.uploadBtnText {
-  font-weight: bolder;
-  font-size: larger;
+.uploadBtn {
+  border-radius: 10em;
+  position: relative;
 }
 
-.uploadBtn {
-  background: white;
-  border-radius: 10em;
-  height: 5em;
-  width: 10em;
-  padding-left: 10em;
-  padding-right: 10em;
-  top: 15em;
-  position: absolute;
+.uploadBtn:hover {
+  background: #f0f0f0;
   cursor: pointer;
+}
+
+.chooseBtnContainer {
+  border-radius: 10%;
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 0.8em 0.8em;
+  background-image: linear-gradient(#ff6666, #fbdb65);
+}
+
+.chooseBtn {
+  display: none;
+}
+
+.chooseBtnText {
+  font-weight: bold;
+}
+
+input[type="file"] {
+  display: none;
 }
 
 .descriptionText {
@@ -38,9 +52,20 @@
 
 .descriptionContainer {
   display: flex;
+  padding-top: 5em;
 }
 
-.buttonContainer {
+.btnContainer {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 5em;
+  flex-wrap: wrap;
+  padding-top: 3em;
+}
+
+.img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
