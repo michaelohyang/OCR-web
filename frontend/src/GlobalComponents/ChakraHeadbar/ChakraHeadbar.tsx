@@ -1,8 +1,7 @@
 import * as React from "react";
 import Logofunc from "./logo";
 import "./ChakraHeadbar.css";
-import { HStack, Image, Text, Center } from "@chakra-ui/react";
-import logo1 from "./logo.jpg";
+import { HStack, Text } from "@chakra-ui/react";
 import Menufunc from "./Menu1";
 
 export default class ChakraHeadbar extends React.Component {

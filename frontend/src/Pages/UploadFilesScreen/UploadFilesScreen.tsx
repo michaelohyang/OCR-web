@@ -4,7 +4,6 @@ import { Component } from "react";
 import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
-import NavBar from "./Components/NavBar/NavBar";
 import "./UploadFilesScreen.css";
 
 class UploadFilesScreen extends Component<any, any> {
