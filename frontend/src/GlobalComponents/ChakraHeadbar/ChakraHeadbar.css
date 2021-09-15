@@ -4,7 +4,7 @@
   justify-content: space-between;
   background: linear-gradient(
     90deg,
-    rgba(214, 230, 187, 1) 0%,
+    rgb(217, 233, 188) 0%,
     rgba(9, 121, 113, 0.6180847338935574) 41%,
     rgba(0, 212, 255, 1) 100%
   );
@@ -35,7 +35,7 @@
 
 @keyframes typing {
   from {
-    width: 10%;
+    width: 20%;
   }
   to {
     width: 80%;
