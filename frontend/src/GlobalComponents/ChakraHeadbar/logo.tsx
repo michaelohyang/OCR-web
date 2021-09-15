@@ -1,4 +1,4 @@
-import "../App.css";
+import "./ChakraHeadbar";
 import logo1 from "./logo.jpg";
 import { HStack, Image, Text } from "@chakra-ui/react";
 import * as React from "react";

@@ -2,15 +2,14 @@ import { Box, Grid } from "@chakra-ui/layout";
 import axios from "axios";
 import { Component } from "react";
 import ChakraButton from "../../GlobalComponents/ChakraButton";
+import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
-import NavBar from "./Components/NavBar/NavBar";
 import "./UploadFilesScreen.css";
 
 class UploadFilesScreen extends Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      formData: new FormData(),
       arrayOfFiles: [],
       numberOfAddedFiles: 0,
     };
@@ -21,7 +20,11 @@ class UploadFilesScreen extends Component<any, any> {
   }
 
   uploadFilesFunction = () => {
-    axios.post("http://localhost:8080/upload", this.state.formData);
+    let formDataCopy = new FormData();
+    console.log("This is array of files", this.state.arrayOfFiles);
+    formDataCopy.append("medical", this.state.arrayOfFiles);
+    console.log("this is formdata", formDataCopy);
+    axios.post("http://localhost:8080/upload", formDataCopy);
     alert("Images Successfully Uploaded to The Database");
   };
 
@@ -33,7 +36,6 @@ class UploadFilesScreen extends Component<any, any> {
     this.setState({
       arrayOfFiles: tempArrFiles,
     });
-    this.setState({ formData: this.state.formData.delete(id) });
   };
 
   chooseFiles = (e: any) => {
@@ -46,7 +48,6 @@ class UploadFilesScreen extends Component<any, any> {
       }
     }
     for (let i = 0; i < fileLength; i++) {
-      formDataCopy.append("medical", e.target.files[i]);
       arrNewFiles.push({
         id: `patient_name_${i}`,
         image: URL.createObjectURL(e.target.files[i]),
@@ -66,7 +67,7 @@ class UploadFilesScreen extends Component<any, any> {
     return (
       <div>
         <div>
-          <NavBar />
+          <ChakraHeadbar />
         </div>
         <div className="bodyContainer">
           <Grid templateRows="repeat(3, 2fr)" height="45em" gap={3}>
