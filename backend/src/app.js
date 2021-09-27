@@ -1,5 +1,3 @@
-"use strict";
-exports.__esModule = true;
 var express = require("express");
 var cors = require("cors");
 var projectConstant = require("./Util/constant.tsx");
@@ -14,4 +12,4 @@ function setupServer() {
         return console.log("App listening on port " + projectConstant.PORT + "!");
     });
 }
-exports["default"] = setupServer;
+module.exports = setupServer;
