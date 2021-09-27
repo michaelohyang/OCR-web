@@ -2,7 +2,7 @@ var fs = require("fs");
 var path = require("path");
 const constant = require("../Util/constant.tsx");
 /**
- * This function checks if a diectory exists. Create one if it does not exist.
+ * This function checks if a directory exists. Create one if it does not exist.
  *
  * @param name The name of the user's name.
  */
