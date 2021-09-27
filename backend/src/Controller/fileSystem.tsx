@@ -1,11 +1,13 @@
 var fs = require("fs");
 var path = require("path");
 const constant = require("../Util/constant.tsx");
+
 /**
  * This function checks if a directory exists. Create one if it does not exist.
  *
  * @param name The name of the user's name.
  */
+
 function createDirectory(userName: any) {
   // create root directory if it does not exist
   const rootDir = `${constant.defaultFolder}`;
@@ -23,4 +25,4 @@ function createDirectory(userName: any) {
   }
 }
 
-module.exports = { createDirectory };
+module.exports = createDirectory;

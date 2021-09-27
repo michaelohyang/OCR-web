@@ -3,7 +3,7 @@ const cors = require("cors");
 const projectConstant = require("./Util/constant.tsx");
 var upload = require("./Controller/multer.tsx");
 
-export default function setupServer() {
+function setupServer() {
   const app = express();
   app.use(cors());
 
@@ -19,3 +19,5 @@ export default function setupServer() {
     console.log(`App listening on port ${projectConstant.PORT}!`)
   );
 }
+
+module.exports = setupServer;
