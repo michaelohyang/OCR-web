@@ -1,6 +1,6 @@
 var fs = require("fs");
 var path = require("path");
-const constant = require("../Util/constant.tsx");
+const constant = require("../Util/constant");
 
 /**
  * This function checks if a directory exists. Create one if it does not exist.
