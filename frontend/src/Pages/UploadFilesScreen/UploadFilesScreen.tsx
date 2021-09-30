@@ -5,10 +5,12 @@ import ChakraButton from "../../GlobalComponents/ChakraButton";
 import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
 import NavBar from "./Components/NavBar/NavBar";
 import "./UploadFilesScreen.css";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 class UploadFilesScreen extends Component<any, any> {
   constructor(props: any) {
     super(props);
+    
     this.state = {
       formData: new FormData(),
       arrayOfFiles: [],
@@ -19,6 +21,7 @@ class UploadFilesScreen extends Component<any, any> {
     this.chooseFiles = this.chooseFiles.bind(this);
     this.removeImage = this.removeImage.bind(this);
   }
+
 
   uploadFilesFunction = () => {
     axios.post("http://localhost:8080/upload", this.state.formData);
@@ -94,11 +97,20 @@ class UploadFilesScreen extends Component<any, any> {
                   />
                   <p className={"chooseBtnText"}>Choose Files</p>
                 </label>
-                <ChakraButton
-                  txtname={"Upload"}
-                  onClickFunc={this.uploadFilesFunction}
-                  cssDesign={"uploadBtn"}
-                />
+                <Link to="/confirm">
+                  <ChakraButton
+                    txtname={"Upload"}
+                    onClickFunc={this.uploadFilesFunction}
+                    cssDesign={"uploadBtn"}
+                  />
+                </Link>
+
+{/* <Link to="/dashboard">
+     <button type="button">
+          Click Me!
+     </button>
+ </Link> */}
+
               </div>
             </Box>
           </Grid>
