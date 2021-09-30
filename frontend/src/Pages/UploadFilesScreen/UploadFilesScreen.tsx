@@ -104,12 +104,6 @@ class UploadFilesScreen extends Component<any, any> {
                   />
                 </Link>
 
-{/* <Link to="/dashboard">
-     <button type="button">
-          Click Me!
-     </button>
- </Link> */}
-
               </div>
             </Box>
           </Grid>
