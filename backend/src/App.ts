@@ -1,12 +1,12 @@
 const express = require('express');
 const cors = require('cors');
-const projectConstant = require('./Util/constant.tsx');
-var upload = require('./Controller/multer.tsx');
+const projectConstant = require('./Util/constant');
+var upload = require('./Controller/multer');
 
 const app = express();
 app.use(cors());
 
-app.post('/upload', upload.uploadFile.array('medical', 12), (req, res) => {
+app.post('/upload', upload.uploadFile.array('medical', 12), (req: any, res: any) => {
   console.log(req.files);
 });
 

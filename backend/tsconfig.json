@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "es2015",
+    "noImplicitAny": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "build",
+    "allowJs": false,
+    "experimentalDecorators": true,
+    "lib": ["es2021"]
+  },
+  "include": ["src"]
+}
