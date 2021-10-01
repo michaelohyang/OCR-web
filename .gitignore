@@ -31,3 +31,6 @@ yarn-error.log*
 
 # ignore the build folder for backend
 /backend/build
+
+/backend/output
+/backend/uploads
