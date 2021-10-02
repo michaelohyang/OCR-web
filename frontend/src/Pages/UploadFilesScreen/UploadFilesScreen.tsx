@@ -5,10 +5,12 @@ import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
 import "./UploadFilesScreen.css";
+import { Link } from "react-router-dom";
 
 class UploadFilesScreen extends Component<any, any> {
   constructor(props: any) {
     super(props);
+    
     this.state = {
       arrayOfFiles: [],
       numberOfAddedFiles: 0,
@@ -18,6 +20,7 @@ class UploadFilesScreen extends Component<any, any> {
     this.chooseFiles = this.chooseFiles.bind(this);
     this.removeImage = this.removeImage.bind(this);
   }
+
 
   uploadFilesFunction = () => {
     let formDataCopy = new FormData();
@@ -93,11 +96,14 @@ class UploadFilesScreen extends Component<any, any> {
                   />
                   <p className={"chooseBtnText"}>Choose Files</p>
                 </label>
-                <ChakraButton
-                  txtname={"Upload"}
-                  onClickFunc={this.uploadFilesFunction}
-                  cssDesign={"uploadBtn"}
-                />
+                <Link to="/confirm">
+                  <ChakraButton
+                    txtname={"Upload"}
+                    onClickFunc={this.uploadFilesFunction}
+                    cssDesign={"uploadBtn"}
+                  />
+                </Link>
+
               </div>
             </Box>
           </Grid>

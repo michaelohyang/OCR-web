@@ -5,7 +5,9 @@ interface DesignedButtonProps {
   txtname: string;
   onClickFunc?: () => void;
   cssDesign?: any;
-  onChange?: (e: any) => void;
+  // onChange?: (String: any) => void;
+  onChange?: () => void;
+  id?: any;
 }
 
 export default function ChakraButton(props: DesignedButtonProps) {
@@ -18,6 +20,7 @@ export default function ChakraButton(props: DesignedButtonProps) {
       onClick={props.onClickFunc}
       className={props.cssDesign}
       onChange={props.onChange}
+      id={props.id}
     >
       {props.txtname}
     </Button>
