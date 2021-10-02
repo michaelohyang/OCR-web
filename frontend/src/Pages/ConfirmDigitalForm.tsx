@@ -24,7 +24,7 @@ class ConfirmDigitalForm extends Component<any, any> {
         super(props);
         this.state= {
             // digitalForm: '{ "Name": "John Deo", "Gender": "Male", "Age": 32}',
-            digitalForm: data,
+            digitalForm: {},
             dic: {},
             newEntry: [<div></div>],
         };
@@ -38,13 +38,16 @@ class ConfirmDigitalForm extends Component<any, any> {
         this.submit = this.submit.bind(this);
 
         this.getJson();
-        this.populateDic();
     }
 
     getJson = () => {
-        axios.get('https://api.npms.io/v2/search?q=react')
-        .then(response => this.setState({ digitalForm: response.data }));
-        console.log(this.state.digitalForm);
+        axios.get('http://localhost:8080/form')
+        .then(response => {
+            this.setState({ digitalForm: response.data });
+            console.log(this.state.digitalForm);
+            this.populateDic();
+            this.setState({dic: this.state.dic});
+        });
     }
 
     populateDic = () => {
@@ -101,10 +104,8 @@ class ConfirmDigitalForm extends Component<any, any> {
         });
     }
 
-    submit =() => {
-        var dicJson = JSON.stringify(this.state.dic);
-        console.log(dicJson);
-        axios.post('https://reqres.in/api/confirm', dicJson).then(response => (console.log(response.data)));
+    submit = () => {
+        axios.post('http://localhost:8080/confirmForm', this.state.dic).then(response => (console.log(response.data)));
         alert("Successful upload medical records!");
     }
 
