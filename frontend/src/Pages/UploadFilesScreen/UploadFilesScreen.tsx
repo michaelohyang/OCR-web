@@ -5,7 +5,7 @@ import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
 import "./UploadFilesScreen.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class UploadFilesScreen extends Component<any, any> {
   constructor(props: any) {

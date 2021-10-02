@@ -1,28 +1,24 @@
-import { Box, Grid, ListItem } from "@chakra-ui/layout";
+import { HStack } from "@chakra-ui/layout";
 import axios from "axios";
 import { Component } from "react";
-import ReactDOM from "react-dom";
-import { updateJsxAttribute } from "typescript";
 import ChakraButton from "../GlobalComponents/ChakraButton";
-import { useHistory } from 'react-router-dom';
-// import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
-// import NavBar from "./Components/NavBar/NavBar";
-// import "./UploadFilesScreen.css";
-
-var data = {
-    "Name": "John Doe",
-    "Gender": "Male",
-    "Age": "32"
-    };
+import ChakraHeadbar from "../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
+import "./ConfirmDigitalForm.css";
+import ParticlesBg from 'particles-bg'
+import update from 'immutability-helper'; 
 
 class ConfirmDigitalForm extends Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state= {
-            // digitalForm: '{ "Name": "John Deo", "Gender": "Male", "Age": 32}',
-            digitalForm: data,
+            // digitalForm: {},
+            digitalForm: {
+                "Name": "John Doe",
+                "Age": 32,
+            },
             dic: {},
             newEntry: [<div></div>],
+            updateDic: false,
         };
         this.getJson = this.getJson.bind(this);
         this.populateDic = this.populateDic.bind(this);
@@ -33,29 +29,36 @@ class ConfirmDigitalForm extends Component<any, any> {
         this.addAttri = this.addAttri.bind(this);
         this.submit = this.submit.bind(this);
 
-        this.getJson();
-        // this.populateDic();
+        // this.getJson();
+        this.populateDic();
+        // var dicG: {[id:string]: string} ={};
     }
 
     getJson = () => {
-        // axios.get('https://api.npms.io/v2/search?q=react')
-        // .then(response => this.setState({ digitalForm: response.data }));
-        axios.get('https://api.npms.io/v2/search?q=react')
+        axios.get('http://localhost:8080/form')
         .then(response => {
-            this.setState({
-              digitalForm: response.data
-            });
-            console.log(response.data);
+            this.setState({ digitalForm: response.data });
+            console.log(this.state.digitalForm);
             this.populateDic();
-          });
-        console.log(this.state.digitalForm);
+            this.setState({dic: this.state.dic});
+        });
     }
 
     populateDic = () => {
         console.log("populate dic");
+        // var dicCopy: {[id:string]: string} = {};
         for(var key in this.state.digitalForm) {
+            console.log(key);
+            // !!! alternative way to update state
+            // this.setState({ 
+            //     dic: update(this.state.dic, {k: {$set: this.state.digitalForm[k]}})})
             this.state.dic[key] = this.state.digitalForm[key];
+            
         }
+        this.setState({
+            dic: this.state.dic,
+         });
+        console.log(this.state.dic);
     };
 
     deleteAttri = (k: any) => {
@@ -66,13 +69,17 @@ class ConfirmDigitalForm extends Component<any, any> {
     };
 
     updateAttri = (e: any, originalKey: any, content: any) => {
-        this.state.dic[e.target.value] = content;
+        // this.setState({ dic: update(this.state.dic, {e: {target: {value: {$set: content} }}})})
+        console.log(e);
         this.setState({
             dic: this.state.dic,
         });
     }
 
+    // function is not call correctly  
     updateContent = (e: any, k: any) => {
+        console.log(k)
+        // this.setState({dic: update(this.state.dic, {k: {$set: e.target.value}})})
         this.state.dic[k] = e.target.value;
         this.setState({
             dic: this.state.dic,
@@ -81,11 +88,11 @@ class ConfirmDigitalForm extends Component<any, any> {
 
     inputAttri = () => {
         this.state.newEntry.push(
-            <div>
-                <input id="added-attri" type="text" placeholder="attribute name" defaultValue=""></input>
+            <div className="addattrbox">
+                <input className="addattrtext" id="added-attri" type="text" placeholder="attribute name" defaultValue=""></input>
                 :
-                <input id="added-value" type="text" placeholder="content" defaultValue=""></input>
-                <ChakraButton txtname={"Add"} onClickFunc={() => this.addAttri()} />
+                <input className="addattrtext" id="added-value" type="text" placeholder="content" defaultValue=""></input>
+                <div className="adjustbuttom_delete"><ChakraButton txtname={"Add"} onClickFunc={() => this.addAttri()} /></div>
             </div>
         );
         this.setState({
@@ -95,8 +102,16 @@ class ConfirmDigitalForm extends Component<any, any> {
 
     addAttri = () => {
         var attri = document.getElementById("added-attri") as HTMLInputElement;
+        console.log("line91")
         var value = document.getElementById("added-value") as HTMLInputElement;
-        this.state.dic[attri.value] = value.value;
+        // var attri_val = attri.value;
+        // var val_val = value.value;
+        // const newdic = {...this.state.dic, attri_val: val_val}; 
+        // this.setState({dic:newdic})
+        // debugger
+        // this.setState({dic:update(this.state.dic, {attri: {value: {$set: value.value}}})})
+
+        this.state.dic[attri.value] = value.value; // 106 - 109
         this.setState({
             newEntry: [<div></div>],
         });
@@ -105,10 +120,8 @@ class ConfirmDigitalForm extends Component<any, any> {
         });
     }
 
-    submit =() => {
-        var dicJson = JSON.stringify(this.state.dic);
-        console.log(dicJson);
-        axios.post('https://reqres.in/api/confirm', dicJson).then(response => (console.log(response.data)));
+    submit = () => {
+        axios.post('http://localhost:8080/confirmForm', this.state.dic).then(response => (console.log(response.data)));
         alert("Successful upload medical records!");
     }
 
@@ -122,25 +135,38 @@ class ConfirmDigitalForm extends Component<any, any> {
         // input?.addEventListener('input', (e: any) => this.userUpdate(e));
         for (var key in this.state.dic) {
             const k = key;
+            
             rows.push(
                 <div key={k}>
-                    {k}
-                    : 
-                    <input id={k} type="text" defaultValue={this.state.dic[k]} onChange={(e: any) => this.updateContent(e, k)}>
-                    </input>
-                    <ChakraButton txtname={"Delete"} onClickFunc={() => this.deleteAttri(k)} />
+                    <HStack className="textdiv">
+                        {/* <ParticlesBg num={50} type="lines" bg={true} /> */}
+                        <div className="firstpart">
+                            {k}
+                            :
+                        </div>
+                        <div className="secondpart">
+                            <input className="textarea" id={k} type="text" defaultValue={this.state.dic[k]} onChange={(e: any) => this.updateContent(e, k)}>
+                            </input>
+                            <ChakraButton txtname={"Delete"} onClickFunc={() => this.deleteAttri(k)} />
+                        </div>
+                    </HStack> 
                 </div>);
         }
         console.log(this.state.dic);
-        // console.log(this.state.digitalForm.hasOwnProperty("Age"));
         return (
-            <div>
-                <div>
-                {rows}
+            <div className="overallbg">
+                <ChakraHeadbar />
+                <div >
+                    <ParticlesBg type="thick" bg={true} />
+                    <div className="rowdistance">
+                        <div>
+                        {rows}
+                        </div>
+                        <div className="addattr"><ChakraButton txtname={"Add Attribute"} onClickFunc={() => this.inputAttri()}/></div>
+                        <div>{this.state.newEntry}</div>
+                        <div className="submitbuttom"><ChakraButton txtname={"Submit"} onClickFunc={() => this.submit()}/></div>
+                    </div>
                 </div>
-                <ChakraButton txtname={"Add Attribute"} onClickFunc={() => this.inputAttri()}/>
-                <div>{this.state.newEntry}</div>
-                <ChakraButton txtname={"Submit Changes"} onClickFunc={() => this.submit()}/>
             </div>
         );
     }
