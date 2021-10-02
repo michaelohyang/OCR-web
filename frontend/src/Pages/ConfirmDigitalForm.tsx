@@ -1,4 +1,4 @@
-import { Box, Grid, ListItem } from "@chakra-ui/layout";
+import { Box, Grid, HStack, ListItem } from "@chakra-ui/layout";
 import axios from "axios";
 import { Component } from "react";
 import ReactDOM from "react-dom";
@@ -8,6 +8,10 @@ import { useHistory } from 'react-router-dom';
 // import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
 // import NavBar from "./Components/NavBar/NavBar";
 // import "./UploadFilesScreen.css";
+import ChakraHeadbar from "../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
+import "./ConfirmDigitalForm.css";
+import { background, layout } from "@chakra-ui/styled-system";
+import ParticlesBg from 'particles-bg'
 
 var data = {
     "Name": "John Doe",
@@ -73,11 +77,11 @@ class ConfirmDigitalForm extends Component<any, any> {
 
     inputAttri = () => {
         this.state.newEntry.push(
-            <div>
-                <input id="added-attri" type="text" placeholder="attribute name" defaultValue=""></input>
+            <div className="addattrbox">
+                <input className="addattrtext" id="added-attri" type="text" placeholder="attribute name" defaultValue=""></input>
                 :
-                <input id="added-value" type="text" placeholder="content" defaultValue=""></input>
-                <ChakraButton txtname={"Add"} onClickFunc={() => this.addAttri()} />
+                <input className="addattrtext" id="added-value" type="text" placeholder="content" defaultValue=""></input>
+                <div className="adjustbuttom_delete"><ChakraButton txtname={"Add"} onClickFunc={() => this.addAttri()} /></div>
             </div>
         );
         this.setState({
@@ -114,25 +118,39 @@ class ConfirmDigitalForm extends Component<any, any> {
         // input?.addEventListener('input', (e: any) => this.userUpdate(e));
         for (var key in this.state.dic) {
             const k = key;
+            
             rows.push(
                 <div key={k}>
-                    {k}
-                    : 
-                    <input id={k} type="text" defaultValue={this.state.dic[k]} onChange={(e: any) => this.updateContent(e, k)}>
-                    </input>
-                    <ChakraButton txtname={"Delete"} onClickFunc={() => this.deleteAttri(k)} />
+                    <HStack className="textdiv">
+                        <ParticlesBg type="tadpole" bg={true} />
+                        <div className="firstpart">
+                            {k}
+                            :
+                        </div>
+                        <div className="secondpart">
+                            <input className="textarea" id={k} type="text" defaultValue={this.state.dic[k]} onChange={(e: any) => this.updateContent(e, k)}>
+                            </input>
+                            <ChakraButton txtname={"Delete"} onClickFunc={() => this.deleteAttri(k)} />
+                        </div>
+                    </HStack> 
                 </div>);
         }
         console.log(this.state.dic);
         // console.log(this.state.digitalForm.hasOwnProperty("Age"));
         return (
             <div>
-                <div>
-                {rows}
+                <ChakraHeadbar />
+                <div className="overallbg">
+                    <ParticlesBg type="thick" bg={true} />
+                    <div className="rowdistance">
+                        <div>
+                        {rows}
+                        </div>
+                        <div className="addattr"><ChakraButton txtname={"Add Attribute"} onClickFunc={() => this.inputAttri()}/></div>
+                        <div>{this.state.newEntry}</div>
+                        <div className="submitbuttom"><ChakraButton txtname={"Submit"} onClickFunc={() => this.submit()}/></div>
+                    </div>
                 </div>
-                <ChakraButton txtname={"Add Attribute"} onClickFunc={() => this.inputAttri()}/>
-                <div>{this.state.newEntry}</div>
-                <ChakraButton txtname={"Submit Changes"} onClickFunc={() => this.submit()}/>
             </div>
         );
     }
