@@ -5,27 +5,22 @@ import ReactDOM from "react-dom";
 import { updateJsxAttribute } from "typescript";
 import ChakraButton from "../GlobalComponents/ChakraButton";
 import { useHistory } from 'react-router-dom';
-// import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
-// import NavBar from "./Components/NavBar/NavBar";
-// import "./UploadFilesScreen.css";
 import ChakraHeadbar from "../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./ConfirmDigitalForm.css";
 import { background, layout } from "@chakra-ui/styled-system";
 import ParticlesBg from 'particles-bg'
 
-var data = {
-    "Name": "John Doe",
-    "Gender": "Male",
-    "Age": "32"
-    };
-
 class ConfirmDigitalForm extends Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state= {
+<<<<<<< HEAD
             // digitalForm: '{ "Name": "John Deo", "Gender": "Male", "Age": 32}',
+=======
+>>>>>>> 83ad8fa79d77f9eb6fcc3269b5b368038d8c3252
             digitalForm: {},
             dic: {},
+
             newEntry: [<div></div>],
         };
         this.getJson = this.getJson.bind(this);
@@ -55,6 +50,7 @@ class ConfirmDigitalForm extends Component<any, any> {
         for(var key in this.state.digitalForm) {
             this.state.dic[key] = this.state.digitalForm[key];
         }
+        console.log(this.state.dic);
     };
 
     deleteAttri = (k: any) => {
@@ -137,7 +133,6 @@ class ConfirmDigitalForm extends Component<any, any> {
                 </div>);
         }
         console.log(this.state.dic);
-        // console.log(this.state.digitalForm.hasOwnProperty("Age"));
         return (
             <div>
                 <ChakraHeadbar />
