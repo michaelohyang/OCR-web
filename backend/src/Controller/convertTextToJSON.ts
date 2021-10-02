@@ -1,12 +1,11 @@
 var fs = require('fs');
 
-const convertTextToJSON = (textFile: String ) => {
-    const texString: string = fs.readFileSync(textFile, 'utf8');
+const convertTextToJSON = (filePath: String ) => {
+    const texString: string = fs.readFileSync(filePath, 'utf8');
     let textArr: string[] = texString.split('\n');
     let infoMap: Map<string, string> = new Map();
     let tempInfo: string = "";
     textArr = textArr.map(e => e.toLowerCase());
-    console.log(textArr)
     for (let i=0; i < textArr.length; i++) {
         if (textArr[i] == "name") {
             tempInfo = textArr[i+1];
@@ -17,7 +16,7 @@ const convertTextToJSON = (textFile: String ) => {
         } else if (textArr[i] == "street line") {
             infoMap.set(textArr[i], textArr[i-1]);
         } else if (textArr[i] == "street line 2" && textArr[i-1] != "street line") {
-            infoMap.set(textArr[i], textArr[i-1]) 
+            infoMap.set(textArr[i], textArr[i-1]); 
         } else if (textArr[i] == "city") {
             infoMap.set(textArr[i], textArr[i-2]);
         } else if (textArr[i] == "state/province") {
@@ -26,7 +25,8 @@ const convertTextToJSON = (textFile: String ) => {
             infoMap.set(textArr[i], textArr[i-1]);
         }
     }
-    let result = JSON.stringify(textArr);
+    let result = Object.fromEntries(infoMap);6
+    fs.unlinkSync(filePath);
     return result;
 }
 

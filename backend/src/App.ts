@@ -8,10 +8,12 @@ const convert = require('./Controller/convertTextToJSON');
 const app = express();
 app.use(cors());
 
-app.post('/upload', upload.uploadFile.array('medical', 12), (req: any, res: any) => {
-  console.log(req.files);
-});
-
 app.listen(projectConstant.PORT, () =>
   console.log(`App listening on port ${projectConstant.PORT}!`),
 );
+
+app.post('/upload', upload.uploadFile.array('medical', 12), (req: any, res: any) => {
+  console.log(req.files);
+  let path = process.cwd();
+  convert.convertTextToJSON(path + "/src/ConvertedFileToText/OCRresult.txt");
+});
