@@ -1,23 +1,16 @@
-import { Box, Grid, HStack, ListItem } from "@chakra-ui/layout";
+import { HStack } from "@chakra-ui/layout";
 import axios from "axios";
 import { Component } from "react";
-import ReactDOM from "react-dom";
-import { updateJsxAttribute } from "typescript";
 import ChakraButton from "../GlobalComponents/ChakraButton";
-import { useHistory } from 'react-router-dom';
 import ChakraHeadbar from "../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./ConfirmDigitalForm.css";
-import { background, layout } from "@chakra-ui/styled-system";
 import ParticlesBg from 'particles-bg'
+import update from 'immutability-helper'; 
 
 class ConfirmDigitalForm extends Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state= {
-<<<<<<< HEAD
-            // digitalForm: '{ "Name": "John Deo", "Gender": "Male", "Age": 32}',
-=======
->>>>>>> 83ad8fa79d77f9eb6fcc3269b5b368038d8c3252
             digitalForm: {},
             dic: {},
 
@@ -48,7 +41,8 @@ class ConfirmDigitalForm extends Component<any, any> {
     populateDic = () => {
         console.log("populate dic");
         for(var key in this.state.digitalForm) {
-            this.state.dic[key] = this.state.digitalForm[key];
+            this.setState({ dic: update(this.state.dic, {key: {$set: this.state.digitalForm[key]}})})
+            // this.state.dic[key] = this.state.digitalForm[key];
         }
         console.log(this.state.dic);
     };
@@ -61,14 +55,18 @@ class ConfirmDigitalForm extends Component<any, any> {
     };
 
     updateAttri = (e: any, originalKey: any, content: any) => {
-        this.state.dic[e.target.value] = content;
+        this.setState({ dic: update(this.state.dic, {e: {target: {value: {$set: content} }}})})
+        
         this.setState({
             dic: this.state.dic,
         });
     }
 
+    // function is not call correctly  
     updateContent = (e: any, k: any) => {
-        this.state.dic[k] = e.target.value;
+        console.log(k)
+        this.setState({dic: update(this.state.dic, {k: {$set: e.target.value}})})
+        // this.state.dic[k] = e.target.value;
         this.setState({
             dic: this.state.dic,
         });
@@ -90,8 +88,16 @@ class ConfirmDigitalForm extends Component<any, any> {
 
     addAttri = () => {
         var attri = document.getElementById("added-attri") as HTMLInputElement;
+        console.log("line91")
         var value = document.getElementById("added-value") as HTMLInputElement;
-        this.state.dic[attri.value] = value.value;
+        var attri_val = attri.value;
+        var val_val = value.value;
+        const newdic = {...this.state.dic, attri_val: val_val}; 
+        this.setState({dic:newdic})
+        // debugger
+        // this.setState({dic:update(this.state.dic, {attri: {value: {$set: value.value}}})})
+
+        // this.state.dic[attri.value] = value.value;
         this.setState({
             newEntry: [<div></div>],
         });
@@ -119,7 +125,7 @@ class ConfirmDigitalForm extends Component<any, any> {
             rows.push(
                 <div key={k}>
                     <HStack className="textdiv">
-                        <ParticlesBg type="tadpole" bg={true} />
+                        {/* <ParticlesBg num={50} type="lines" bg={true} /> */}
                         <div className="firstpart">
                             {k}
                             :
@@ -134,9 +140,9 @@ class ConfirmDigitalForm extends Component<any, any> {
         }
         console.log(this.state.dic);
         return (
-            <div>
+            <div className="overallbg">
                 <ChakraHeadbar />
-                <div className="overallbg">
+                <div >
                     <ParticlesBg type="thick" bg={true} />
                     <div className="rowdistance">
                         <div>
