@@ -1,4 +1,4 @@
-var multer = require("multer");
+const multer = require("multer");
 var path = require("path");
 const backendConstant = require("../Util/constant");
 const fileSystem = require(path.resolve(__dirname, "./fileSystem"));

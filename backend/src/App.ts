@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const projectConstant = require('./Util/constant');
-var upload = require('./Controller/multer');
+const upload = require('./Controller/multer');
+const getOCR = require('./Controller/ocrScan');
+const convert = require('./Controller/convertTextToJSON');
 
 const app = express();
 app.use(cors());
