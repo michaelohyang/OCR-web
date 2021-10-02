@@ -34,12 +34,20 @@ class ConfirmDigitalForm extends Component<any, any> {
         this.submit = this.submit.bind(this);
 
         this.getJson();
-        this.populateDic();
+        // this.populateDic();
     }
 
     getJson = () => {
+        // axios.get('https://api.npms.io/v2/search?q=react')
+        // .then(response => this.setState({ digitalForm: response.data }));
         axios.get('https://api.npms.io/v2/search?q=react')
-        .then(response => this.setState({ digitalForm: response.data }));
+        .then(response => {
+            this.setState({
+              digitalForm: response.data
+            });
+            console.log(response.data);
+            this.populateDic();
+          });
         console.log(this.state.digitalForm);
     }
 
