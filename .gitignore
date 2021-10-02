@@ -26,3 +26,8 @@ yarn-error.log*
 # temporary folder that stores images from the front end
 /uploads
 
+# ignore the build folder for backend
+/backend/build
+
+/backend/output
+/backend/uploads
