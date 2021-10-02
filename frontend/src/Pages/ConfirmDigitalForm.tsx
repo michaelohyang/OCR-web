@@ -5,7 +5,6 @@ import ChakraButton from "../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./ConfirmDigitalForm.css";
 import ParticlesBg from 'particles-bg'
-import update from 'immutability-helper'; 
 
 class ConfirmDigitalForm extends Component<any, any> {
     constructor(props: any) {
