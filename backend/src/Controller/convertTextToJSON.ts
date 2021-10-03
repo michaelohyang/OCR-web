@@ -25,8 +25,8 @@ const convertTextToJSON = (filePath: String ) => {
             infoMap.set(textArr[i], textArr[i-1]);
         }
     }
-    let result = Object.fromEntries(infoMap);6
-    fs.unlinkSync(filePath);
+    let result = Object.fromEntries(infoMap);
+    fs.unlinkSync(filePath);    
     return result;
 }
 

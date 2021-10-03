@@ -24,8 +24,8 @@ class ConfirmDigitalForm extends Component<any, any> {
     this.addAttri = this.addAttri.bind(this);
     this.submit = this.submit.bind(this);
 
-    // this.getJson();
-    this.populateDic();
+    this.getJson();
+    // this.populateDic();
     // var dicG: {[id:string]: string} ={};
   }
 

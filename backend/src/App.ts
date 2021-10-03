@@ -6,6 +6,8 @@ const bodyParser = require('body-parser')
 const projectConstant = require('./Util/constant');
 const createDir = require('./Controller/fileSystem');
 const upload = require('./Controller/multer');
+const conversion = require('./Controller/convertTextToJSON');
+const ocrScanner = require('./Controller/ocrScan');
 
 const app = express();
 app.use(cors());
@@ -19,9 +21,13 @@ app.post('/upload', upload.uploadFile.array('medical', 12), (req: any, res: any)
 
 // Send the json objects to the front end
 app.get('/form', (req: any, res: any) => {
-  var json_object = 
+  console.log("im running")
+  let imagePath: string = "./UploadedPictures/test1.jpg";
+  ocrScanner.getOCRtxt(imagePath);
+  let textPath: string = "./ConvertedFileToText/ocrResult.txt" 
+  let json_object: JSON = conversion.convertTextToJSON(textPath);
+  console.log(json_object)
   res.send(json_object);
-  console.log(111);
 });
 
 // Receive the updated json objects from the front end

@@ -5,15 +5,16 @@ const vision = require("@google-cloud/vision");
 var fs = require("fs");
 
 const client = new vision.ImageAnnotatorClient();
-const getOCRtxt = async (fileName: String) => {
-  const [result] = await client.documentTextDetection(fileName);
+const getOCRtxt = async (filePath: String) => {
+  const [result] = await client.documentTextDetection(filePath);
   const fullTextAnnotation = result.fullTextAnnotation;
-
   // TODO: modify path as necessary
-  var logger = fs.createWriteStream("../ConvertedFileToText/" + fileName + ".txt", {
+  let path = process.cwd() + "src/ConvertedFileToText/" ;
+  var logger = fs.createWriteStream( "ocrResult.txt", {
     flags: "a",
   });
   logger.write(fullTextAnnotation.text);
+  fs.unlinkSync(filePath);
 };
 
 module.exports = {
