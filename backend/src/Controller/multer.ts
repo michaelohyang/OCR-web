@@ -1,7 +1,6 @@
 const multer = require("multer");
-var path = require("path");
 const backendConstant = require("../Util/constant");
-const fileSystem = require(path.resolve(__dirname, "./fileSystem"));
+const fileSystem = require('./fileSystem');
 const userName = "Kevin";
 
 const storage = multer.diskStorage({
