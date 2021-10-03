@@ -6,7 +6,7 @@ const userName = "Kevin";
 
 const storage = multer.diskStorage({
   destination: (req: any, file: any, cb: any) => {
-    fileSystem.createDirectory(userName);
+    fileSystem.createUploadDirectory(userName);
     cb(null, `./${backendConstant.defaultFolder}/${userName}`);
   },
   filename: (req: any, file: any, cb: any) => {

@@ -9,12 +9,12 @@ const getOCRtxt = async (filePath: String) => {
   const [result] = await client.documentTextDetection(filePath);
   const fullTextAnnotation = result.fullTextAnnotation;
   // TODO: modify path as necessary
-  let path = process.cwd() + "src/ConvertedFileToText/" ;
-  var logger = fs.createWriteStream( "ocrResult.txt", {
+
+  var logger = fs.createWriteStream( "./src/ConvertedFileToText/ocrResult.txt", {
     flags: "a",
   });
   logger.write(fullTextAnnotation.text);
-  fs.unlinkSync(filePath);
+  // fs.unlinkSync(filePath);
 };
 
 module.exports = {

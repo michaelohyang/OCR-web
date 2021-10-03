@@ -20,13 +20,11 @@ app.post('/upload', upload.uploadFile.array('medical', 12), (req: any, res: any)
 });
 
 // Send the json objects to the front end
-app.get('/form', (req: any, res: any) => {
-  console.log("im running")
-  let imagePath: string = "./UploadedPictures/test1.jpg";
-  ocrScanner.getOCRtxt(imagePath);
-  let textPath: string = "./ConvertedFileToText/ocrResult.txt" 
+app.get('/form', async (req: any, res: any) => {
+  let imagePath: string = "./src/UploadedPictures/test1.jpg";
+  await ocrScanner.getOCRtxt(imagePath);
+  let textPath: string = "./src/ConvertedFileToText/ocrResult.txt"; 
   let json_object: JSON = conversion.convertTextToJSON(textPath);
-  console.log(json_object)
   res.send(json_object);
 });
 

@@ -26,7 +26,7 @@ const convertTextToJSON = (filePath: String ) => {
         }
     }
     let result = Object.fromEntries(infoMap);
-    fs.unlinkSync(filePath);    
+    // fs.unlinkSync(filePath);    
     return result;
 }
 

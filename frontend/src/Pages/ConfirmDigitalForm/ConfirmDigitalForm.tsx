@@ -32,17 +32,14 @@ class ConfirmDigitalForm extends Component<any, any> {
   getJson = () => {
     axios.get("http://localhost:8080/form").then((response) => {
       this.setState({ digitalForm: response.data });
-      console.log(this.state.digitalForm);
       this.populateDic();
       this.setState({ dic: this.state.dic });
     });
   };
 
   populateDic = () => {
-    console.log("populate dic");
     // var dicCopy: {[id:string]: string} = {};
     for (var key in this.state.digitalForm) {
-      console.log(key);
       // !!! alternative way to update state
       // this.setState({
       //     dic: update(this.state.dic, {k: {$set: this.state.digitalForm[k]}})})
@@ -51,7 +48,6 @@ class ConfirmDigitalForm extends Component<any, any> {
     this.setState({
       dic: this.state.dic,
     });
-    console.log(this.state.dic);
   };
 
   deleteAttri = (k: any) => {
@@ -63,7 +59,6 @@ class ConfirmDigitalForm extends Component<any, any> {
 
   updateAttri = (e: any, originalKey: any, content: any) => {
     // this.setState({ dic: update(this.state.dic, {e: {target: {value: {$set: content} }}})})
-    console.log(e);
     this.setState({
       dic: this.state.dic,
     });
@@ -71,7 +66,6 @@ class ConfirmDigitalForm extends Component<any, any> {
 
   // function is not call correctly
   updateContent = (e: any, k: any) => {
-    console.log(k);
     // this.setState({dic: update(this.state.dic, {k: {$set: e.target.value}})})
     this.state.dic[k] = e.target.value;
     this.setState({
@@ -109,7 +103,6 @@ class ConfirmDigitalForm extends Component<any, any> {
 
   addAttri = () => {
     var attri = document.getElementById("added-attri") as HTMLInputElement;
-    console.log("line91");
     var value = document.getElementById("added-value") as HTMLInputElement;
     // var attri_val = attri.value;
     // var val_val = value.value;
@@ -163,7 +156,6 @@ class ConfirmDigitalForm extends Component<any, any> {
         </div>
       );
     }
-    console.log(this.state.dic);
     return (
       <div className="overallbg">
         <ChakraHeadbar />
