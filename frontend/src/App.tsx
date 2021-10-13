@@ -2,7 +2,7 @@ import "./App.css";
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import UploadFilesScreen from "./Pages/UploadFilesScreen/UploadFilesScreen";
-import ConfirmFilesScreen from "./Pages/ConfirmDigitalForm";
+import ConfirmFilesScreen from "./Pages/ConfirmDigitalForm/ConfirmDigitalForm";
 
 class App extends Component {
   render() {

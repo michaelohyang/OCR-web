@@ -1,12 +1,11 @@
-var multer = require("multer");
-var path = require("path");
+const multer = require("multer");
 const backendConstant = require("../Util/constant");
-const fileSystem = require(path.resolve(__dirname, "./fileSystem"));
+const fileSystem = require('./fileSystem');
 const userName = "Kevin";
 
 const storage = multer.diskStorage({
   destination: (req: any, file: any, cb: any) => {
-    fileSystem.createDirectory(userName);
+    fileSystem.createUploadDirectory(userName);
     cb(null, `./${backendConstant.defaultFolder}/${userName}`);
   },
   filename: (req: any, file: any, cb: any) => {
@@ -15,6 +14,7 @@ const storage = multer.diskStorage({
     var fileName = realName + "-" + Date.now() + "." + extension;
     cb(null, fileName);
   },
+  
 });
 
-module.exports =  {uploadFile: multer({ storage: storage })};
+module.exports = {uploadFile: multer({ storage: storage })};

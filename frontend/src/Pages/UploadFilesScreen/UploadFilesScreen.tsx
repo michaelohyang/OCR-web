@@ -6,11 +6,12 @@ import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
 import "./UploadFilesScreen.css";
 import { Link } from "react-router-dom";
+import ParticlesBg from "particles-bg";
 
 class UploadFilesScreen extends Component<any, any> {
   constructor(props: any) {
     super(props);
-    
+
     this.state = {
       arrayOfFiles: [],
       numberOfAddedFiles: 0,
@@ -21,10 +22,11 @@ class UploadFilesScreen extends Component<any, any> {
     this.removeImage = this.removeImage.bind(this);
   }
 
-
   uploadFilesFunction = () => {
     let formDataCopy = new FormData();
     formDataCopy.append("medical", this.state.arrayOfFiles);
+    console.log("info", this.state.arrayOfFiles);
+    console.log("formdata", formDataCopy);
     axios.post("http://localhost:8080/upload", formDataCopy);
     alert("Images Successfully Uploaded to The Database");
   };
@@ -66,11 +68,10 @@ class UploadFilesScreen extends Component<any, any> {
 
   render() {
     return (
-      <div>
+      <div className="bodyContainer">
+        <ChakraHeadbar />
         <div>
-          <ChakraHeadbar />
-        </div>
-        <div className="bodyContainer">
+          <ParticlesBg type="thick" bg={true} />
           <Grid templateRows="repeat(3, 2fr)" height="45em" gap={3}>
             <Box>
               <p className="bodyText">
@@ -103,7 +104,6 @@ class UploadFilesScreen extends Component<any, any> {
                     cssDesign={"uploadBtn"}
                   />
                 </Link>
-
               </div>
             </Box>
           </Grid>

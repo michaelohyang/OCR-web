@@ -1,6 +1,12 @@
 .bodyContainer {
-  height: 57.8em;
-  background: #f8f6f0;
+  height: 100vh;
+  background: linear-gradient(
+    90deg,
+    rgba(214, 230, 187, 1) 0%,
+    rgba(155, 200, 245, 0.542454481792717) 0%,
+    rgba(166, 235, 249, 1) 100%
+  );
+  overflow-y: auto;
 }
 
 .bodyText {
