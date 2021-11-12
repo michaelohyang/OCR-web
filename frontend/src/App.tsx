@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import UploadFilesScreen from "./Pages/UploadFilesScreen/UploadFilesScreen";
 import ConfirmFilesScreen from "./Pages/ConfirmDigitalForm";
+import ProjectMain from "./Pages/ProjectMain";
 
 class App extends Component {
   render() {
@@ -11,8 +12,11 @@ class App extends Component {
         <div>
           <Switch>
             <Route path="/" exact>
-              <UploadFilesScreen />
+              <ProjectMain />
             </Route>
+            {/* <Route path="/" exact>
+              <UploadFilesScreen />
+            </Route> */}
             <Route path="/confirm">
               <ConfirmFilesScreen />
             </Route>
