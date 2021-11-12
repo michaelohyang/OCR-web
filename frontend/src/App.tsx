@@ -2,7 +2,7 @@ import "./App.css";
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import UploadFilesScreen from "./Pages/UploadFilesScreen/UploadFilesScreen";
-import ConfirmFilesScreen from "./Pages/ConfirmDigitalForm";
+import ConfirmFilesScreen from "./Pages/ConfirmDigitalForm/ConfirmDigitalForm";
 import ProjectMain from "./Pages/ProjectMain/ProjectMain";
 
 class App extends Component {
@@ -14,9 +14,9 @@ class App extends Component {
             <Route path="/" exact>
               <ProjectMain />
             </Route>
-            {/* <Route path="/" exact>
+            <Route path="/upload">
               <UploadFilesScreen />
-            </Route> */}
+            </Route> 
             <Route path="/confirm">
               <ConfirmFilesScreen />
             </Route>

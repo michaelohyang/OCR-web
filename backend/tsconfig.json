@@ -4,7 +4,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "target": "es2015",
+    "target": "es2020",
     "noImplicitAny": true,
     "strict": true,
     "moduleResolution": "node",
@@ -12,7 +12,7 @@
     "outDir": "build",
     "allowJs": false,
     "experimentalDecorators": true,
-    "lib": ["es2021"]
+    "lib": ["es6"]
   },
   "include": ["src"]
 }
