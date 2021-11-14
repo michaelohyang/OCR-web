@@ -25,23 +25,9 @@ class UploadFilesScreen extends Component<any, any> {
   uploadFilesFunction = () => {
     let formDataCopy = new FormData();
     formDataCopy.append("medical", this.state.arrayOfFiles);
-    let url = "http://localhost:8080/upload";
-    // console.log("info", this.state.arrayOfFiles);
-    // var res = Array.from(formDataCopy.entries(), ([key, prop]) => ({
-    //   [key]: {
-    //     ContentLength: typeof prop === "string" ? prop.length : prop.size,
-    //   },
-    // }));
-
-    // console.log(res);
-    axios(url, {
-      method: "post",
-      data: formDataCopy,
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
-    // axios.post("http://localhost:8080/upload", formDataCopy);
+    console.log("info", this.state.arrayOfFiles);
+    console.log("formdata", formDataCopy);
+    axios.post("http://localhost:8080/upload", formDataCopy);
     alert("Images Successfully Uploaded to The Database");
   };
 
