@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "App.ts",
   "private": true,
-  "author": "Michael Oh-Yang, Kevin Fan",
+  "author": "Michael Oh-Yang, Kevin Fan, Peggy Zhao, Trevor Dai, Josh Chen",
   "scripts": {
     "test": "",
     "prestart": "rimraf build",
