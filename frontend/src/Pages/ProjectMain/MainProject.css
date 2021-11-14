@@ -7,6 +7,14 @@
   color: white;
 }
 
+.projectTitle {
+  font-size: large;
+}
+
+.projectDes {
+  font-size: small;
+}
+
 .projectBox {
   padding: 100px;
   flex: 3;
