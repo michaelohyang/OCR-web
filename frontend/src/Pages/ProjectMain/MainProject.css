@@ -22,5 +22,6 @@
   flex-wrap: wrap;
   display: flex;
   width: 5em;
+  align-items: center;
   /* border-spacing: px; */
 }

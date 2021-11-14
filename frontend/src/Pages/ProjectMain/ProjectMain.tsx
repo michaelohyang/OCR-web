@@ -106,7 +106,7 @@ class ProjectMain extends Component<any, any> {
         console.log(k + " : " + this.state.projects[k].title);
         projComp.push(
             <div key={k}>
-                    <Center bg="tomato" h="100px" w="200px" color="white">
+                    <Center bg="tomato" h="7em" w="14em" color="white">
                       <Link to="/upload" onClick={() => this.postSelectedProject(this.state.projects[k].id)}>
                         {/* <img className="projectImage" src={this.state.projects[k].url} alt="..." /> */}
                         <h1 className="projectTitle">{this.state.projects[k].title}</h1>
