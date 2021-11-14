@@ -7,12 +7,15 @@ interface DisplayFileImageProps {
 
 export default function DisplayFileImage(props: DisplayFileImageProps) {
   return (
-    <div className="resizeImage">
+    <div>
       {(props.fileArray || []).map((url: any, id: any) => (
-        <>
-          <img src={url.image} alt="..." />
-          <button onClick={() => props.removeImage(url.id)}>x</button>
-        </>
+        <div className="resizeImage">
+          <img className="picture" src={url.image} alt="medicalImage" />
+
+          <div className="deleteBtn">
+            <button onClick={() => props.removeImage(url.id)}>x</button>
+          </div>
+        </div>
       ))}
     </div>
   );

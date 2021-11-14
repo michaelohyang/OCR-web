@@ -21,7 +21,6 @@ class UploadFilesScreen extends Component<any, any> {
     this.removeImage = this.removeImage.bind(this);
   }
 
-
   uploadFilesFunction = () => {
     let formDataCopy = new FormData();
     formDataCopy.append("medical", this.state.arrayOfFiles);
@@ -77,15 +76,14 @@ class UploadFilesScreen extends Component<any, any> {
       <div className="bodyContainer">
         <ChakraHeadbar />
         <div>
-          <ParticlesBg type="thick" bg={true} />
-          <Grid templateRows="repeat(3, 2fr)" height="45em" gap={3}>
+          <Grid templateRows="repeat(3, 2fr)" height="55em" gap={3}>
             <Box>
               <p className="bodyText">
                 No Limits On How Many Files You Can Upload!
               </p>
             </Box>
             <Box>
-              <div className="img">
+              <div className="images">
                 <DisplayFileImage
                   fileArray={this.state.arrayOfFiles}
                   removeImage={this.removeImage}
@@ -112,24 +110,24 @@ class UploadFilesScreen extends Component<any, any> {
                 </Link>
               </div>
             </Box>
-          </Grid>
-          <Grid
-            templateColumns="repeat(4, 1fr)"
-            gap={6}
-            className="descriptionContainer"
-          >
-            <Box className="descriptionText">
-              ① Click on the files you want to upload
-            </Box>
-            <Box className="descriptionText">
-              ② View your files on this page
-            </Box>
-            <Box className="descriptionText">
-              ③ Finalize your changes on the files you want
-            </Box>
-            <Box className="descriptionText">
-              ④ Sit back and watch the magic!
-            </Box>
+            <Grid
+              templateColumns="repeat(4, 1fr)"
+              gap={6}
+              className="descriptionContainer"
+            >
+              <Box className="descriptionText">
+                ① Click on the files you want to upload
+              </Box>
+              <Box className="descriptionText">
+                ② View your files on this page
+              </Box>
+              <Box className="descriptionText">
+                ③ Finalize your changes on the files you want
+              </Box>
+              <Box className="descriptionText">
+                ④ Sit back and watch the magic!
+              </Box>
+            </Grid>
           </Grid>
         </div>
       </div>
