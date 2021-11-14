@@ -160,7 +160,7 @@ class ConfirmDigitalForm extends Component<any, any> {
       <div className="overallbg">
         <ChakraHeadbar />
         <div>
-          <ParticlesBg type="thick" bg={true} />
+          {/* <ParticlesBg type="thick" bg={true} /> */}
           <div className="rowdistance">
             <div>{rows}</div>
             <div className="addattr">

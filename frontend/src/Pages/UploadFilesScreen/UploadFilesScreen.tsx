@@ -77,7 +77,7 @@ class UploadFilesScreen extends Component<any, any> {
       <div className="bodyContainer">
         <ChakraHeadbar />
         <div>
-          <ParticlesBg type="thick" bg={true} />
+          {/* <ParticlesBg type="thick" bg={true} /> */}
           <Grid templateRows="repeat(3, 2fr)" height="45em" gap={3}>
             <Box>
               <p className="bodyText">

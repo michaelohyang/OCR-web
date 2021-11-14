@@ -104,7 +104,7 @@ class ProjectMain extends Component<any, any> {
         console.log(k + " : " + this.state.projects[k].title);
         projComp.push(
             <div key={k}>
-                    <Center bg="tomato" h="100px" color="white">
+                    <Center bg="tomato" h="7em" w="14em" color="white" marginTop="3em">
                       <Link to="/upload" onClick={() => this.postSelectedProject(this.state.projects[k].id)}>
                         <img className="projectImage" src={this.state.projects[k].url} alt="..." />
                         {this.state.projects[k].title}
@@ -120,7 +120,7 @@ class ProjectMain extends Component<any, any> {
       <div className="bodyContainer">
         <ChakraHeadbar />
         <div>
-          <ParticlesBg type="thick" bg={true} />
+          {/* <ParticlesBg type="thick" bg={true} /> */}
           <Grid templateRows="repeat(3, 2fr)" height="45em" gap={3}>
             <Box>
               <p className="bodyText">
@@ -128,9 +128,9 @@ class ProjectMain extends Component<any, any> {
               </p>
             </Box>
             <Box>
-                <Stack direction={'row'} className="projectBox" alignItems="center">
+                <HStack direction={'row'} className="projectBox">
                     {projComp}
-                </Stack>
+                </HStack>
             </Box>
             <Box>
               <div className="btnContainer">

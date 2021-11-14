@@ -4,11 +4,14 @@
 }
 
 .bodyText {
-  color: white;
+  color: rgb(54, 41, 41);
 }
 
 .projectBox {
-  padding: 100px;
-  flex: 3;
+  /* padding: 100px;
+  flex: 3; */
   /* border-spacing: px; */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
