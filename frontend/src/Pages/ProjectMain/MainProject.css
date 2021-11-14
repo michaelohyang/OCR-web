@@ -24,3 +24,9 @@
   flex-wrap: wrap;
   align-items: center;
 }
+
+.placeHolder {
+  /* margin-left: 2em; */
+  height: 7em;
+  width: 0em;
+}
