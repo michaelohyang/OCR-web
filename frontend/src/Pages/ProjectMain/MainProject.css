@@ -16,7 +16,10 @@
 }
 
 .projectBox {
-  padding: 100px;
-  flex: 3;
+  /* direction: row; */
+  padding: 6em;
+  /* flex: 3; */
+  display: flex;
+  width: 5em;
   /* border-spacing: px; */
 }
