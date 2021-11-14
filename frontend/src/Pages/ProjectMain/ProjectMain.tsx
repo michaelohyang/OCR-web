@@ -1,4 +1,4 @@
-import { VStack, HStack, Stack, Center } from "@chakra-ui/layout";
+import { HStack, Center } from "@chakra-ui/layout";
 import { Box, Grid } from "@chakra-ui/layout";
 import axios from "axios";
 import { Component } from "react";
@@ -6,7 +6,6 @@ import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./MainProject.css";
 import { Link } from "react-router-dom";
-import ParticlesBg from "particles-bg";
 
 class ProjectMain extends Component<any, any> {
   constructor(props: any) {
