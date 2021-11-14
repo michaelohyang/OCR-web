@@ -4,7 +4,7 @@
 }
 
 .bodyText {
-  color: white;
+  color: rgb(54, 41, 41);
 }
 
 .projectTitle {
@@ -16,12 +16,10 @@
 }
 
 .projectBox {
-  /* direction: row; */
-  padding: 6em;
-  /* flex: 3; */
-  flex-wrap: wrap;
-  display: flex;
-  width: 5em;
-  align-items: center;
+  /* padding: 100px;
+  flex: 3; */
   /* border-spacing: px; */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
