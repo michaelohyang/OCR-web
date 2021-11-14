@@ -19,6 +19,7 @@
   /* direction: row; */
   padding: 6em;
   /* flex: 3; */
+  flex-wrap: wrap;
   display: flex;
   width: 5em;
   /* border-spacing: px; */
