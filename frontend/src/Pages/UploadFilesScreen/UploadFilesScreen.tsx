@@ -41,6 +41,12 @@ class UploadFilesScreen extends Component<any, any> {
     });
   };
 
+  // Callback after setState - easiest -> current implementation
+  // await throught asynchronous call - second easiest
+  // Promise execution using .then -> writing your own Promise -> very rare case -> only use it if other solution fails
+  // Use window.addEventListerner -> slightly more complicated
+  // useEffect = only for functional component
+
   chooseFiles = (e: any) => {
     let arrNewFiles = [];
     let formDataCopy = this.state.formData;
