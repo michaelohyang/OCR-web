@@ -16,7 +16,8 @@ class ProjectMain extends Component<any, any> {
         projects: [{
                         "id": 1,
                         "title": "Project 1",
-                        "url": "https://jobs.newscientist.com/getasset/f1c3a835-6751-447e-a8a5-5e9dc2e76f0b/"
+                        "description": "XXXXXXX"
+                        // "url": "https://jobs.newscientist.com/getasset/f1c3a835-6751-447e-a8a5-5e9dc2e76f0b/"
                     }, {
                       "id": 2,
                         "title": "Project 2",
