@@ -25,9 +25,23 @@ class UploadFilesScreen extends Component<any, any> {
   uploadFilesFunction = () => {
     let formDataCopy = new FormData();
     formDataCopy.append("medical", this.state.arrayOfFiles);
-    console.log("info", this.state.arrayOfFiles);
-    console.log("formdata", formDataCopy);
-    axios.post("http://localhost:8080/upload", formDataCopy);
+    let url = "http://localhost:8080/upload";
+    // console.log("info", this.state.arrayOfFiles);
+    // var res = Array.from(formDataCopy.entries(), ([key, prop]) => ({
+    //   [key]: {
+    //     ContentLength: typeof prop === "string" ? prop.length : prop.size,
+    //   },
+    // }));
+
+    // console.log(res);
+    axios(url, {
+      method: "post",
+      data: formDataCopy,
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    // axios.post("http://localhost:8080/upload", formDataCopy);
     alert("Images Successfully Uploaded to The Database");
   };
 
@@ -40,6 +54,12 @@ class UploadFilesScreen extends Component<any, any> {
       arrayOfFiles: tempArrFiles,
     });
   };
+
+  // Callback after setState - easiest -> current implementation
+  // await throught asynchronous call - second easiest
+  // Promise execution using .then -> writing your own Promise -> very rare case -> only use it if other solution fails
+  // Use window.addEventListerner -> slightly more complicated
+  // useEffect = only for functional component
 
   chooseFiles = (e: any) => {
     let arrNewFiles = [];

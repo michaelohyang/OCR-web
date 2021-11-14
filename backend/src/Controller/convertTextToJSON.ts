@@ -7,7 +7,8 @@ const convertTextToJSON = (filePath: String ) => {
     let tempInfo: string = "";
     textArr = textArr.map(e => e.toLowerCase());
     for (let i=0; i < textArr.length; i++) {
-        if (textArr[i] == "name") {
+        // set contains all templete field:  name, gender ..
+        if (textArr[i] == "name") { // if (set.contains(textArr[i]))
             tempInfo = textArr[i+1];
             if (textArr[i+2] != "last name") {
                 tempInfo = tempInfo + " " + textArr[i+2];
