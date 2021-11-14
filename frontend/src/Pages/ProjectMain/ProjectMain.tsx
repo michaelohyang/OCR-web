@@ -64,14 +64,17 @@ class ProjectMain extends Component<any, any> {
 
   removeProject = (id: any) => {
     console.log("REMOVE: " + id);
-    let remainingProjects = this.state.projects.filter(
-        (item: any) => item.id !== id
-      );
-    console.log(remainingProjects);
-    // this.postProject();
-    this.setState({
-        projects: remainingProjects,
-    });
+    var remove = window.confirm("FATAL! Deleted project will be permanate!");
+    if (remove) {
+      let remainingProjects = this.state.projects.filter(
+          (item: any) => item.id !== id
+        );
+      console.log(remainingProjects);
+      // this.postProject();
+      this.setState({
+          projects: remainingProjects,
+      });
+    }
   }
 
   postSelectedProject = (id: any) => {
