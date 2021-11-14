@@ -1,0 +1,14 @@
+.projectImage {
+  height: 80px;
+  width: 80px;
+}
+
+.bodyText {
+  color: white;
+}
+
+.projectBox {
+  padding: 100px;
+  flex: 3;
+  /* border-spacing: px; */
+}
