@@ -11,7 +11,6 @@ import ParticlesBg from "particles-bg";
 class UploadFilesScreen extends Component<any, any> {
   constructor(props: any) {
     super(props);
-
     this.state = {
       arrayOfFiles: [],
       numberOfAddedFiles: 0,
@@ -21,6 +20,7 @@ class UploadFilesScreen extends Component<any, any> {
     this.chooseFiles = this.chooseFiles.bind(this);
     this.removeImage = this.removeImage.bind(this);
   }
+
 
   uploadFilesFunction = () => {
     let formDataCopy = new FormData();
@@ -40,6 +40,12 @@ class UploadFilesScreen extends Component<any, any> {
       arrayOfFiles: tempArrFiles,
     });
   };
+
+  // Callback after setState - easiest -> current implementation
+  // await throught asynchronous call - second easiest
+  // Promise execution using .then -> writing your own Promise -> very rare case -> only use it if other solution fails
+  // Use window.addEventListerner -> slightly more complicated
+  // useEffect = only for functional component
 
   chooseFiles = (e: any) => {
     let arrNewFiles = [];
