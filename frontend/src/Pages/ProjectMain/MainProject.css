@@ -4,7 +4,15 @@
 }
 
 .bodyText {
-  color: white;
+  color: rgb(54, 41, 41);
+}
+
+.projectTitle {
+  font-size: large;
+}
+
+.projectDes {
+  font-size: small;
 }
 
 .projectTitle {
@@ -16,7 +24,17 @@
 }
 
 .projectBox {
-  padding: 100px;
-  flex: 3;
+  /* padding: 100px;
+  flex: 3; */
   /* border-spacing: px; */
+  margin: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.placeHolder {
+  /* margin-left: 2em; */
+  height: 7em;
+  width: 0em;
 }
