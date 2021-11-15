@@ -1,12 +1,7 @@
 /* the background color */
-.container1 {
+.bodyContainer {
   height: 100vh;
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(176, 238, 247, 1) 0%,
-    rgba(152, 143, 170, 1) 100%
-  );
+  background: linear-gradient(89.96deg, #b0eef7 0.04%, #988faa 99.96%);
   overflow-y: auto;
 }
 /* the design of the title */
@@ -19,8 +14,10 @@
 
 /* the overall name div */
 .namemaindiv {
+  display: flex;
+  align-items: center;
   margin-top: 1em;
-  margin-left: 15%;
+  margin-left: 10em;
   font-size: 1.5em;
   height: 4em;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -32,13 +29,13 @@
   border-color: gray;
   border-width: 1px;
   height: 2em;
-  width: 50%;
+  width: 15em;
   background-color: transparent;
 }
 
 /* description overall div */
 .desmaindiv {
-  margin-left: 5%;
+  margin-left: 7.5em;
   /* margin-top: 2em; */
   font-size: 1.5em;
   height: 7em;
@@ -51,7 +48,7 @@
   height: 5em;
   border-color: gray;
   border-width: 1px;
-  width: 45%;
+  width: 15em;
   background-color: transparent;
 }
 
@@ -62,7 +59,7 @@
   margin-top: 2em;
   margin-right: 20%;
   gap: 30%;
-  margin-left: 18%;
+  margin-left: 32%;
 }
 
 .maincontainer {

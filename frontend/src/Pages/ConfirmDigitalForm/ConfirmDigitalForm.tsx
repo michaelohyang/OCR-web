@@ -4,7 +4,6 @@ import { Component } from "react";
 import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./ConfirmDigitalForm.css";
-import ParticlesBg from "particles-bg";
 
 class ConfirmDigitalForm extends Component<any, any> {
   constructor(props: any) {
@@ -157,10 +156,10 @@ class ConfirmDigitalForm extends Component<any, any> {
       );
     }
     return (
-      <div className="overallbg">
+      <div className="bodyContainer">
         <ChakraHeadbar />
         <div>
-          <ParticlesBg type="thick" bg={true} />
+          {/* <ParticlesBg type="thick" bg={true} /> */}
           <div className="rowdistance">
             <div>{rows}</div>
             <div className="addattr">

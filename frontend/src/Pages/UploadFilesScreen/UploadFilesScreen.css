@@ -1,16 +1,12 @@
 .bodyContainer {
   height: 100vh;
-  background: linear-gradient(
-    90deg,
-    rgba(214, 230, 187, 1) 0%,
-    rgba(155, 200, 245, 0.542454481792717) 0%,
-    rgba(166, 235, 249, 1) 100%
-  );
+  background: linear-gradient(89.96deg, #b0eef7 0.04%, #988faa 99.96%);
   overflow-y: auto;
 }
 
 .bodyText {
   font-size: larger;
+  color: #000000 !important;
   text-align: center;
   font-weight: bold;
   font-size: larger;
@@ -64,6 +60,7 @@ input[type="file"] {
 .descriptionContainer {
   display: flex;
   padding-top: 5em;
+  position: relative;
 }
 
 .btnContainer {
@@ -75,8 +72,8 @@ input[type="file"] {
   padding-top: 3em;
 }
 
-.img {
+.images {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
