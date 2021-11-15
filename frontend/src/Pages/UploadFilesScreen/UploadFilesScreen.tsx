@@ -6,7 +6,6 @@ import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
 import "./UploadFilesScreen.css";
 import { Link } from "react-router-dom";
-import ParticlesBg from "particles-bg";
 
 class UploadFilesScreen extends Component<any, any> {
   constructor(props: any) {

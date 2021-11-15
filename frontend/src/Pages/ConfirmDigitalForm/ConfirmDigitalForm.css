@@ -85,13 +85,8 @@
 }
 
 /* this is the style for rest space of background */
-.overallbg {
+.bodyContainer {
   height: 100vh;
-  background: linear-gradient(
-    90deg,
-    rgba(214, 230, 187, 1) 0%,
-    rgba(155, 200, 245, 0.542454481792717) 0%,
-    rgba(166, 235, 249, 1) 100%
-  );
+  background: linear-gradient(89.96deg, #b0eef7 0.04%, #988faa 99.96%);
   overflow-y: auto;
 }
