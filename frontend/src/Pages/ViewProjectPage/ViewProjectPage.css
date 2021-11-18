@@ -13,20 +13,24 @@
   margin-left: 5%;
   margin-right: 4%;
 }
+
 .boxContainer {
-  max-width: 20em;
-  height: 20em;
+  /* min-width: 25em; */
+  /* max-width: 20em; */
   display: inline-flex;
   position: relative;
   border: 3px;
   margin-right: 3em;
+  margin-bottom: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .deleteButton {
   position: absolute;
   border-radius: 50%;
   top: 0;
-  right: 0.1em;
+  right: 0.5em;
   z-index: 1;
   width: 12px !important;
   height: 12px !important;
@@ -45,9 +49,37 @@
 }
 
 .deleteButtonText:hover {
-  font-weight: bolder;
+  font-weight: bold;
 }
 
-.modalBox:hover {
-  box-shadow: 0.2em 0.3em #888888;
+.boxContainer:hover {
+  box-shadow: 0 0.3em 0.1em rgb(0 0 0 / 30%);
+  border-radius: 5%;
+}
+
+.addIcon {
+  height: 5em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.addButtonContainer {
+  background-color: #f4f4f4;
+  border-radius: 5%;
+  width: 24em;
+  height: 20em;
+  display: inline-flex;
+  position: relative;
+  border: 3px;
+  margin-right: 3em;
+  margin-bottom: 1.5em;
+  margin-top: 0.7em;
+  cursor: pointer;
+}
+
+.addButtonContainer:hover {
+  box-shadow: 0.4em 0.4em #888888;
 }

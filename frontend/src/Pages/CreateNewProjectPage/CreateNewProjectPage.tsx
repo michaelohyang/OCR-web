@@ -34,6 +34,7 @@ class Create_New_Project_Page extends Component<any, any> {
     };
     console.log("this is project", projectInfo);
     axios.post("http://localhost:8080/createProject", projectInfo);
+    alert(this.state.project_name + " has been successfully added!");
     this.setState({ redirect: "/" });
   };
 

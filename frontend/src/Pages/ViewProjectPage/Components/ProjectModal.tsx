@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/layout";
-import "./ViewProjectPage.css";
+import "../ViewProjectPage.css";
 import { Link } from "react-router-dom";
 
 interface ProjectModalInterface {
@@ -20,16 +20,17 @@ function ProjectModal(props: ProjectModalInterface) {
         marginTop="0.5em"
         className="modalBox"
       >
-        <Link to="/upload" onClick={() => props.projects[props.k].id}>
+        <Link to="/upload">
           <img
             src={
               "https://geology.utah.gov/apps/pubs_landing/preview-not-available.gif"
             }
             alt="imagePreview"
           />
-          <Box p="3">
+          <Box p="4">
             <Box
               mt="2"
+              maxWidth="20em"
               fontSize="larger"
               fontWeight="bold"
               as="h2"
@@ -38,14 +39,15 @@ function ProjectModal(props: ProjectModalInterface) {
               overflow="hidden"
               isTruncated
             >
-              {props.projects[props.k].title}
+              {props.projects[props.k].project_name}
             </Box>
             <Box
-              maxWidth="20em"
               mt="2"
-              fontSize="medium"
-              as="h2"
+              maxWidth="20em"
+              fontSize="larger"
               textAlign="center"
+              lineHeight="tight"
+              overflow="hidden"
               isTruncated
             >
               {props.projects[props.k].description}
@@ -54,7 +56,7 @@ function ProjectModal(props: ProjectModalInterface) {
         </Link>
         <div className="deleteButton">
           <button
-            onClick={() => props.removeProject(props.projects[props.k].id)}
+            onClick={() => props.removeProject(props.projects[props.k])}
             className="deleteButtonText"
           >
             x

@@ -1,7 +1,7 @@
 import * as React from "react";
 import LogoImage from "./logo";
 import "./ChakraHeadbar.css";
-import { HStack, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import DropDownMenu from "./DropDownMenu";
 
 export default class ChakraHeadbar extends React.Component {
