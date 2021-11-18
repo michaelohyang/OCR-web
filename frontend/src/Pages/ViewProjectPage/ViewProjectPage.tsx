@@ -4,10 +4,11 @@ import axios from "axios";
 import { Component } from "react";
 import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
-import "./MainProject.css";
+import "./ViewProjectPage.css";
 import { Link } from "react-router-dom";
+import ProjectModal from "./ProjectModal";
 
-class ProjectMain extends Component<any, any> {
+class ViewProjectPage extends Component<any, any> {
   constructor(props: any) {
     super(props);
 
@@ -20,9 +21,8 @@ class ProjectMain extends Component<any, any> {
         },
         {
           id: 2,
-          title: "Understanding the Benefits of Telepsychiatry",
-          description:
-            "The mental health industry isasdddddddddddddddddddddddddddddddddddddddddddddddddddddddddasdadasdadasdadasddddddddddddddd",
+          title: "Understanding the Benefits ",
+          description: "The mental health industry,",
         },
         {
           id: 3,
@@ -106,94 +106,31 @@ class ProjectMain extends Component<any, any> {
   };
 
   render() {
-    var projComp = [];
+    var availableProjects = [];
     for (let key in this.state.projects) {
       const k = key;
-      projComp.push(
+      availableProjects.push(
         <div key={k} className="boxContainer">
-          <Box
-            maxW="sm"
-            bg="white"
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-            marginTop="0.5em"
-          >
-            <Link
-              to="/upload"
-              onClick={() =>
-                this.postSelectedProject(this.state.projects[k].id)
-              }
-            >
-              <img
-                src={
-                  "https://geology.utah.gov/apps/pubs_landing/preview-not-available.gif"
-                }
-                alt="imagePreview"
-              />
-              <Box p="3">
-                <Box
-                  mt="2"
-                  fontSize="larger"
-                  fontWeight="bold"
-                  as="h2"
-                  textAlign="center"
-                  lineHeight="tight"
-                  isTruncated
-                >
-                  {this.state.projects[k].title}
-                </Box>
-                <Box
-                  maxWidth="20em"
-                  mt="2"
-                  fontSize="medium"
-                  as="h2"
-                  textAlign="center"
-                  isTruncated
-                  // className="bodyText1"
-                  // data-text={this.state.projects[k].description}
-                >
-                  {this.state.projects[k].description}
-                </Box>
-              </Box>
-            </Link>
-          </Box>
-          <div className="deleteButton">
-            <button
-              onClick={() => this.removeProject(this.state.projects[k].id)}
-            >
-              x
-            </button>
-          </div>
+          <ProjectModal
+            projects={this.state.projects}
+            k={k}
+            removeProject={this.removeProject}
+          />
         </div>
       );
     }
 
     return (
-      <div className="bodyContainer">
+      <div className="screenContainer">
         <ChakraHeadbar />
         <div>
-          <Grid templateRows="repeat(3, 2fr)" height="40em" gap={3}>
+          <Grid templateRows="repeat(3, 2fr)" height="50" gap={3}>
             <Box>
               <p className="bodyText">Medical Research Projects</p>
             </Box>
-            <Box>
-              <HStack className="projectBox">
-                <div></div>
-
-                {projComp}
-              </HStack>
-            </Box>
-            <Box>
-              <div className="btnContainer">
-                <Link to="/createProject">
-                  <ChakraButton
-                    txtname={"Add Project"}
-                    cssDesign={"uploadBtn"}
-                  />
-                </Link>
-              </div>
-            </Box>
+            {/* <Box>{availableProjects}</Box>
+             */}
+            <div className="projectBox">{availableProjects}</div>
           </Grid>
         </div>
       </div>
@@ -201,4 +138,4 @@ class ProjectMain extends Component<any, any> {
   }
 }
 
-export default ProjectMain;
+export default ViewProjectPage;

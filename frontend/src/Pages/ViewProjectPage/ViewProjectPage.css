@@ -1,0 +1,53 @@
+.screenContainer {
+  height: 100vh;
+  background: linear-gradient(89.96deg, #b0eef7 0.04%, #988faa 99.96%);
+  overflow-y: auto;
+}
+
+.projectBox {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 5em;
+  margin-left: 5%;
+  margin-right: 4%;
+}
+.boxContainer {
+  max-width: 20em;
+  height: 20em;
+  display: inline-flex;
+  position: relative;
+  border: 3px;
+  margin-right: 3em;
+}
+
+.deleteButton {
+  position: absolute;
+  border-radius: 50%;
+  top: 0;
+  right: 0.1em;
+  z-index: 1;
+  width: 12px !important;
+  height: 12px !important;
+  padding: 0.2em 1em 0em 0em;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0.5;
+  text-align: center;
+  font-size: 1.8em;
+  line-height: 0em;
+  margin-top: 0.5em;
+}
+
+.deleteButtonText {
+  padding-left: 0.3em;
+}
+
+.deleteButtonText:hover {
+  font-weight: bolder;
+}
+
+.modalBox:hover {
+  box-shadow: 0.2em 0.3em #888888;
+}
