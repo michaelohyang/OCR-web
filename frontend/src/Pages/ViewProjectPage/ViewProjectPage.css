@@ -59,7 +59,7 @@
 }
 
 .boxContainer:hover {
-  box-shadow: 0 0.3em 0.1em rgb(0 0 0 / 30%);
+  box-shadow: 10px 10px 0px -1px rgba(0, 0, 0, 0.1);
   border-radius: 5%;
 }
 
@@ -87,5 +87,5 @@
 }
 
 .addButtonContainer:hover {
-  box-shadow: 0.4em 0.4em #888888;
+  box-shadow: 10px 10px 0px -1px rgba(0, 0, 0, 0.1);
 }

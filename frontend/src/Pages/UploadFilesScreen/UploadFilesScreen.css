@@ -85,7 +85,7 @@ input[type="file"] {
 }
 
 .uploadFileContainer:hover {
-  box-shadow: 0.4em 0.4em #888888;
+  box-shadow: 10px 10px 0px -1px rgba(0, 0, 0, 0.1);
 }
 
 .addIconInUploads {
