@@ -37,6 +37,7 @@ function ProjectModal(props: ProjectModalInterface) {
               textAlign="center"
               lineHeight="tight"
               overflow="hidden"
+              _hover={{ textDecorationLine: "underline" }}
               isTruncated
             >
               {props.projects[props.k].project_name}

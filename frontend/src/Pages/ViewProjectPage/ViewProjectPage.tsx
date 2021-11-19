@@ -107,7 +107,7 @@ class ViewProjectPage extends Component<any, any> {
         <div>
           <Grid templateRows="repeat(3, 2fr)" height="50" gap={3}>
             <Box>
-              <p className="bodyText">Medical Research Projects</p>
+              <p className="viewProjectBodyText">Medical Research Projects</p>
             </Box>
             <div className="projectBox">
               {this.state.projects}

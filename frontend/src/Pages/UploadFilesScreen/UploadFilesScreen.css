@@ -1,20 +1,19 @@
-.bodyContainer {
+.uploadPageBodyContainer {
   height: 100vh;
   background: linear-gradient(89.96deg, #b0eef7 0.04%, #988faa 99.96%);
   overflow-y: auto;
 }
 
-.bodyText {
+.uploadPageBodyText {
   font-size: larger;
   color: #000000 !important;
-  text-align: center;
   font-weight: bold;
   font-size: larger;
-  padding-top: 3em;
+  padding-top: 2em;
 }
 
 .uploadBtn {
-  border-radius: 10em;
+  border-radius: 20em;
   position: relative;
 }
 
@@ -23,11 +22,19 @@
   cursor: pointer;
 }
 
-.chooseBtnContainer {
-  border-radius: 10%;
+.uploadPageBtnContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5em;
+  flex-wrap: wrap;
+  padding-top: 3em;
+}
+
+.chooseFileBtnContainer {
+  border-radius: 0.3em;
   cursor: pointer;
   display: inline-block;
-  border: 1px solid #ccc;
   padding: 0.8em 0.8em;
   background: linear-gradient(
     103deg,
@@ -35,10 +42,6 @@
     rgba(215, 151, 47, 1) 99%,
     rgba(215, 152, 47, 1) 100%
   );
-}
-
-.chooseBtn {
-  display: none;
 }
 
 .chooseBtnText {
@@ -51,7 +54,7 @@ input[type="file"] {
 
 .descriptionText {
   font-weight: 1000;
-  font-size: larger;
+  font-size: large;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,21 +62,37 @@ input[type="file"] {
 
 .descriptionContainer {
   display: flex;
+  justify-content: space-evenly;
   padding-top: 5em;
   position: relative;
 }
 
-.btnContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5em;
-  flex-wrap: wrap;
-  padding-top: 3em;
+.hiddenImgInput {
+  display: none;
 }
 
-.images {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+/* CSS below applies to the condition where no images are uploaded */
+.uploadFileContainer {
+  align-items: center;
+  background-color: #f4f4f4;
+  border-radius: 5%;
+  width: 24em;
+  height: 20em;
+  display: inline-flex;
+  position: relative;
+  border: 3px;
+  cursor: pointer;
+}
+
+.uploadFileContainer:hover {
+  box-shadow: 0.4em 0.4em #888888;
+}
+
+.addIconInUploads {
+  height: 5em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
 }

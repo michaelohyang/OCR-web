@@ -6,6 +6,8 @@ import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
 import "./UploadFilesScreen.css";
 import { Link } from "react-router-dom";
+import DisplayForNoImageUpload from "./Components/CaseConditionForUpload/DisplayForNoImages";
+import { Button } from "@chakra-ui/button";
 
 class UploadFilesScreen extends Component<any, any> {
   constructor(props: any) {
@@ -71,34 +73,32 @@ class UploadFilesScreen extends Component<any, any> {
   };
 
   render() {
-    return (
-      <div className="bodyContainer">
+    return this.state.arrayOfFiles.length !== 0 ? (
+      <div className="uploadPageBodyContainer">
         <ChakraHeadbar />
         <div>
-          <Grid templateRows="repeat(3, 2fr)" height="55em" gap={3}>
-            <Box>
-              <p className="bodyText">
+          <Grid templateRows="repeat(3, 2fr)" height="43em" gap={3}>
+            <Box display="flex" justifyContent="center" marginBottom="1em">
+              <p className="uploadPageBodyText">
                 No Limits On How Many Files You Can Upload!
               </p>
             </Box>
-            <Box>
-              <div className="images">
-                <DisplayFileImage
-                  fileArray={this.state.arrayOfFiles}
-                  removeImage={this.removeImage}
-                />
-              </div>
+            <Box display="flex" justifyContent="center" padding="0.3em">
+              <DisplayFileImage
+                fileArray={this.state.arrayOfFiles}
+                removeImage={this.removeImage}
+              />
             </Box>
             <Box>
-              <div className="btnContainer">
-                <label className={"chooseBtnContainer"}>
+              <div className="uploadPageBtnContainer">
+                <label className={"chooseFileBtnContainer"}>
                   <input
                     type="file"
                     name="medical"
                     multiple
                     onChange={(e: any) => this.chooseFiles(e)}
                   />
-                  <p className={"chooseBtnText"}>Choose Files</p>
+                  <p className={"chooseBtnText"}> Choose Files </p>
                 </label>
                 <Link to="/confirm">
                   <ChakraButton
@@ -130,6 +130,8 @@ class UploadFilesScreen extends Component<any, any> {
           </Grid>
         </div>
       </div>
+    ) : (
+      <DisplayForNoImageUpload chooseFilesFunction={this.chooseFiles} />
     );
   }
 }

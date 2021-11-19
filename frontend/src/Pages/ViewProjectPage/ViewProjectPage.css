@@ -6,7 +6,6 @@
 
 .projectBox {
   display: flex;
-  /* align-items: center; */
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 5em;
@@ -14,9 +13,16 @@
   margin-right: 4%;
 }
 
+.viewProjectBodyText {
+  font-size: larger;
+  color: #000000 !important;
+  text-align: center;
+  font-weight: bold;
+  font-size: larger;
+  padding-top: 3em;
+}
+
 .boxContainer {
-  /* min-width: 25em; */
-  /* max-width: 20em; */
   display: inline-flex;
   position: relative;
   border: 3px;

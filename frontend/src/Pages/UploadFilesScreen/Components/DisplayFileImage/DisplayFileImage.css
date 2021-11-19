@@ -1,20 +1,23 @@
 .resizeImage {
-  max-width: 20em;
+  width: 20em;
   height: 20em;
+  object-fit: cover;
   display: inline-flex;
+  justify-content: space-evenly;
   position: relative;
-  margin-bottom: 2em;
-  margin-left: 4.5em;
+  /* margin-bottom: 2em; */
+  margin: 0.5em;
 }
 
 .picture {
   border-radius: 5%;
+  cursor: zoom-in;
 }
 
 .deleteBtn {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 0.1em;
+  right: 0.1em;
   z-index: 1;
   width: 12px !important;
   height: 12px !important;

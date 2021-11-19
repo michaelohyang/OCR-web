@@ -14,9 +14,6 @@ export default class ChakraHeadbar extends React.Component {
         <div className="textOnCenter">
           <Text>Online Medical Record Scanner</Text>
         </div>
-        <div className="menuOnRight">
-          <DropDownMenu />
-        </div>
       </div>
     );
   }
