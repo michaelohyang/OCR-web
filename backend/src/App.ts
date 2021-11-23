@@ -44,7 +44,6 @@ app.post('/createProject', (req: any, res: any) => {
 // Send the new project information to the backend database
 app.get('/projects', async (req: any, res: any) => {
   let projects = await database.getJsonData("Project");
-  console.log(projects);
   res.send(projects);
 });
 

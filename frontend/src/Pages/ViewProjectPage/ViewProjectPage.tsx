@@ -27,7 +27,6 @@ class ViewProjectPage extends Component<any, any> {
       let projects = res.data;
       for (let key in projects) {
         const k = key;
-        console.log(projects[k]);
         availableProjects.push(
           <div key={k} className="boxContainer">
             <ProjectModal
@@ -43,7 +42,6 @@ class ViewProjectPage extends Component<any, any> {
   }
 
   removeProject = (id: any) => {
-    console.log("REMOVE: " + id);
     var remove = window.confirm("FATAL! Deleted project will be permanate!");
     if (remove) {
       let remainingProjects = this.state.projects.filter(

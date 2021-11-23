@@ -59,28 +59,20 @@ function writeNewPost(ref:string, key:string, value:any) {
           goOffline(db)
         })
         .catch((error) => {
-          console.log("The write failed..." + error)
+          console.log("The write failed... " + error)
           goOffline(db)
         });
 }
 
 function deleteData(ref:string) {
     remove(child(dbRef, ref)).then((data) => {
-        console.log(data)
-        console.log("Data removed successfully!")
+        console.log("Data removed successfully! ", data)
         goOffline(db)
       })
       .catch((error) => {
-        console.log("The removed failed..." + error)
+        console.log("The removed failed... " + error)
         goOffline(db)
       });
 }
-
-// read
-// (async()=>{
-//     let result = await getJsonData("class/keyValue")
-//     console.log(result)
-//     writeNewPost("class/keyValue", "name123", "joshchen")
-// })()
 
 module.exports = {dbRef, getJsonData, writeNewPost, overwriteData, deleteData};

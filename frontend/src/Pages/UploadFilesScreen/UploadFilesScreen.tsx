@@ -7,7 +7,6 @@ import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
 import "./UploadFilesScreen.css";
 import { Link } from "react-router-dom";
 import DisplayForNoImageUpload from "./Components/CaseConditionForUpload/DisplayForNoImages";
-import { Button } from "@chakra-ui/button";
 
 class UploadFilesScreen extends Component<any, any> {
   constructor(props: any) {
@@ -25,14 +24,11 @@ class UploadFilesScreen extends Component<any, any> {
   uploadFilesFunction = () => {
     let formDataCopy = new FormData();
     formDataCopy.append("medical", this.state.arrayOfFiles);
-    console.log("info", this.state.arrayOfFiles);
-    console.log("formdata", formDataCopy);
     axios.post("http://localhost:8080/upload", formDataCopy);
     alert("Images Successfully Uploaded to The Database");
   };
 
   removeImage = (id: any) => {
-    console.log(id);
     let tempArrFiles = this.state.arrayOfFiles.filter(
       (item: any) => item.id !== id
     );

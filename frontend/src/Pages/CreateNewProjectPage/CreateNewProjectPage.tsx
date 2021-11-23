@@ -32,7 +32,6 @@ class Create_New_Project_Page extends Component<any, any> {
       project_name: this.state.project_name,
       description: this.state.description,
     };
-    console.log("this is project", projectInfo);
     axios.post("http://localhost:8080/createProject", projectInfo);
     this.setState({ redirect: "/" });
   };
@@ -66,10 +65,10 @@ class Create_New_Project_Page extends Component<any, any> {
             </HStack>
 
             <HStack className="buttons">
-                <Link to="/">
-                  <ChakraButton txtname={"Cancel"} />
-                </Link>
-                <ChakraButton txtname={"Confirm"} onClickFunc={this.onsubmit} />
+              <Link to="/">
+                <ChakraButton txtname={"Cancel"} />
+              </Link>
+              <ChakraButton txtname={"Confirm"} onClickFunc={this.onsubmit} />
             </HStack>
           </div>
         </div>

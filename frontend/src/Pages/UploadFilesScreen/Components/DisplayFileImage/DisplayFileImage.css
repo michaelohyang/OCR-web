@@ -11,18 +11,18 @@
 
 .picture {
   border-radius: 5%;
-  cursor: zoom-in;
+  cursor: pointer;
 }
 
 .deleteBtn {
   position: absolute;
   top: 0.1em;
-  right: 0.1em;
+  right: 0.15em;
   z-index: 1;
   width: 12px !important;
   height: 12px !important;
   background-color: #fff;
-  padding: 0.2em 1em 1.2em 0.6em;
+  padding: 0.2em 1em 1.2em 0.35em;
   font-weight: bold;
   cursor: pointer;
   opacity: 0.5;
@@ -34,4 +34,63 @@
 
 .resizeImage:hover .deleteBtn {
   opacity: 1;
+}
+
+/* Shows expanded image */
+
+/* The Modal (background) */
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 50em;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* The Close Button */
+.closeExpandedImage {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.closeExpandedImage:hover,
+.closeExpandedImage:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 50em) {
+  .modal-content {
+    width: 100%;
+  }
 }
