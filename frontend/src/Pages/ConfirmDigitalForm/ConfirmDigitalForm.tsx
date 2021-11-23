@@ -129,7 +129,6 @@ class ConfirmDigitalForm extends Component<any, any> {
   render() {
     var rows = [];
     this.state.newEntry.push(<div></div>);
-    // input?.addEventListener('input', (e: any) => this.userUpdate(e));
     for (var key in this.state.dic) {
       const k = key;
 

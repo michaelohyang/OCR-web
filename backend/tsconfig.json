@@ -1,18 +1,32 @@
+// {
+//   "compilerOptions": {
+//     "module": "CommonJS",
+//     "esModuleInterop": true,
+//     "allowSyntheticDefaultImports": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "target": "es2020",
+//     "noImplicitAny": true,
+//     "strict": true,
+//     "moduleResolution": "node",
+//     "sourceMap": true,
+//     "outDir": "build",
+//     "allowJs": false,
+//     "experimentalDecorators": true,
+//     "lib": ["es6"]
+//   },
+//   "include": ["src"]
+// }
 {
   "compilerOptions": {
-    "module": "CommonJS",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "target": "es2020",
-    "noImplicitAny": true,
+    "target": "ES2015",
+    "module": "commonjs",
     "strict": true,
-    "moduleResolution": "node",
-    "sourceMap": true,
+    "esModuleInterop": true,
     "outDir": "build",
-    "allowJs": false,
-    "experimentalDecorators": true,
-    "lib": ["es6"]
+    "lib": ["es6"],
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src"]
 }

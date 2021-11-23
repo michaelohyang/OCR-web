@@ -5,25 +5,22 @@ import { IconButton } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
 //This is the function design layout of the menu button function
-export default function Menufunc() {
+export default function DropDownMenu() {
   return (
     <HStack>
       <Menu>
         <MenuButton
           boxSize="6em"
-          border="ButtonShadow"
+          padding="0em"
+          border="0em"
+          // background="0em"
           as={IconButton}
           aria-label="Options"
           icon={<HamburgerIcon boxSize="3em" />}
           variant="outline"
-          colorScheme="cyan"
-          background="linear-gradient(to-l,
-          90deg,
-          rgba(214, 230, 187, 1) 0%,
-          rgba(9, 121, 113, 0.6180847338935574) 41%,
-          rgba(0, 212, 255, 1) 100%
-        );"
-          _hover={{ bgGradient: "linear(to-r, blue.500, gray.500)" }}
+          colorScheme="transparent"
+          _hover={{ color: "white" }}
+          _focus={{ outline: "none" }}
         />
         <MenuList>
           <MenuItem

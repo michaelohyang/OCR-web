@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import UploadFilesScreen from "./Pages/UploadFilesScreen/UploadFilesScreen";
 import ConfirmFilesScreen from "./Pages/ConfirmDigitalForm/ConfirmDigitalForm";
-import ProjectMain from "./Pages/ProjectMain/ProjectMain";
+import ViewProjectPage from "./Pages/ViewProjectPage/ViewProjectPage";
 import CreateProject from "./Pages/CreateNewProjectPage/CreateNewProjectPage";
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
         <div>
           <Switch>
             <Route path="/" exact>
-              <ProjectMain />
+              <ViewProjectPage />
             </Route>
             <Route path="/createProject">
               <CreateProject />

@@ -3,6 +3,7 @@
   height: 100vh;
   background: linear-gradient(89.96deg, #b0eef7 0.04%, #988faa 99.96%);
   overflow-y: auto;
+  overflow-x: auto;
 }
 /* the design of the title */
 .textheader {
@@ -10,16 +11,23 @@
   font-family: "Times New Roman", Times, serif;
   font-size: 3em;
   justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: auto;
+  position: relative;
 }
 
 /* the overall name div */
-.namemaindiv {
+.nameMainDiv {
   display: flex;
   align-items: center;
-  margin-top: 1em;
-  margin-left: 10em;
+  position: absolute;
+  padding-top: 2em;
+  padding-left: 13%;
   font-size: 1.5em;
   height: 4em;
+  overflow-y: auto;
+  overflow-x: auto;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
@@ -28,48 +36,61 @@
 .namediv {
   border-color: gray;
   border-width: 1px;
-  height: 2em;
-  width: 15em;
+  height: 1.5em;
+  width: 63%;
   background-color: transparent;
 }
 
 /* description overall div */
-.desmaindiv {
-  margin-left: 7.5em;
-  /* margin-top: 2em; */
+.desMainDiv {
+  padding-left: 2%;
+  margin-top: 5em;
+  position: absolute;
   font-size: 1.5em;
   height: 7em;
+  overflow-y: auto;
+  overflow-x: auto;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 /* description textarea div */
 .Description {
-  height: 5em;
+  height: 80%;
   border-color: gray;
   border-width: 1px;
-  width: 15em;
+  width: 54%;
   background-color: transparent;
 }
 
 /* div design that contain: cancel button and confirm button */
-.buttoncontainer {
-  display: flex;
-  /* justify-content: space-evenly; */
-  margin-top: 2em;
-  margin-right: 20%;
-  gap: 30%;
-  margin-left: 32%;
-}
 
 .maincontainer {
   background-color: rgba(144, 185, 219, 0.781);
-  margin-left: 30%;
-  margin-top: 3%;
-  margin-right: 29%;
+  margin-left: 32vw;
+  margin-top: 3vw;
+  margin-right: 32vw;
   height: 26em;
-  border-width: 1px;
+  border-width: 0.05em;
   border-radius: 2em;
   border-color: blueviolet;
   opacity: 70%;
+  width: 34em;
+  overflow-y: auto;
+  overflow-x: auto;
+  position: relative;
+}
+
+.nametext {
+  margin-left: 0.1%;
+}
+
+.buttons {
+  position: absolute;
+  margin-top: 20em;
+  display: flex;
+  gap: 6em;
+  margin-left: 6em;
+  overflow-x: auto;
+  overflow-y: auto;
 }
