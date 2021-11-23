@@ -9,10 +9,11 @@ import axios from "axios";
 class Create_New_Project_Page extends Component<any, any> {
   constructor(props: any) {
     super(props);
+    // state will contain two variables: the name of project you would like to pass and the project description
+    // you would like to pass.
     this.state = {
       project_name: String,
       description: String,
-      redirect: null,
     };
     this.onsubmit = this.onsubmit.bind(this);
     this.send_data_backend = this.send_data_backend.bind(this);
@@ -64,11 +65,13 @@ class Create_New_Project_Page extends Component<any, any> {
               <textarea className="Description" id="description1"></textarea>
             </HStack>
 
-            <HStack className="buttons">
+            <HStack className="buttoncontainer">
               <Link to="/">
                 <ChakraButton txtname={"Cancel"} />
               </Link>
-              <ChakraButton txtname={"Confirm"} onClickFunc={this.onsubmit} />
+              <Link to="/">
+                <ChakraButton txtname={"Confirm"} onClickFunc={this.onsubmit} />
+              </Link>
             </HStack>
           </div>
         </div>
