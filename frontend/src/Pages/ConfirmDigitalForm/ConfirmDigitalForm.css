@@ -2,10 +2,14 @@
 .textarea {
   /* background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%); */
   background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-  border: 0.1em dotted black;
+
   font-family: monospace;
   font-weight: bolder;
+  border-radius: 0.6em;
+  border-width: 0.05em;
   height: 3.5em;
+  border-color: blueviolet;
+  box-shadow: 1px 1px #b0edf1;
   margin-right: 1em;
 }
 /* this is the style for whole div of information can be deleted */
@@ -62,7 +66,12 @@
 
 /* this is the style for poped text area if add attribute clicked */
 .addattrtext {
-  background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
+  /* background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%); */
+  background: whitesmoke;
+  border-radius: 0.7em;
+  border-width: 0.05em;
+  border-color: grey;
+  box-shadow: 1px 1px #888888;
 }
 
 /* this is the style for submit buttom */

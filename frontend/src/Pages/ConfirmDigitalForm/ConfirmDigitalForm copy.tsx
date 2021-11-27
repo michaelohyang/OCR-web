@@ -124,7 +124,7 @@ class ConfirmDigitalForm extends Component<any, any> {
       newEntry: [<div></div>],
     });
     this.setState({
-      dic: this.state.dic, 
+      dic: this.state.dic,
     });
   };
 
