@@ -12,6 +12,7 @@ interface ProjectModalInterface {
   projects: any;
   k: string;
   removeProject: Function;
+  selectProject: Function;
 }
 
 function ProjectModal(props: ProjectModalInterface) {
@@ -28,7 +29,7 @@ function ProjectModal(props: ProjectModalInterface) {
         marginTop="0.5em"
         className="modalBox"
       >
-        <Link to="/upload">
+        <Link to="/existDigitalForm" onClick={() => props.selectProject(props.k)}>
           <img
             src={colors[Math.floor(Math.random() * colors.length)]}
             alt="imagePreview"
