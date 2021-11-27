@@ -6,7 +6,20 @@ import "./ViewProjectPage.css";
 import ProjectModal from "./Components/ProjectModal";
 import imageLogo from "./Components/addIcon.png";
 import { Link } from "react-router-dom";
+import ExistDigitalForm from "../ExistDigitalForm/ExistDigitalForm";
 
+// class ConfirmPage() extedns Component {
+//     stateForm = .....
+
+//     <FinalizePage
+//     stateForm = {this.state.form}
+//     />
+// }
+
+
+// class finalizePage() extends Component{
+//     this.stateForm;
+// }
 class ViewProjectPage extends Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -33,6 +46,7 @@ class ViewProjectPage extends Component<any, any> {
               projects={projects}
               k={k}
               removeProject={this.removeProject}
+              selectProject = {this.selectProject}
             />
           </div>
         );
@@ -50,6 +64,27 @@ class ViewProjectPage extends Component<any, any> {
       this.setState({ projects: remainingProjects });
     }
   };
+
+  selectProject = (projectId: any) => {
+    <ExistDigitalForm
+    selectedProjectId = {projectId}
+    />
+    console.log(projectId);
+    this.setState({
+      selectedProjectId: projectId
+    }, () => {
+      console.log(projectId);
+    //   <ExistDigitalForm
+    //   selectedProjectId = {this.state.selectedProjectId}
+    // />
+    console.log(projectId);
+    const t = this.state.selectedProjectId;
+    console.log(t);
+    });
+    // <ExistDigitalForm
+    //   selectedProjectId = {this.state.selectedProjectId}
+    // />
+  }
 
   postSelectedProject = (id: any) => {
     console.log("selected project: " + id);
