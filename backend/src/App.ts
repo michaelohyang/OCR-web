@@ -1,3 +1,5 @@
+import { AnyTxtRecord } from "dns";
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
@@ -29,9 +31,12 @@ app.post('/form', async (req: any, res: any) => {
 });
 
 // Receive the updated json objects from the front end
-app.get('/confirmForm', (req: any, res: any) => {
-  var finalDataInJSON = req.body;
-  createDir.createOutputDirectory('Output.json', finalDataInJSON);
+app.post('/confirmForm', async (req: any, res: any) => {
+  var finalformInJSON = req.body;
+  var project_id = req.query.id;
+  let forms = await database.getJsonData(`Project/${project_id}/forms`);
+  console.log(forms);
+  forms.push(finalformInJSON);
 });
 
 // Send the new project information to the backend database
@@ -44,7 +49,15 @@ app.post('/createProject', (req: any, res: any) => {
 // Send the new project information to the backend database
 app.get('/projects', async (req: any, res: any) => {
   let projects = await database.getJsonData("Project");
+  console.log(projects);
   res.send(projects);
+});
+
+// Delete a project permanently using its ID
+app.post('/delete', (req: any, res: any) => {
+  let projectId = req.query.id;
+  console.log(projectId);
+  database.deleteData(`Project/${projectId}`);
 });
 
 app.listen(projectConstant.PORT, () =>
