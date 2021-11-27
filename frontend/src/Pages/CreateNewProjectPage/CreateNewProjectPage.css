@@ -7,6 +7,7 @@ input {
   height: 100vh;
   background: linear-gradient(89.96deg, #b0eef7 0.04%, #988faa 99.96%);
   overflow-y: auto;
+  overflow-x: auto;
 }
 
 .newProjectBodyContainer {
