@@ -1,11 +1,9 @@
-import * as React from "react";
 import { Button } from "@chakra-ui/react";
 
 interface DesignedButtonProps {
   txtname: string;
   onClickFunc?: () => void;
   cssDesign?: any;
-  // onChange?: (String: any) => void;
   onChange?: () => void;
   id?: any;
 }

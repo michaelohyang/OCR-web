@@ -1,18 +1,20 @@
 import { Component } from "react";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./CreateNewProjectPage.css";
-import { Text, HStack } from "@chakra-ui/layout";
-import ChakraButton from "../../GlobalComponents/ChakraButton";
+import { Text } from "@chakra-ui/layout";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
+import { Button } from "@chakra-ui/button";
 
 class Create_New_Project_Page extends Component<any, any> {
   constructor(props: any) {
     super(props);
+    // state will contain two variables: the name of project you would like to pass and the project description
+    // you would like to pass.
     this.state = {
       project_name: String,
       description: String,
-      redirect: null,
+      redirect: false,
     };
     this.onsubmit = this.onsubmit.bind(this);
     this.send_data_backend = this.send_data_backend.bind(this);
@@ -20,10 +22,16 @@ class Create_New_Project_Page extends Component<any, any> {
 
   // this function will put the information that user pass in into this.state.
   onsubmit = () => {
-    let attri = document.getElementById("name1") as HTMLInputElement;
-    let des = document.getElementById("description1") as HTMLInputElement;
-    this.setState({ project_name: attri.value });
-    this.setState({ description: des.value }, this.send_data_backend);
+    let name = document.getElementById("nameInput") as HTMLInputElement;
+    let description = document.getElementById(
+      "descriptionInput"
+    ) as HTMLInputElement;
+    if (name.innerHTML === "" || description.innerHTML === "") {
+      alert("You cannot leave project name or description empty!");
+      return;
+    }
+    this.setState({ project_name: name.value });
+    this.setState({ description: description.value }, this.send_data_backend);
   };
 
   // this function will send all of information contained in state
@@ -32,9 +40,9 @@ class Create_New_Project_Page extends Component<any, any> {
       project_name: this.state.project_name,
       description: this.state.description,
     };
-    console.log("this is project", projectInfo);
     axios.post("http://localhost:8080/createProject", projectInfo);
-    this.setState({ redirect: "/" });
+    alert("Information successfully sent to the Backend!");
+    this.setState({ redirect: true });
   };
 
   render() {
@@ -42,35 +50,50 @@ class Create_New_Project_Page extends Component<any, any> {
       return <Redirect to={"/"} />;
     }
     return (
-      <div>
-        {/* header  */}
+      <div className="newProjectScreenContainer">
         <ChakraHeadbar />
-        <div className="bodyContainer">
-          <div className="textheader">
-            <Text>Create a New Project </Text>
-          </div>
-
-          <div className="maincontainer">
-            <HStack className="nameMainDiv">
-              <div className="nametext">
-                <Text>Name : </Text>{" "}
+        <div className="newProjectBodyContainer">
+          <div className="newProjectBox">
+            <div className="newProjectFlexContainer">
+              <div className="textHeader">
+                <Text>Create a New Project </Text>
               </div>
-              <input id="name1" className="namediv" type="text"></input>
-            </HStack>
-
-            <HStack className="desMainDiv">
-              <div style={{ height: "5em" }}>
-                <Text>Description:</Text>{" "}
+              <div className="newProjectNameContainer">
+                <input
+                  id="nameInput"
+                  className="newProjectNameInput"
+                  type="text"
+                  placeholder="Project Name"
+                />
+                <span className="newProjectNameText"></span>
               </div>
-              <textarea className="Description" id="description1"></textarea>
-            </HStack>
-
-            <HStack className="buttons">
+              <div className="newProjectDescriptionContainer">
+                <input
+                  id="descriptionInput"
+                  className="newProjectDescriptionInput"
+                  type="text"
+                  placeholder="Description"
+                />
+                <span className="newProjectDescriptionText"></span>
+              </div>
+              <div className="newProjectButtonsContainer">
                 <Link to="/">
-                  <ChakraButton txtname={"Cancel"} />
+                  <Button
+                    marginRight="2.5em"
+                    _focus={{ outline: 0, boxShadow: "none" }}
+                  >
+                    Cancel
+                  </Button>
                 </Link>
-                <ChakraButton txtname={"Confirm"} onClickFunc={this.onsubmit} />
-            </HStack>
+                <Button
+                  marginLeft="2.5em"
+                  _focus={{ outline: 0, boxShadow: "none" }}
+                  onClick={this.onsubmit}
+                >
+                  Submit
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

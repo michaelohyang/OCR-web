@@ -4,19 +4,23 @@ import { Component } from "react";
 import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./ConfirmDigitalForm.css";
+import * as React from "react";
 
 class ConfirmDigitalForm extends Component<any, any> {
+  myRef: React.RefObject<HTMLDivElement>;
   constructor(props: any) {
     super(props);
+    this.myRef = React.createRef();
     this.state = {
       digitalForm: {},
-      dic: {},
-      newEntry: [<div></div>],
+      dict: {},
+      newEntry: [],
       updateDic: false,
-      count : 1,
+      count: 0,
+      pendingCounts: [],
     };
     this.getJson = this.getJson.bind(this);
-    this.populateDic = this.populateDic.bind(this);
+    this.populateDict = this.populateDict.bind(this);
     this.deleteAttri = this.deleteAttri.bind(this);
     this.updateAttri = this.updateAttri.bind(this);
     this.updateContent = this.updateContent.bind(this);
@@ -24,67 +28,76 @@ class ConfirmDigitalForm extends Component<any, any> {
     this.addAttri = this.addAttri.bind(this);
     this.submit = this.submit.bind(this);
 
+    // Calling the function getJson(): It is fetching the information from
+    // the backend
     this.getJson();
-    // this.populateDic();
-    // var dicG: {[id:string]: string} ={};
   }
 
   getJson = () => {
     axios.get("http://localhost:8080/form").then((response) => {
       this.setState({ digitalForm: response.data });
-      this.populateDic();
-      this.setState({ dic: this.state.dic });
+      this.populateDict();
+      this.setState({ dic: this.state.dict });
     });
   };
 
-  populateDic = () => {
-    // var dicCopy: {[id:string]: string} = {};
+  populateDict = () => {
+    let dictCopy = this.state.dict;
+    console.log("this is prepopulateDict: ", dictCopy);
     for (var key in this.state.digitalForm) {
-      // !!! alternative way to update state
-      // this.setState({
-      //     dic: update(this.state.dic, {k: {$set: this.state.digitalForm[k]}})})
-      this.state.dic[key] = this.state.digitalForm[key];
+      dictCopy[key] = this.state.digitalForm[key];
     }
-    this.setState({
-      dic: this.state.dic,
+    this.setState({ dict: dictCopy }, () => {
+      console.log("this is postpopulateDict", this.state.dict);
     });
   };
 
   deleteAttri = (k: any) => {
-    delete this.state.dic[k];
-    this.setState({
-      dic: this.state.dic,
+    let deleteDictCopy = this.state.dict;
+    console.log("this is predeleteAttri: ", deleteDictCopy);
+    delete deleteDictCopy[k];
+    // delete this.state.dict[k];
+    this.setState({ dict: deleteDictCopy }, () => {
+      console.log("this is postpopulateDict: ", this.state.dict);
     });
   };
 
   updateAttri = (e: any, originalKey: any, content: any) => {
-    // this.setState({ dic: update(this.state.dic, {e: {target: {value: {$set: content} }}})})
-    this.setState({
-      dic: this.state.dic,
+    console.log("this is preupdatedAttri", this.state.dict);
+    this.setState({ dict: this.state.dict }, () => {
+      console.log("this is postupdatedAttri: ", this.state.dict);
     });
   };
 
   // function is not call correctly
   updateContent = (e: any, k: any) => {
-    // this.setState({dic: update(this.state.dic, {k: {$set: e.target.value}})})
-    this.state.dic[k] = e.target.value;
-    this.setState({
-      dic: this.state.dic,
+    let updatedDictCopy = this.state.dict;
+    console.log("this is preupdatedContent: ", updatedDictCopy);
+    updatedDictCopy[k] = e.target.value;
+    this.setState({ dict: updatedDictCopy }, () => {
+      console.log("this is postupdatedContent: ", this.state.dict);
     });
   };
 
   
   inputAttri = () => {
-    let newid = "added-attri" + this.state.count.toString();
-    let newval = "added-value" + this.state.count.toString();
-    console.log(newid);
+    const thisCount = this.state.count;
+    this.state.pendingCounts.push(thisCount);
+    let newid = "added-attri" + thisCount.toString();
+    let newval = "added-value" + thisCount.toString();
+    console.log(thisCount);
     this.state.newEntry.push(
-      <div className="addattrbox">
+      <div
+        id={thisCount}
+        key={thisCount}
+        className="addattrbox"
+        ref={this.myRef}
+      >
         <input
           className="addattrtext"
-          id= {newid}
+          id={newid}
           type="text"
-          placeholder="attribute name"
+          placeholder={thisCount}
           defaultValue=""
         ></input>
         :
@@ -96,41 +109,46 @@ class ConfirmDigitalForm extends Component<any, any> {
           defaultValue=""
         ></input>
         <div className="adjustbuttom_delete">
-          <ChakraButton txtname={"Add"} onClickFunc={() => this.addAttri()} />
+          <ChakraButton
+            txtname={"Add"}
+            onClickFunc={() => this.addAttri(thisCount)}
+          />
         </div>
       </div>
     );
     this.setState({
-      dic: this.state.dic,
+      dic: this.state.dict,
       count: this.state.count + 1,
+      pendingCounts: this.state.pendingCounts,
     });
   };
 
-  addAttri = () => {
-    let tempid = "added-attri" + (this.state.count - 1).toString();
-    console.log(tempid);
-    let tempval = "added-value" + (this.state.count - 1).toString();
+  addAttri = (count: any) => {
+    let tempid = "added-attri" + count.toString();
+    let tempval = "added-value" + count.toString();
     var attri = document.getElementById(tempid) as HTMLInputElement;
     var value = document.getElementById(tempval) as HTMLInputElement;
-    // var attri_val = attri.value;
-    // var val_val = value.value;
-    // const newdic = {...this.state.dic, attri_val: val_val};
-    // this.setState({dic:newdic})
-    // debugger
-    // this.setState({dic:update(this.state.dic, {attri: {value: {$set: value.value}}})})
+    let addedAttributeDictCopy = this.state.dict;
+    const node = this.myRef.current;
 
-    this.state.dic[attri.value] = value.value; // 106 - 109
+    let tempNewEntry = [];
+    tempNewEntry.push(node);
+
     this.setState({
-      newEntry: [<div></div>],
+      newEntry: this.state.newEntry.filter(
+        (entr: any) => Number.parseInt(entr.key) !== count
+      ),
     });
-    this.setState({
-      dic: this.state.dic, 
+    console.log("this is preaddedAttributeDictCopy: ", addedAttributeDictCopy);
+    addedAttributeDictCopy[attri.value] = value.value;
+    this.setState({ dict: addedAttributeDictCopy }, () => {
+      console.log("this is postaddedAttributeDictCopy: ", this.state.dict);
     });
   };
 
   submit = () => {
     axios
-      .post("http://localhost:8080/confirmForm", this.state.dic)
+      .post("http://localhost:8080/confirmForm", this.state.dict)
       .then((response) => console.log(response.data));
     alert("Successful upload medical records!");
   };
@@ -138,14 +156,12 @@ class ConfirmDigitalForm extends Component<any, any> {
   render() {
     var rows = [];
     this.state.newEntry.push(<div></div>);
-    // input?.addEventListener('input', (e: any) => this.userUpdate(e));
-    for (var key in this.state.dic) {
+    for (var key in this.state.dict) {
       const k = key;
 
       rows.push(
         <div key={k}>
           <HStack className="textdiv">
-            {/* <ParticlesBg num={50} type="lines" bg={true} /> */}
             <div className="firstpart">{k}:</div>
             <div className="secondpart">
               <input
@@ -168,7 +184,6 @@ class ConfirmDigitalForm extends Component<any, any> {
       <div className="bodyContainer">
         <ChakraHeadbar />
         <div>
-
           <div className="rowdistance">
             <div>{rows}</div>
             <div className="addattr">
