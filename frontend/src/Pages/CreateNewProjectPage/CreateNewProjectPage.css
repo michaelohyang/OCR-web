@@ -1,96 +1,178 @@
-/* the background color */
-.bodyContainer {
+input {
+  border: none;
+  outline: none;
+}
+
+.newProjectScreenContainer {
   height: 100vh;
   background: linear-gradient(89.96deg, #b0eef7 0.04%, #988faa 99.96%);
   overflow-y: auto;
-  overflow-x: auto;
 }
-/* the design of the title */
-.textheader {
+
+.newProjectBodyContainer {
   display: flex;
-  font-family: "Times New Roman", Times, serif;
-  font-size: 3em;
   justify-content: center;
-  align-items: center;
   overflow-y: auto;
-  overflow-x: auto;
+}
+
+.textHeader {
+  font-family: "Poppins-Bold";
+  font-weight: bolder;
+  font-size: xx-large;
+  color: #333333;
+  text-align: center;
+  margin-top: 2em;
+}
+
+.newProjectBox {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  color: black;
+  height: 40em;
+  width: 30em;
+  margin-top: 1.8em;
+  margin-bottom: 1.8em;
+  border-radius: 2%;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.newProjectFlexContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Beginning of ProjectNameInput CSS*/
+
+.newProjectNameContainer {
+  width: 100%;
+  margin-top: 4em;
+  border-bottom: 2px solid #adadad;
   position: relative;
 }
 
-/* the overall name div */
-.nameMainDiv {
-  display: flex;
-  align-items: center;
+.newProjectNameInput {
+  font-family: "Poppins-Regular";
+  font-size: 15px;
+  color: #555555;
+  line-height: 1.2;
+  display: block;
+  width: 100%;
+  height: 45px;
+  background: transparent;
+  padding: 0 5px;
+}
+
+.newProjectNameText {
   position: absolute;
-  padding-top: 2em;
-  padding-left: 13%;
-  font-size: 1.5em;
-  height: 4em;
-  overflow-y: auto;
-  overflow-x: auto;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
 }
 
-/* name input div */
-.namediv {
-  border-color: gray;
-  border-width: 1px;
-  height: 1.5em;
-  width: 63%;
-  background-color: transparent;
-}
-
-/* description overall div */
-.desMainDiv {
-  padding-left: 2%;
-  margin-top: 5em;
+.newProjectNameText::before {
+  content: "";
+  display: block;
   position: absolute;
-  font-size: 1.5em;
-  height: 7em;
-  overflow-y: auto;
-  overflow-x: auto;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  bottom: -0.15em;
+  left: 0;
+  width: 0;
+  height: 0.1em;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+  background: #6a7dfe;
+  background: -webkit-linear-gradient(left, #21d4fd, #b721ff);
 }
 
-/* description textarea div */
-.Description {
-  height: 80%;
-  border-color: gray;
-  border-width: 1px;
-  width: 54%;
-  background-color: transparent;
+/* .newProjectNameText::after {
+  font-family: Poppins-Regular;
+  font-size: 1em;
+  color: #999999;
+  line-height: 1em;
+  content: attr(data-placeholder);
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 1.5em;
+  left: 0em;
+  padding-left: 5px;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+} */
+
+/* .newProjectNameInput:focus + .newProjectNameText::after {
+  top: -0.3em;
+} */
+
+.newProjectNameInput:focus + .newProjectNameText::before {
+  width: 100%;
 }
 
-/* div design that contain: cancel button and confirm button */
+/* End of ProjectNameInput CSS*/
 
-.maincontainer {
-  background-color: rgba(144, 185, 219, 0.781);
-  margin-left: 32vw;
-  margin-top: 3vw;
-  margin-right: 32vw;
-  height: 26em;
-  border-width: 0.05em;
-  border-radius: 2em;
-  border-color: blueviolet;
-  opacity: 70%;
-  width: 34em;
-  overflow-y: auto;
-  overflow-x: auto;
+/* Beginning of ProjectDescriptionInput CSS*/
+
+.newProjectDescriptionContainer {
+  width: 100%;
+  margin-top: 4em;
+  border-bottom: 2px solid #adadad;
   position: relative;
 }
 
-.nametext {
-  margin-left: 0.1%;
+.newProjectDescriptionInput {
+  font-family: "Poppins-Regular";
+  font-size: 15px;
+  color: #555555;
+  line-height: 1.2;
+  display: block;
+  width: 100%;
+  height: 45px;
+  background: transparent;
+  padding: 0 5px;
 }
 
-.buttons {
+.newProjectDescriptionText {
   position: absolute;
-  margin-top: 20em;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.newProjectDescriptionText::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -0.15em;
+  left: 0;
+  width: 0;
+  height: 0.1em;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+  background: #6a7dfe;
+  background: -webkit-linear-gradient(left, #21d4fd, #b721ff);
+}
+
+.newProjectDescriptionInput:focus + .newProjectDescriptionText::before {
+  width: 100%;
+}
+
+/* End ProjectDescription Input*/
+
+.newProjectButtonsContainer {
+  margin-top: 1em;
   display: flex;
-  gap: 6em;
-  margin-left: 6em;
-  overflow-x: auto;
-  overflow-y: auto;
+  justify-content: center;
+  margin-top: 6em;
 }
