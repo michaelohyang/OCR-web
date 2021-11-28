@@ -57,7 +57,7 @@ function ProjectModal(props: ProjectModalInterface) {
         </Link>
         <div className="deleteButton">
           <button
-            onClick={() => props.removeProject(props.projects[props.k])}
+            onClick={() => props.removeProject(props.k)}
             className="deleteButtonText"
           >
             x
