@@ -48,8 +48,14 @@ class ViewProjectPage extends Component<any, any> {
       let remainingProjects = this.state.projects.filter(
         (item: any) => item.key !== id
       );
+<<<<<<< HEAD
       
       axios.post(`http://localhost:8080/delete?id=${id}`).then((response) => console.log(response));
+=======
+
+      axios.post(`http://localhost:8080/delete?id=${id}`).then((response) => console.log(response));
+
+>>>>>>> main
       this.setState({ projects: remainingProjects });
     }
   };

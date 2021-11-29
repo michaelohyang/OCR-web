@@ -26,8 +26,13 @@ class Create_New_Project_Page extends Component<any, any> {
     let description = document.getElementById(
       "descriptionInput"
     ) as HTMLInputElement;
+<<<<<<< HEAD
     console.log(name.value);
     console.log(description.value);
+=======
+    console.log(name);
+    console.log(description);
+>>>>>>> main
     if (name.value === "" || description.value === "") {
       alert("You cannot leave project name or description empty!");
       return;
@@ -41,6 +46,7 @@ class Create_New_Project_Page extends Component<any, any> {
     let projectInfo = {
       project_name: this.state.project_name,
       description: this.state.description,
+      forms: [{placeholder: "This is a placeholder."}],
     };
     axios.post("http://localhost:8080/createProject", projectInfo);
     alert("Information successfully sent to the Backend!");
