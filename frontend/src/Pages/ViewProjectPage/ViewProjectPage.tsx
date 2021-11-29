@@ -6,6 +6,7 @@ import "./ViewProjectPage.css";
 import ProjectModal from "./Components/ProjectModal";
 import imageLogo from "./Components/addIcon.png";
 import { Link } from "react-router-dom";
+import { func } from "prop-types";
 
 class ViewProjectPage extends Component<any, any> {
   constructor(props: any) {
@@ -47,6 +48,8 @@ class ViewProjectPage extends Component<any, any> {
       let remainingProjects = this.state.projects.filter(
         (item: any) => item.key !== id
       );
+      
+      axios.post(`http://localhost:8080/delete?id=${id}`).then((response) => console.log(response));
       this.setState({ projects: remainingProjects });
     }
   };

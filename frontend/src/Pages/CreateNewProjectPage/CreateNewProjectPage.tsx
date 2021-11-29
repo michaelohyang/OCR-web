@@ -26,7 +26,9 @@ class Create_New_Project_Page extends Component<any, any> {
     let description = document.getElementById(
       "descriptionInput"
     ) as HTMLInputElement;
-    if (name.innerHTML === "" || description.innerHTML === "") {
+    console.log(name.value);
+    console.log(description.value);
+    if (name.value === "" || description.value === "") {
       alert("You cannot leave project name or description empty!");
       return;
     }
