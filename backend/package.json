@@ -14,10 +14,12 @@
     "@firebase/app": "^0.7.8",
     "@firebase/database": "^0.12.4",
     "@google-cloud/vision": "^2.4.0",
+    "axios": "^0.24.0",
     "compromise": "^13.11.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "multer": "^1.4.3",
+    "node-fetch": "^3.1.0",
     "rimraf": "^3.0.2",
     "typescript": "^4.4.2",
     "uuid": "^8.3.2"
