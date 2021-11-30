@@ -53,10 +53,7 @@ class UploadFilesScreen extends Component<any, any> {
       }
     }
     for (let i = 0; i < fileLength; i++) {
-      arrNewFiles.push({
-        id: `patient_name_${i}`,
-        image: URL.createObjectURL(e.target.files[i]),
-      });
+      arrNewFiles.push(e.target.files[i]);
     }
     // update the arrray that contains the current files we have
     this.setState({ arrayOfFiles: arrNewFiles });
