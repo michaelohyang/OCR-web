@@ -10,9 +10,9 @@ const database = require('./Controller/firebase');
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
 
 // Receive the images from the front end and store them in a temopory folder
 app.post('/upload', upload.uploadFile.array('medical', 12), (req: any, res: any) => {
