@@ -16,14 +16,18 @@ class UploadFilesScreen extends Component<any, any> {
       numberOfAddedFiles: 0,
     };
 
-    this.uploadFilesFunction = this.uploadFilesFunction.bind(this);
     this.chooseFiles = this.chooseFiles.bind(this);
     this.removeImage = this.removeImage.bind(this);
+    this.uploadFilesFunction = this.uploadFilesFunction.bind(this);
   }
 
   uploadFilesFunction = () => {
     let formDataCopy = new FormData();
-    formDataCopy.append("medical", this.state.arrayOfFiles);
+    for (let i = 0; i < this.state.arrayOfFiles.length; i++) {
+      console.log(this.state.arrayOfFiles[i]);
+      formDataCopy.append("medical", this.state.arrayOfFiles[i]);
+    }
+    console.log(formDataCopy);
     axios.post("http://localhost:8080/upload", formDataCopy);
     alert("Images Successfully Uploaded to The Database");
   };
@@ -45,21 +49,17 @@ class UploadFilesScreen extends Component<any, any> {
 
   chooseFiles = (e: any) => {
     let arrNewFiles = [];
-    let formDataCopy = this.state.formData;
     let fileLength = e.target.files.length;
     for (let i = 0; i < fileLength; i++) {
       if (e.target.files[i]["type"].split("/")[0] !== "image") {
         return;
       }
-    }
+    } 
     for (let i = 0; i < fileLength; i++) {
       arrNewFiles.push(e.target.files[i]);
     }
     // update the arrray that contains the current files we have
     this.setState({ arrayOfFiles: arrNewFiles });
-
-    // update the formData
-    this.setState({ formData: formDataCopy });
 
     // Update the literal number of files added
     this.setState({ numberOfAddedFiles: fileLength });
