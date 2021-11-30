@@ -33,11 +33,16 @@ class UploadFilesScreen extends Component<any, any> {
   };
 
   removeImage = (id: any) => {
-    let tempArrFiles = this.state.arrayOfFiles.filter(
-      (item: any) => item.id !== id
+    console.log(id);
+    console.log(this.state.arrayOfFiles);
+    let tempArrFilesFront = this.state.arrayOfFiles.slice(0, id);
+    let tempArrFilesBack = this.state.arrayOfFiles.slice(
+      id + 1,
+      this.state.arrayOfFiles.length - 1
     );
+    console.log(tempArrFilesFront, tempArrFilesBack);
     this.setState({
-      arrayOfFiles: tempArrFiles,
+      arrayOfFiles: tempArrFilesFront.concat(tempArrFilesBack),
     });
   };
 
@@ -48,13 +53,14 @@ class UploadFilesScreen extends Component<any, any> {
   // useEffect = only for functional component
 
   chooseFiles = (e: any) => {
+    console.log(e.target.files);
     let arrNewFiles = [];
     let fileLength = e.target.files.length;
     for (let i = 0; i < fileLength; i++) {
       if (e.target.files[i]["type"].split("/")[0] !== "image") {
         return;
       }
-    } 
+    }
     for (let i = 0; i < fileLength; i++) {
       arrNewFiles.push(e.target.files[i]);
     }
