@@ -1,17 +1,14 @@
 /* this method used for  header whole div */
 .container {
-  box-shadow: 0.5px 0.5px gray;
+  position: sticky;
+  top: 0em;
+  z-index: 10;
   height: 7em;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  background: linear-gradient(
-    90deg,
-    rgb(217, 233, 188) 0%,
-    rgba(9, 121, 113, 0.6180847338935574) 41%,
-    rgba(0, 212, 255, 1) 100%
-  );
+  background: linear-gradient(89.96deg, #b0eef7 0.04%, #988faa 99.96%);
 }
 
 .imgOnLeft {
@@ -27,7 +24,7 @@
   text-align: center;
   padding-top: 1.2em;
   padding-right: 10em;
-  color: blanchedalmond;
+  color: black;
   font-weight: bolder;
   font-size: xx-large;
   font-family: monospace;
