@@ -61,6 +61,11 @@ class ViewProjectPage extends Component<any, any> {
       let remainingProjects = this.state.projects.filter(
         (item: any) => item.key !== id
       );
+
+      axios
+        .post(`http://localhost:8080/delete?id=${id}`)
+        .then((response) => console.log(response));
+
       this.setState({ projects: remainingProjects });
     }
   };
@@ -100,7 +105,6 @@ class ViewProjectPage extends Component<any, any> {
     axios
       .post("http://localhost:8080/projectMain", this.state.projects)
       .then((response) => console.log(response.data));
-    // alert("Successful upload medical records!");
   };
 
   getJson = () => {
@@ -111,9 +115,7 @@ class ViewProjectPage extends Component<any, any> {
 
   updateProject = (updatedInfo: []) => {
     if (!this.arraysEqual(this.state.projects, updatedInfo)) {
-      this.setState({ projects: updatedInfo }, () => {
-        console.log(this.state.projects);
-      });
+      this.setState({ projects: updatedInfo });
     }
   };
 

@@ -1,6 +1,12 @@
 import { Box } from "@chakra-ui/layout";
 import "../ViewProjectPage.css";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import blue from "./blue.jpg";
+import yellow from "./yellow.jpg";
+import green from "./green.jpg";
+import red from "./red.jpg";
+import deleteIcon1 from "./deleteIcon.png";
 
 interface ProjectModalInterface {
   projects: any;
@@ -10,6 +16,8 @@ interface ProjectModalInterface {
 }
 
 function ProjectModal(props: ProjectModalInterface) {
+  const [colors] = useState<string[]>([blue, yellow, green, red]);
+
   return (
     <div>
       <Box
@@ -23,10 +31,9 @@ function ProjectModal(props: ProjectModalInterface) {
       >
         <Link to="/existDigitalForm" onClick={() => props.selectProject(props.k)}>
           <img
-            src={
-              "https://geology.utah.gov/apps/pubs_landing/preview-not-available.gif"
-            }
+            src={colors[Math.floor(Math.random() * colors.length)]}
             alt="imagePreview"
+            className="projectImageResize"
           />
           <Box p="4">
             <Box
@@ -54,16 +61,17 @@ function ProjectModal(props: ProjectModalInterface) {
             >
               {props.projects[props.k].description}
             </Box>
+            <div className="deleteButton">
+              <button
+                onClick={() => props.removeProject(props.k)}
+                className="deleteButtonText"
+              >
+                &times;
+                {/* <img src={deleteIcon1} /> */}
+              </button>
+            </div>
           </Box>
         </Link>
-        <div className="deleteButton">
-          <button
-            onClick={() => props.removeProject(props.projects[props.k])}
-            className="deleteButtonText"
-          >
-            x
-          </button>
-        </div>
       </Box>
     </div>
   );

@@ -10,9 +10,9 @@ const database = require('./Controller/firebase');
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
 
 // Receive the images from the front end and store them in a temopory folder
 app.post('/upload', upload.uploadFile.array('medical', 12), (req: any, res: any) => {
@@ -29,9 +29,12 @@ app.post('/form', async (req: any, res: any) => {
 });
 
 // Receive the updated json objects from the front end
-app.get('/confirmForm', (req: any, res: any) => {
-  var finalDataInJSON = req.body;
-  createDir.createOutputDirectory('Output.json', finalDataInJSON);
+app.post('/confirmForm', async (req: any, res: any) => {
+  var finalformInJSON = req.body;
+  var project_id = req.query.id;
+  let forms = await database.getJsonData(`Project/${project_id}/forms`);
+  console.log(forms);
+  forms.push(finalformInJSON);
 });
 
 // Send the new project information to the backend database
@@ -45,6 +48,13 @@ app.post('/createProject', (req: any, res: any) => {
 app.get('/projects', async (req: any, res: any) => {
   let projects = await database.getJsonData("Project");
   res.send(projects);
+});
+
+// Delete a project permanently using its ID
+app.post('/delete', (req: any, res: any) => {
+  let projectId = req.query.id;
+  console.log(projectId);
+  database.deleteData(`Project/${projectId}`);
 });
 
 app.listen(projectConstant.PORT, () =>

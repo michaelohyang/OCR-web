@@ -16,24 +16,33 @@ class UploadFilesScreen extends Component<any, any> {
       numberOfAddedFiles: 0,
     };
 
-    this.uploadFilesFunction = this.uploadFilesFunction.bind(this);
     this.chooseFiles = this.chooseFiles.bind(this);
     this.removeImage = this.removeImage.bind(this);
+    this.uploadFilesFunction = this.uploadFilesFunction.bind(this);
   }
 
   uploadFilesFunction = () => {
     let formDataCopy = new FormData();
-    formDataCopy.append("medical", this.state.arrayOfFiles);
+    for (let i = 0; i < this.state.arrayOfFiles.length; i++) {
+      console.log(this.state.arrayOfFiles[i]);
+      formDataCopy.append("medical", this.state.arrayOfFiles[i]);
+    }
+    console.log(formDataCopy);
     axios.post("http://localhost:8080/upload", formDataCopy);
     alert("Images Successfully Uploaded to The Database");
   };
 
   removeImage = (id: any) => {
-    let tempArrFiles = this.state.arrayOfFiles.filter(
-      (item: any) => item.id !== id
+    console.log(id);
+    console.log(this.state.arrayOfFiles);
+    let tempArrFilesFront = this.state.arrayOfFiles.slice(0, id);
+    let tempArrFilesBack = this.state.arrayOfFiles.slice(
+      id + 1,
+      this.state.arrayOfFiles.length - 1
     );
+    console.log(tempArrFilesFront, tempArrFilesBack);
     this.setState({
-      arrayOfFiles: tempArrFiles,
+      arrayOfFiles: tempArrFilesFront.concat(tempArrFilesBack),
     });
   };
 
@@ -44,8 +53,8 @@ class UploadFilesScreen extends Component<any, any> {
   // useEffect = only for functional component
 
   chooseFiles = (e: any) => {
+    console.log(e.target.files);
     let arrNewFiles = [];
-    let formDataCopy = this.state.formData;
     let fileLength = e.target.files.length;
     for (let i = 0; i < fileLength; i++) {
       if (e.target.files[i]["type"].split("/")[0] !== "image") {
@@ -53,16 +62,10 @@ class UploadFilesScreen extends Component<any, any> {
       }
     }
     for (let i = 0; i < fileLength; i++) {
-      arrNewFiles.push({
-        id: `patient_name_${i}`,
-        image: URL.createObjectURL(e.target.files[i]),
-      });
+      arrNewFiles.push(e.target.files[i]);
     }
     // update the arrray that contains the current files we have
     this.setState({ arrayOfFiles: arrNewFiles });
-
-    // update the formData
-    this.setState({ formData: formDataCopy });
 
     // Update the literal number of files added
     this.setState({ numberOfAddedFiles: fileLength });
