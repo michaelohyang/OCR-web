@@ -28,9 +28,8 @@ class UploadFilesScreen extends Component<any, any> {
       formDataCopy.append("medical", this.state.arrayOfFiles[i]);
     }
     console.log(formDataCopy);
-    axios.post("http://localhost:8080/upload", formDataCopy).then(() => {
-      alert("Images Successfully Uploaded to The Database");
-    });
+    axios.post("http://localhost:8080/upload", formDataCopy);
+    alert("Images Successfully Uploaded to The Database");
   };
 
   removeImage = (id: any) => {
