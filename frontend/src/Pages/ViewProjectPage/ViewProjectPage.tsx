@@ -8,18 +8,6 @@ import imageLogo from "./Components/addIcon.png";
 import { Link } from "react-router-dom";
 import ExistDigitalForm from "../ExistDigitalForm/ExistDigitalForm";
 
-// class ConfirmPage() extedns Component {
-//     stateForm = .....
-
-//     <FinalizePage
-//     stateForm = {this.state.form}
-//     />
-// }
-
-
-// class finalizePage() extends Component{
-//     this.stateForm;
-// }
 class ViewProjectPage extends Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -91,21 +79,21 @@ class ViewProjectPage extends Component<any, any> {
     // />
   }
 
-  postSelectedProject = (id: any) => {
-    console.log("selected project: " + id);
-    this.setState({
-      selectedProjectid: id,
-    });
-    axios
-      .post("http://localhost:8080/projectMain", this.state.selectedProjectId)
-      .then((response) => console.log(response.data));
-  };
+  // postSelectedProject = (id: any) => {
+  //   console.log("selected project: " + id);
+  //   this.setState({
+  //     selectedProjectid: id,
+  //   });
+  //   axios
+  //     .post("http://localhost:8080/projectMain", this.state.selectedProjectId)
+  //     .then((response) => console.log(response.data));
+  // };
 
-  postProject = () => {
-    axios
-      .post("http://localhost:8080/projectMain", this.state.projects)
-      .then((response) => console.log(response.data));
-  };
+  // postProject = () => {
+  //   axios
+  //     .post("http://localhost:8080/projectMain", this.state.projects)
+  //     .then((response) => console.log(response.data));
+  // };
 
   getJson = () => {
     axios.get("http://localhost:8080/projects").then((response) => {

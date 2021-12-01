@@ -29,7 +29,7 @@ function ProjectModal(props: ProjectModalInterface) {
         marginTop="0.5em"
         className="modalBox"
       >
-        <Link to="/existDigitalForm" onClick={() => props.selectProject(props.k)}>
+        <Link to={{pathname: "/existDigitalForm", state: {projectID: props.k}}} onClick={() => props.selectProject(props.k)}>
           <img
             src={colors[Math.floor(Math.random() * colors.length)]}
             alt="imagePreview"

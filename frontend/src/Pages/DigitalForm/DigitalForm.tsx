@@ -2,57 +2,110 @@ import { Component } from "react"
 import axios from "axios";
 import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
-import "./digitalForm.css";
+import "./DigitalForm.css";
 // import ParticlesBg from "particles-bg";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { HStack} from "@chakra-ui/layout";
 
 class digitalForm extends Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state = {
-            rawJson: [{
-                    "First Name" : "John"},
-                    {"Last Name" : "Johnson"},
-                    {"Gender": "Male"
-                }],
-            data: [],
+            form: {},
+            selectedProjectId: {},
+            newEntry: [],
         };
-        // getJson(); 
-        console.log(this.state.rawJson[0]);
-        this.formatRawJson(this.state.rawJson);
+        this.state.selectedProjectId["projectID"] = this.props.location.state["projectID"];
+        this.state.form["form"] = this.props.location.state["form"];
+        this.setState({
+            selectedProjectId: this.state.selectedProjectId,
+            form: this.state.form,
+        });
+        // console.log(this.state.form["form"]);
+        // for (var key in this.props.location.state["form"]) {
+        //     const k = key;
+        //     console.log(k);
+        //     console.log(this.props.location.state["form"][k]);
+        // }
+        // this.buildForm();
+        // console.log(this.state.newEntry);
     }
 
-    getJson = () => {
-        axios.get("http://localhost:8080/generatedForm").then((response) => {
-          this.setState({ rawJson: response.data });
-        //   this.setState({ dic: this.state.dic });
-        });
-    };
+    buildForm = () => {
+        var rows = [];
+        // this.state.newEntry.push(<div></div>);
+        for (var key in this.state.form["form"]) {
+            const k = key;
+            rows.push(
+                <div key={k}>
+                    <HStack className="textdiv">
+                        <div className="firstpart">{k}:</div>
+                        <div className="firstpart">{this.state.form[k]}:</div>
+                        {/* <div className="secondpart">
+                        <input
+                            className="textarea"
+                            id={k}
+                            type="text"
+                            defaultValue={this.state.dic[k]}
+                            onChange={(e: any) => this.updateContent(e, k)}
+                        ></input>
+                        <ChakraButton
+                            txtname={"Delete"}
+                            onClickFunc={() => this.deleteAttri(k)}
+                        />
+                        </div> */}
+                    </HStack>
+                </div>
+            );
+        }
+        console.log(rows);
+    }
 
-    formatRawJson = (raw: any) => {
-        var dataJSONString=JSON.stringify(this.state.rawJson[0]); 
-        console.log(dataJSONString);
-        console.log(dataJSONString.split(":"))
-        let splitted = dataJSONString.split(":");
-        console.log(splitted[0]);
-        this.setState({
-            data: splitted,
-        });
+    submit = () => {
+        alert("Medical records are in your project!");
     }
     
     render() {
-        console.log(this.state.rawJson[0]);
-        console.log(this.state.data);
+        var rows = [];
+        console.log(this.state.form["form"]);
+        for (var key in this.state.form["form"]) {
+            const k = key;
+            rows.push(
+                <div key={k}>
+                    <HStack className="textdiv">
+                        <div className="firstpart">
+                            {k}:    {this.state.form["form"][k]}
+                        </div>
+                    </HStack>
+                </div>
+            );
+        }
         return(
             <div className="overallbg">
                 <ChakraHeadbar />
                 Digital form
                 <div>
-                    {this.state.data}
+                    {rows}
                 </div>
+                <Link to={{pathname: "/confirm", state: {projectID: this.state.selectedProjectId["projectID"]}}}>
+                    <div className="submitbuttom">
+                        <ChakraButton
+                            txtname={"Back"}
+                            // onClickFunc={() => this.submit(1234)}
+                        />
+                    </div>
+                </Link>
+                <Link to={{pathname: "/"}}>
+                    <div className="submitbuttom">
+                        <ChakraButton
+                            txtname={"Submit"}
+                            onClickFunc={() => this.submit()}
+                        />
+                    </div>
+                </Link>
             </div>
         );
     }
 }
 
-export default digitalForm;
+export default withRouter(digitalForm);

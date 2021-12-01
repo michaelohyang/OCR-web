@@ -4,7 +4,7 @@ import axios from "axios";
 import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./ExistDigitalForm.css";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import ViewProjectPage from "../ViewProjectPage/ViewProjectPage";
 // import ProjectModal from "../ViewProjectPage/Components/ProjectModal";
 // import ExistDigitalForm from "../ExistDigitalForm/ExistDigitalForm";
@@ -26,20 +26,25 @@ class ExistDigitalForm extends Component <any, any> {
             }],
             form: [],
             forms: [],
-            selectedProjectId: [],
+            selectedProjectId: {},
         };
+        this.state.selectedProjectId["projectID"] = this.props.location.state["projectID"];
+        this.setState({
+            selectedProjectId: this.state.selectedProjectId,
+        });
+        console.log(this.state.selectedProjectId);
         this.pushExistForm(this.state.rawJson);
         //getJson();
     }
     getJson = () => {
-        axios.get("http://localhost:8080/existForm/{project#}").then((response) => {
+        axios.get(`http://localhost:8080/existForm/?projectID=${this.state.selectedProjectId["projectID"]}`).then((response) => {
           this.setState({ rawJson: response.data });
         //   this.setState({ dic: this.state.dic });
         });
     };
 
     pushExistForm = (rawJson: any) => {
-        console.log(this.props.selectedProjectId);
+        console.log(this.state.selectedProjectId);
         var eachform: any[] = [];
         for (let patient in rawJson) {
             eachform = [];
@@ -78,13 +83,16 @@ class ExistDigitalForm extends Component <any, any> {
                     {this.state.forms}
                 </Stack>
                     <div className="submitbuttom">
+                    {/* <Link to={{pathname: "/existDigitalForm", 
+                    state: {projectID: props.k}}} 
+                    onClick={() => props.selectProject(props.k)}> */}
                         <Link to="/">
                             <ChakraButton
                                 txtname={"return to project main"}
                             />
                         </Link>
                         <br/>
-                        <Link to="/upload">
+                        <Link to={{pathname: "/upload", state: {projectID: this.state.selectedProjectId["projectID"]}}}>
                             <ChakraButton
                                 txtname={"Add New Medical Record"}
                             />
@@ -95,4 +103,4 @@ class ExistDigitalForm extends Component <any, any> {
     }
 }
 
-export default ExistDigitalForm;
+export default withRouter(ExistDigitalForm);
