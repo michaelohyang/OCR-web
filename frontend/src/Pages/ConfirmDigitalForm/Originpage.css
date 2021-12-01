@@ -1,0 +1,25 @@
+/* overall page */
+.bodyContainerOrigin {
+  height: 100vh;
+  background: linear-gradient(89.96deg, #b0eef7 0.04%, #988faa 99.96%);
+  overflow-y: auto;
+}
+
+/* main div of all components */
+.maindivOrigin {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Add Attribute button css */
+.AddAttr {
+  display: flex;
+  justify-content: center;
+  margin-top: 14em;
+}
+
+.submit {
+  display: flex;
+  margin-top: 7em;
+  justify-content: center;
+}

@@ -6,6 +6,7 @@ import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./ConfirmDigitalForm.css";
 import * as React from "react";
+import Originpage from "./Originpage";
 
 class ConfirmDigitalForm extends Component<any, any> {
   myRef: React.RefObject<HTMLDivElement>;
@@ -29,7 +30,8 @@ class ConfirmDigitalForm extends Component<any, any> {
     this.inputAttri = this.inputAttri.bind(this);
     this.addAttri = this.addAttri.bind(this);
     this.submit = this.submit.bind(this);
-
+    this.deleteAttri1 = this.deleteAttri1.bind(this);
+    
     // Calling the function getJson(): It is fetching the information from
     // the backend
 
@@ -48,6 +50,7 @@ class ConfirmDigitalForm extends Component<any, any> {
       this.setState({ dic: this.state.dict });
     });
   };
+  
 
   populateDict = () => {
     let dictCopy = this.state.dict;
@@ -58,6 +61,11 @@ class ConfirmDigitalForm extends Component<any, any> {
       console.log("this is postpopulateDict", this.state.dict);
     });
   };
+
+  componentWillMount() {
+    console.log(this.state.newEntry)
+  }
+
 
   deleteAttri = (k: any) => {
     let deleteDictCopy = this.state.dict;
@@ -83,6 +91,7 @@ class ConfirmDigitalForm extends Component<any, any> {
     });
   };
 
+  
   inputAttri = () => {
     const thisCount = this.state.count;
     this.state.pendingCounts.push(thisCount);
@@ -90,31 +99,41 @@ class ConfirmDigitalForm extends Component<any, any> {
     let newval = "added-value" + thisCount.toString();
     this.state.newEntry.push(
       <div
-        id={thisCount}
-        key={thisCount}
-        className="addattrbox"
-        ref={this.myRef}
-      >
-        <input
-          className="addattrtext"
-          id={newid}
-          type="text"
-          placeholder={thisCount}
-          defaultValue=""
-        ></input>
-        :
-        <input
-          className="addattrtext"
-          id={newval}
-          type="text"
-          placeholder="content"
-          defaultValue=""
-        ></input>
-        <div className="adjustbuttom_delete">
-          <ChakraButton
-            txtname={"Add"}
-            onClickFunc={() => this.addAttri(thisCount)}
-          />
+       id={thisCount}
+      key={thisCount} 
+      className="addattrMainDiv">
+        <div
+          id={thisCount}
+          key={thisCount}
+          className="addattrbox"
+          ref={this.myRef}
+        >
+          <input
+            className="addattrtext"
+            id={newid}
+            type="text"
+            placeholder={"Attribute"}
+            defaultValue=""
+          ></input>
+          :
+          <input
+            className="addattrtext"
+            id={newval}
+            type="text"
+            placeholder="Content"
+            defaultValue=""
+          ></input>
+          <div className="plus radius" onClick={() => this.addAttri(thisCount)} >
+          </div>
+          <div className="minus radius" onClick={() => this.deleteAttri1(thisCount)}>
+
+          </div>
+          {/* <div className="adjustbuttom_delete">
+            <ChakraButton
+              txtname={"Add"}
+              onClickFunc={() => this.addAttri(thisCount)}
+            />
+          </div> */}
         </div>
       </div>
     );
@@ -122,6 +141,15 @@ class ConfirmDigitalForm extends Component<any, any> {
       dic: this.state.dict,
       count: this.state.count + 1,
       pendingCounts: this.state.pendingCounts,
+    });
+  };
+  
+
+  deleteAttri1 = (count:any) => {
+    this.setState({
+      newEntry: this.state.newEntry.filter(
+        (entr: any) => Number.parseInt(entr.key) !== count
+      ),
     });
   };
 
@@ -157,7 +185,6 @@ class ConfirmDigitalForm extends Component<any, any> {
 
   render() {
     var rows = [];
-    this.state.newEntry.push(<div></div>);
     for (var key in this.state.dict) {
       const k = key;
 
@@ -182,7 +209,7 @@ class ConfirmDigitalForm extends Component<any, any> {
         </div>
       );
     }
-    return (
+    return this.state.newEntry.length !== 0 ? (
       <div className="bodyContainer">
         <ChakraHeadbar />
         <div>
@@ -213,8 +240,17 @@ class ConfirmDigitalForm extends Component<any, any> {
               </Link>
             </div>
           </div>
+
+          <div className="submitbuttom">
+            <ChakraButton
+              txtname={"Submit"}
+              onClickFunc={() => this.submit()}
+            />
+          </div>
         </div>
       </div>
+    ) : (
+      <Originpage AddAttribute={() => this.inputAttri()} />
     );
   }
 }
