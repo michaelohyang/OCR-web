@@ -7,6 +7,7 @@ import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
 import "./UploadFilesScreen.css";
 import { Link } from "react-router-dom";
 import DisplayForNoImageUpload from "./Components/CaseConditionForUpload/DisplayForNoImages";
+import { withRouter } from "react-router";
 
 class UploadFilesScreen extends Component<any, any> {
   constructor(props: any) {
@@ -14,12 +15,19 @@ class UploadFilesScreen extends Component<any, any> {
     this.state = {
       arrayOfFiles: [],
       numberOfAddedFiles: 0,
+      projectID: "",
     };
 
     this.chooseFiles = this.chooseFiles.bind(this);
     this.removeImage = this.removeImage.bind(this);
     this.uploadFilesFunction = this.uploadFilesFunction.bind(this);
   }
+
+  // componentDidMount() {
+  //   const location = this.props.location;
+  //   console.log(location);
+  //   // this.setState({ projectID: this.props.location.state.projectID });
+  // }
 
   uploadFilesFunction = () => {
     let formDataCopy = new FormData();
@@ -53,7 +61,7 @@ class UploadFilesScreen extends Component<any, any> {
   // useEffect = only for functional component
 
   chooseFiles = (e: any) => {
-    console.log(e.target.files);
+    console.log(this.props.location);
     let arrNewFiles = [];
     let fileLength = e.target.files.length;
     for (let i = 0; i < fileLength; i++) {
@@ -72,6 +80,7 @@ class UploadFilesScreen extends Component<any, any> {
   };
 
   render() {
+    const { match, location, history } = this.props;
     return this.state.arrayOfFiles.length !== 0 ? (
       <div className="uploadPageBodyContainer">
         <ChakraHeadbar />
@@ -135,4 +144,4 @@ class UploadFilesScreen extends Component<any, any> {
   }
 }
 
-export default UploadFilesScreen;
+export default withRouter(UploadFilesScreen);

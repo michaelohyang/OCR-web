@@ -1,12 +1,13 @@
 import { Box } from "@chakra-ui/layout";
 import "../ViewProjectPage.css";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { useEffect, useState } from "react";
 import blue from "./blue.jpg";
 import yellow from "./yellow.jpg";
 import green from "./green.jpg";
 import red from "./red.jpg";
 import deleteIcon1 from "./deleteIcon.png";
+import { withRouter } from "react-router";
 
 interface ProjectModalInterface {
   projects: any;
@@ -28,7 +29,7 @@ function ProjectModal(props: ProjectModalInterface) {
         marginTop="0.5em"
         className="modalBox"
       >
-        <Link to="/upload">
+        <Link to={{ pathname: "/upload", state: { projectID: props.k } }}>
           <img
             src={colors[Math.floor(Math.random() * colors.length)]}
             alt="imagePreview"
