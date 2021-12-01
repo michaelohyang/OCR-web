@@ -61,7 +61,6 @@ class UploadFilesScreen extends Component<any, any> {
   // useEffect = only for functional component
 
   chooseFiles = (e: any) => {
-    console.log(this.props.location);
     let arrNewFiles = [];
     let fileLength = e.target.files.length;
     for (let i = 0; i < fileLength; i++) {
@@ -80,7 +79,6 @@ class UploadFilesScreen extends Component<any, any> {
   };
 
   render() {
-    const { match, location, history } = this.props;
     return this.state.arrayOfFiles.length !== 0 ? (
       <div className="uploadPageBodyContainer">
         <ChakraHeadbar />
