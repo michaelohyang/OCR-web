@@ -13,52 +13,14 @@ class digitalForm extends Component<any, any> {
         this.state = {
             form: {},
             selectedProjectId: {},
-            newEntry: [],
         };
+        this.submit = this.submit.bind(this);
         this.state.selectedProjectId["projectID"] = this.props.location.state["projectID"];
         this.state.form["form"] = this.props.location.state["form"];
         this.setState({
             selectedProjectId: this.state.selectedProjectId,
             form: this.state.form,
         });
-        // console.log(this.state.form["form"]);
-        // for (var key in this.props.location.state["form"]) {
-        //     const k = key;
-        //     console.log(k);
-        //     console.log(this.props.location.state["form"][k]);
-        // }
-        // this.buildForm();
-        // console.log(this.state.newEntry);
-    }
-
-    buildForm = () => {
-        var rows = [];
-        // this.state.newEntry.push(<div></div>);
-        for (var key in this.state.form["form"]) {
-            const k = key;
-            rows.push(
-                <div key={k}>
-                    <HStack className="textdiv">
-                        <div className="firstpart">{k}:</div>
-                        <div className="firstpart">{this.state.form[k]}:</div>
-                        {/* <div className="secondpart">
-                        <input
-                            className="textarea"
-                            id={k}
-                            type="text"
-                            defaultValue={this.state.dic[k]}
-                            onChange={(e: any) => this.updateContent(e, k)}
-                        ></input>
-                        <ChakraButton
-                            txtname={"Delete"}
-                            onClickFunc={() => this.deleteAttri(k)}
-                        />
-                        </div> */}
-                    </HStack>
-                </div>
-            );
-        }
-        console.log(rows);
     }
 
     submit = () => {
