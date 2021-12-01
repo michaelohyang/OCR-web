@@ -60,7 +60,7 @@ class UploadFilesScreen extends Component<any, any> {
       if (e.target.files[i]["type"].split("/")[0] !== "image") {
         return;
       }
-    }
+    } 
     for (let i = 0; i < fileLength; i++) {
       arrNewFiles.push(e.target.files[i]);
     }
