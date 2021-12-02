@@ -1,4 +1,5 @@
 import { HStack } from "@chakra-ui/layout";
+import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import { Component } from "react";
 import ChakraButton from "../../GlobalComponents/ChakraButton";
@@ -19,6 +20,7 @@ class ConfirmDigitalForm extends Component<any, any> {
       updateDic: false,
       count: 0,
       pendingCounts: [],
+      selectedProjectId: {},
     };
     this.getJson = this.getJson.bind(this);
     this.populateDict = this.populateDict.bind(this);
@@ -32,20 +34,30 @@ class ConfirmDigitalForm extends Component<any, any> {
 
     // Calling the function getJson(): It is fetching the information from
     // the backend
-    this.getJson();
+
+    // this.getJson();
+    this.state.selectedProjectId["projectID"] =
+      this.props.location.state["projectID"];
+    this.setState({
+      selectedProjectId: this.state.selectedProjectId,
+    });
+    console.log(this.state.selectedProjectId);
   }
 
   getJson = () => {
-    axios.get("http://localhost:8080/form").then((response) => {
-      this.setState({ digitalForm: response.data });
-      this.populateDict();
-      this.setState({ dic: this.state.dict });
-    });
+    axios
+      .get(
+        `http://localhost:8080/form?id=${this.state.selectedProjectId["projectID"]}`
+      )
+      .then((response) => {
+        this.setState({ digitalForm: response.data });
+        this.populateDict();
+        this.setState({ dic: this.state.dict });
+      });
   };
 
   populateDict = () => {
     let dictCopy = this.state.dict;
-    console.log("this is prepopulateDict: ", dictCopy);
     for (var key in this.state.digitalForm) {
       dictCopy[key] = this.state.digitalForm[key];
     }
@@ -60,7 +72,6 @@ class ConfirmDigitalForm extends Component<any, any> {
 
   deleteAttri = (k: any) => {
     let deleteDictCopy = this.state.dict;
-    console.log("this is predeleteAttri: ", deleteDictCopy);
     delete deleteDictCopy[k];
     // delete this.state.dict[k];
     this.setState({ dict: deleteDictCopy }, () => {
@@ -69,7 +80,6 @@ class ConfirmDigitalForm extends Component<any, any> {
   };
 
   updateAttri = (e: any, originalKey: any, content: any) => {
-    console.log("this is preupdatedAttri", this.state.dict);
     this.setState({ dict: this.state.dict }, () => {
       console.log("this is postupdatedAttri: ", this.state.dict);
     });
@@ -78,7 +88,6 @@ class ConfirmDigitalForm extends Component<any, any> {
   // function is not call correctly
   updateContent = (e: any, k: any) => {
     let updatedDictCopy = this.state.dict;
-    console.log("this is preupdatedContent: ", updatedDictCopy);
     updatedDictCopy[k] = e.target.value;
     this.setState({ dict: updatedDictCopy }, () => {
       console.log("this is postupdatedContent: ", this.state.dict);
@@ -161,16 +170,19 @@ class ConfirmDigitalForm extends Component<any, any> {
         (entr: any) => Number.parseInt(entr.key) !== count
       ),
     });
-    console.log("this is preaddedAttributeDictCopy: ", addedAttributeDictCopy);
     addedAttributeDictCopy[attri.value] = value.value;
     this.setState({ dict: addedAttributeDictCopy }, () => {
       console.log("this is postaddedAttributeDictCopy: ", this.state.dict);
     });
   };
 
-  submit = () => {
+  submit = (project_id: any) => {
+    console.log(this.state.dict);
     axios
-      .post("http://localhost:8080/confirmForm", this.state.dict)
+      .post(
+        `http://localhost:8080/confirm/?projectID=${project_id}`,
+        this.state.dict
+      )
       .then((response) => console.log(response.data));
     alert("Successful upload medical records!");
   };
@@ -201,28 +213,51 @@ class ConfirmDigitalForm extends Component<any, any> {
         </div>
       );
     }
-    return this.state.newEntry.length !== 0 ? (
+    console.log(rows);
+    return this.state.dict.length !== 0 ? (
       <div className="bodyContainer">
         <ChakraHeadbar />
-        <div className="mainbody">
-          <div className="exceptSubmit">
-            <div className="rows">{rows}</div>
-            <div className="exceptRowsAndSubmit">
-              <div>{this.state.newEntry}</div>
-              <div className="addattr">
+        <div>
+          <div className="rowdistance">
+            <div>{rows}</div>
+            <div className="addattr">
+              <ChakraButton
+                txtname={"Add Attribute"}
+                onClickFunction={() => this.inputAttri()}
+              />
+            </div>
+            <div>{this.state.newEntry}</div>
+            <div className="submitbuttom">
+              <Link
+                to={{
+                  pathname: "/upload",
+                  state: {
+                    projectID: this.state.selectedProjectId["projectID"],
+                  },
+                }}
+              >
                 <ChakraButton
                   txtname={"Add Attribute"}
                   onClickFunction={() => this.inputAttri()}
                 />
-              </div>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/digitalForm",
+                  state: {
+                    form: this.state.dict,
+                    projectID: this.state.selectedProjectId["projectID"],
+                  },
+                }}
+              >
+                <ChakraButton
+                  txtname={"Submit"}
+                  onClickFunction={() =>
+                    this.submit(this.state.selectedProjectId["projectID"])
+                  }
+                />
+              </Link>
             </div>
-          </div>
-
-          <div className="submitbuttom">
-            <ChakraButton
-              txtname={"Submit"}
-              onClickFunction={() => this.submit()}
-            />
           </div>
         </div>
       </div>
@@ -231,4 +266,4 @@ class ConfirmDigitalForm extends Component<any, any> {
     );
   }
 }
-export default ConfirmDigitalForm;
+export default withRouter(ConfirmDigitalForm);

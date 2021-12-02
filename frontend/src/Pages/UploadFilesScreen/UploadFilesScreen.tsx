@@ -5,9 +5,8 @@ import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
 import "./UploadFilesScreen.css";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import DisplayForNoImageUpload from "./Components/CaseConditionForUpload/DisplayForNoImages";
-import { withRouter } from "react-router";
 import { Button } from "@chakra-ui/react";
 
 class UploadFilesScreen extends Component<any, any> {
@@ -16,9 +15,15 @@ class UploadFilesScreen extends Component<any, any> {
     this.state = {
       arrayOfFiles: [],
       numberOfAddedFiles: 0,
-      projectID: "",
+      selectedProjectId: {},
     };
-
+    console.log(this.props.location.state);
+    this.state.selectedProjectId["projectID"] =
+      this.props.location.state["projectID"];
+    this.setState({
+      selectedProjectId: this.state.selectedProjectId,
+    });
+    console.log(this.state.selectedProjectId);
     this.chooseFiles = this.chooseFiles.bind(this);
     this.removeImage = this.removeImage.bind(this);
     this.uploadFilesFunction = this.uploadFilesFunction.bind(this);
@@ -37,7 +42,10 @@ class UploadFilesScreen extends Component<any, any> {
       formDataCopy.append("medical", this.state.arrayOfFiles[i]);
     }
     console.log(formDataCopy);
-    axios.post("http://localhost:8080/upload", formDataCopy);
+    axios.post(
+      `http://localhost:8080/upload/?projectID=${this.state.selectedProjectId["projectID"]}`,
+      formDataCopy
+    );
     alert("Images Successfully Uploaded to The Database");
   };
 
@@ -72,6 +80,10 @@ class UploadFilesScreen extends Component<any, any> {
     for (let i = 0; i < fileLength; i++) {
       arrNewFiles.push(e.target.files[i]);
     }
+    const originalFilesLength = this.state.arrayOfFiles.length;
+    for (let i = 0; i < originalFilesLength; i++) {
+      arrNewFiles.push(this.state.arrayOfFiles[i]);
+    }
     // update the arrray that contains the current files we have
     this.setState({ arrayOfFiles: arrNewFiles });
 
@@ -80,6 +92,7 @@ class UploadFilesScreen extends Component<any, any> {
   };
 
   render() {
+    console.log(this.state.arrayOfFiles);
     return this.state.arrayOfFiles.length !== 0 ? (
       <div className="uploadPageBodyContainer">
         <ChakraHeadbar />
@@ -98,6 +111,16 @@ class UploadFilesScreen extends Component<any, any> {
             </Box>
             <Box>
               <div className="uploadPageBtnContainer">
+                <Link
+                  to={{
+                    pathname: "/existDigitalForm",
+                    state: {
+                      projectID: this.state.selectedProjectId["projectID"],
+                    },
+                  }}
+                >
+                  <ChakraButton txtname={"Back"} cssDesign={"uploadBtn"} />
+                </Link>
                 <label className={"chooseFileBtnContainer"}>
                   <input
                     type="file"
@@ -107,7 +130,14 @@ class UploadFilesScreen extends Component<any, any> {
                   />
                   <p className={"chooseBtnText"}> Choose Files </p>
                 </label>
-                <Link to="/confirm">
+                <Link
+                  to={{
+                    pathname: "/confirm",
+                    state: {
+                      projectID: this.state.selectedProjectId["projectID"],
+                    },
+                  }}
+                >
                   <Button
                     marginLeft="2.5em"
                     _focus={{ outline: 0, boxShadow: "none" }}
@@ -140,7 +170,10 @@ class UploadFilesScreen extends Component<any, any> {
         </div>
       </div>
     ) : (
-      <DisplayForNoImageUpload chooseFilesFunction={this.chooseFiles} />
+      <DisplayForNoImageUpload
+        selectedProjectId={this.state.selectedProjectId}
+        chooseFilesFunction={this.chooseFiles}
+      />
     );
   }
 }
