@@ -9,8 +9,9 @@
   justify-content: center;
   padding-bottom: 2em;
   padding-top: 2em;
-  column-gap: 5em;
+  column-gap: 4em;
   margin-top: 5em;
+  padding-left: 4em;
 }
 
 .existmainbody {
@@ -31,7 +32,7 @@
   border-radius: 10%;
   height: 25em;
   width: 20em;
-  /* overflow-y: auto; */
+  overflow-y: auto;
 }
 .extraformstyle {
   margin-top: 2em;
