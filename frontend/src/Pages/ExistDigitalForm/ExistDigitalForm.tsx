@@ -17,11 +17,15 @@ class ExistDigitalForm extends Component<any, any> {
           id: "1",
           "First Name": "John",
           "Last Name": "Johnson",
+          "hello word": "hello earth"
         },
         {
           id: "2",
           FirstName: "Sarah",
           LastName: "Huang",
+          "First Name": "John",
+          "Last Name": "Johnson",
+          "hello word": "hello earth"
         },
       ],
       form: [],
@@ -83,9 +87,9 @@ class ExistDigitalForm extends Component<any, any> {
       <div className="existbodyContainer">
         <ChakraHeadbar />
         <div className="existmainbody">
-          <Stack direction={"row"} alignItems="center" justifyContent="center" className="extraformstyle">
+          <div className="extraformstyle">
             {this.state.forms}
-          </Stack>
+          </div>
           <div className="existsubmitbuttom">
             {/* <Link to={{pathname: "/existDigitalForm", 
                       state: {projectID: props.k}}} 

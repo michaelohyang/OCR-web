@@ -21,9 +21,22 @@
 }
 
 .existinfo {
-  background-color: tomato;
+  background-color: rgb(182, 241, 222);
   margin-left: 3em;
+  box-shadow: 2px 2px 2px 2px gray;
+  padding-left: 5%;
+  padding-right: 1em;
+  padding-top: 2%;
+  padding-bottom: 0.5em;
+  border-radius: 10%;
+  height: 25em;
+  width: 20em;
+  /* overflow-y: auto; */
 }
 .extraformstyle {
   margin-top: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
