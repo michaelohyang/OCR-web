@@ -1,10 +1,16 @@
 const multer = require("multer");
 const backendConstant = require("../Util/constant");
 const fileSystem = require('./fileSystem');
+var fs = require("fs");
 
 const storage = multer.diskStorage({
   destination: (req: any, file: any, cb: any) => {
-    fileSystem.createUploadDirectory();
+    const rootDir = `${backendConstant.defaultFolder}`;
+    if (!fs.existsSync(rootDir)) {
+      fs.mkdir(rootDir, () => {
+        console.log(`${rootDir} has been created! `);
+      });
+    }
     cb(null, `./${backendConstant.defaultFolder}`);
   },
   
