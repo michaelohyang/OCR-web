@@ -36,6 +36,7 @@ class ConfirmDigitalForm extends Component<any, any> {
 
   componentWillMount() {
     this.montprojectinfo();
+    this.forceUpdate();
   }
 
   getJson = () => {
@@ -188,7 +189,7 @@ class ConfirmDigitalForm extends Component<any, any> {
         );
       });
     })
-    this.setState({rows: row}, () => console.log("the row is ", this.state.rows));
+    this.setState({rows: row}, () => this.forceUpdate());
   };
 
   render() {

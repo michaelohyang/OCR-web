@@ -1,5 +1,3 @@
-import { json } from "stream/consumers";
-
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
@@ -9,6 +7,7 @@ const conversion = require('./Controller/convertTextToJSON');
 const ocrScanner = require('./Controller/ocrScan');
 const database = require('./Controller/firebase');
 const fileSys = require('fs');
+const extract = require('./entityExtraction');
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
@@ -31,9 +30,24 @@ app.get('/form', async (req: any, res: any) => {
     files.forEach(async (file: any) => {
       let imagePath: string = "./uploads/" + file;
       await ocrScanner.getOCRtxt(imagePath);
-      let textPath: string = "./src/ConvertedFileToText/ocrResult.txt"; 
-      // let json_object: JSON = conversion.convertTextToJSON(textPath);
-      let json_object = {name: "Kevin", age: 12};
+      let textPath: string = "./ConvertedFileToText/ocrResult.txt"; 
+      let json_object = {};
+      try {
+        const data = fs.readFileSync(textPath, 'utf8')
+        let phoneNumber = extract.extractPhoneNumber(data)
+        let name = extract.extractName(data) 
+        let address = extract.extractAddress(data)
+        let email = extract.extractEmail(data) 
+        json_object = {
+          phoneNumber: phoneNumber,
+          name: name,
+          address: address,
+          email: email
+        }
+        console.log(json_object);
+      } catch (err) {
+        console.error(err)
+      }
       console.log("the backend is sending ", json_object);
       res.send(json_object);
       try {
