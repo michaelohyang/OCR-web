@@ -1,10 +1,29 @@
-.firstpart {
-  width: 40%;
-  padding-left: 25em;
-  text-align: right;
+.existbodyContainer {
+  height: 100vh;
+  background: linear-gradient(120deg, white 0%, lightblue 100%);
+  overflow-y: auto;
 }
 
-.secondpart {
-  padding-left: 0em;
-  height: auto;
+.existsubmitbuttom {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2em;
+  padding-top: 2em;
+  column-gap: 5em;
+  margin-top: 5em;
+}
+
+.existmainbody {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.existinfo {
+  background-color: tomato;
+  margin-left: 3em;
+}
+.extraformstyle {
+  margin-top: 2em;
 }

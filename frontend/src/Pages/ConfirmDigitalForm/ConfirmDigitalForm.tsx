@@ -191,7 +191,7 @@ class ConfirmDigitalForm extends Component<any, any> {
     //   value1 : "what's up",
     // };
     let temp1 = this.state.digitalForm;
-    Object.keys(temp1).map(function(key: any) {
+    Object.keys(temp1).forEach(function(key: any) {
       row.push(
         <div>
           {/* {key}:{temp1[key]} */}
