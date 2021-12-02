@@ -29,7 +29,7 @@ app.post('/form', async (req: any, res: any) => {
 });
 
 // Receive the updated json objects from the front end
-app.post('/confirmForm', async (req: any, res: any) => {
+app.post('/confirmForm?id=project_id', async (req: any, res: any) => {
   var finalformInJSON = req.body;
   var project_id = req.query.id;
   let forms = await database.getJsonData(`Project/${project_id}/forms`);

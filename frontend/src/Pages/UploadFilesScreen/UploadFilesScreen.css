@@ -17,6 +17,12 @@
   position: relative;
 }
 
+.submitbuttom {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5em;
+}
+
 .uploadBtn:hover {
   background: #f0f0f0;
   cursor: pointer;
