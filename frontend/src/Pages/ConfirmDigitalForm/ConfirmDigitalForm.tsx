@@ -44,15 +44,11 @@ class ConfirmDigitalForm extends Component<any, any> {
   }
 
   getJson = () => {
-    axios
-      .get(
-        `http://localhost:8080/form`
-      )
-      .then((response) => {
-        this.setState({ digitalForm: response.data });
-        // this.populateDict();
-        // this.setState({ dic: this.state.dict });
-      });
+    axios.get(`http://localhost:8080/form`).then((response) => {
+      this.setState({ digitalForm: response.data });
+      // this.populateDict();
+      // this.setState({ dic: this.state.dict });
+    });
   };
 
   populateDict = () => {
@@ -191,15 +187,13 @@ class ConfirmDigitalForm extends Component<any, any> {
     //   value1 : "what's up",
     // };
     let temp1 = this.state.digitalForm;
-    Object.keys(temp1).forEach(function(key: any) {
+    Object.keys(temp1).map(function (key: any) {
       row.push(
         <div>
           {/* {key}:{temp1[key]} */}
           <HStack className="textdiv">
             <div className="firstpart">{key}:</div>
-            <div className="projsecondpart">
-              {temp1[key]}
-            </div>
+            <div className="projsecondpart">{temp1[key]}</div>
           </HStack>
         </div>
       );
@@ -207,7 +201,7 @@ class ConfirmDigitalForm extends Component<any, any> {
   };
 
   render() {
-    var rows:any = [];
+    var rows: any = [];
     this.montprojectinfo(rows);
     for (var key in this.state.dict) {
       const k = key;
