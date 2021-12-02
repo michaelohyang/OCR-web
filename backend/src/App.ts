@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
 const projectConstant = require('./Util/constant');
-const createDir = require('./Controller/fileSystem');
 const upload = require('./Controller/multer');
 const conversion = require('./Controller/convertTextToJSON');
 const ocrScanner = require('./Controller/ocrScan');
