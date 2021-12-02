@@ -1,6 +1,5 @@
 const multer = require("multer");
 const backendConstant = require("../Util/constant");
-const fileSystem = require('./fileSystem');
 var fs = require("fs");
 
 const storage = multer.diskStorage({
