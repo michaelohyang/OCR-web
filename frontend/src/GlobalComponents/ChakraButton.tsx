@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/react";
 
 interface DesignedButtonProps {
   txtname: string;
-  onClickFunc?: () => void;
+  onClickFunction?: () => void;
   cssDesign?: any;
   onChange?: () => void;
   id?: any;
@@ -11,14 +11,8 @@ interface DesignedButtonProps {
 export default function ChakraButton(props: DesignedButtonProps) {
   return (
     <Button
-      bgGradient="linear(to-r, red.500, yellow.500)"
-      variant="solid"
-      fontFamily="monospace"
-      size="lg"
-      onClick={props.onClickFunc}
-      className={props.cssDesign}
-      onChange={props.onChange}
-      id={props.id}
+      _focus={{ outline: 0, boxShadow: "none" }}
+      onClick={props.onClickFunction}
     >
       {props.txtname}
     </Button>

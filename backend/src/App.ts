@@ -2,17 +2,17 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
 const projectConstant = require('./Util/constant');
-const createDir = require('./Controller/fileSystem');
 const upload = require('./Controller/multer');
 const conversion = require('./Controller/convertTextToJSON');
 const ocrScanner = require('./Controller/ocrScan');
 const database = require('./Controller/firebase');
+const fileSys = require('fs');
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
 
 // Receive the images from the front end and store them in a temopory folder
 app.post('/upload', upload.uploadFile.array('medical', 12), (req: any, res: any) => {
@@ -20,16 +20,23 @@ app.post('/upload', upload.uploadFile.array('medical', 12), (req: any, res: any)
 });
 
 // Send the json objects to the front end
-app.post('/form', async (req: any, res: any) => {
-  let imagePath: string = "./src/UploadedPictures/test1.jpg";
-  await ocrScanner.getOCRtxt(imagePath);
-  let textPath: string = "./src/ConvertedFileToText/ocrResult.txt"; 
-  let json_object: JSON = conversion.convertTextToJSON(textPath);
-  res.send(json_object);
+app.get('/form', async (req: any, res: any) => {
+  fileSys.readdir("./uploads", (err: any, files: any) => {
+    if (err) {
+      console.log('Unable to scan directory: ' + err);
+    }
+    files.forEach(async (file: any) => {
+      let imagePath: string = "./uploads/" + file;
+      await ocrScanner.getOCRtxt(imagePath);
+      let textPath: string = "./src/ConvertedFileToText/ocrResult.txt"; 
+      let json_object: JSON = conversion.convertTextToJSON(textPath);
+      res.send(json_object);
+    });
+  });
 });
 
 // Receive the updated json objects from the front end
-app.post('/confirmForm', async (req: any, res: any) => {
+app.post('/confirmForm?id=project_id', async (req: any, res: any) => {
   var finalformInJSON = req.body;
   var project_id = req.query.id;
   let forms = await database.getJsonData(`Project/${project_id}/forms`);

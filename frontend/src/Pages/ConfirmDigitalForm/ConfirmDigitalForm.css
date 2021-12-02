@@ -1,41 +1,35 @@
 /* this is style for textarea */
 .textarea {
-  /* background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%); */
-  background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-  border: 0.1em dotted black;
+  /* background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);*/
+  background: #e6e7e8;
   font-family: monospace;
   font-weight: bolder;
+  border-radius: 0.6em;
+  border-width: 0.05em;
   height: 3.5em;
+  border-color: blueviolet;
+  box-shadow: 1px 1px #b0edf1;
   margin-right: 1em;
 }
 /* this is the style for whole div of information can be deleted */
 .textdiv {
   margin-top: 1.5em;
   margin-bottom: 1em;
-  /* height: auto; */
-  /* text-align: center; */
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  column-gap: 1em;
+  column-gap: 0.1em;
   padding-bottom: 0.2em;
-  /* flex-wrap: wrap; */
-  /* background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%); */
 }
 
+/* left part of semicolomn */
 .firstpart {
-  width: 40%;
-  padding-left: 25em;
+  padding-left: 1.5em;
+  width: 20%;
   text-align: right;
 }
 
+/* textarea div */
 .secondpart {
   padding-left: 0em;
   height: auto;
-}
-/* this is the style to adjust the buttom location */
-.adjustbuttom {
-  margin-top: 0.1em;
 }
 
 /* this is the style for addattribute buttom */
@@ -62,31 +56,129 @@
 
 /* this is the style for poped text area if add attribute clicked */
 .addattrtext {
-  background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
+  background: whitesmoke;
+  border-radius: 0.2em;
+  border-width: 0.05em;
+  border-color: grey;
+  box-shadow: 1px 1px #888888;
 }
 
 /* this is the style for submit buttom */
 .submitbuttom {
   display: flex;
   justify-content: center;
-  margin-top: 2.5em;
+  padding-bottom: 2em;
+  padding-top: 2em;
 }
 
 /* this is the style for row position */
 .rowdistance {
   position: relative;
   top: 10%;
-  /* background-color: linear-gradient(
-    90deg,
-    rgba(214, 230, 187, 1) 0%,
-    rgba(155, 200, 245, 0.542454481792717) 0%,
-    rgba(166, 235, 249, 1) 100%
-  ); */
 }
 
 /* this is the style for rest space of background */
 .bodyContainer {
   height: 100vh;
-  background: linear-gradient(89.96deg, #b0eef7 0.04%, #988faa 99.96%);
+  background: linear-gradient(120deg, white 0%, lightblue 100%);
   overflow-y: auto;
+}
+
+/* add attr button */
+.plus {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: black;
+}
+.plus:before,
+.plus:after {
+  content: "";
+  position: absolute;
+  background: #fff;
+}
+.plus:before {
+  left: 50%;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  transform: translateX(-50%);
+}
+.plus:after {
+  top: 50%;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  transform: translateY(-50%);
+}
+.plus:hover {
+  background-color: transparent;
+}
+.radius {
+  border-radius: 50%;
+}
+
+/* minus attr button */
+.minus {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: black;
+}
+.minus:before,
+.minus:after {
+  content: "";
+  position: absolute;
+  background: #fff;
+}
+.minus:before {
+  top: 50%;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  transform: translateY(-50%);
+}
+.minus:hover {
+  opacity: 80%;
+}
+
+/* the div contain attribute, attribute description, plus and minus buttons*/
+.addattrMainDiv {
+  margin-top: 1em;
+}
+
+/* each row pushed div css */
+.rows {
+  background-color: white;
+  width: 33%;
+  margin-top: 3em;
+  padding-bottom: 1em;
+  padding-top: 1em;
+  border-radius: 2em;
+  box-shadow: 5px 5px 5px 5px #888888;
+  margin-bottom: 1em;
+}
+
+/* the div contain all elements except rows headbar and submit button */
+.exceptRowsAndSubmit {
+  margin-left: 10%;
+  margin-top: 3em;
+  width: 40em;
+}
+
+/* the div contain all elements except submit button, headbar */
+.exceptSubmit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  overflow-x: auto;
+  min-height: 30em;
+}
+
+/* the div contain all elements except headbar */
+.mainbody {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: auto;
 }
