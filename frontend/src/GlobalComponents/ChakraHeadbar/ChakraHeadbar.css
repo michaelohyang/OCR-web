@@ -8,7 +8,8 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  background: linear-gradient(89.96deg, #b0eef7 0.04%, #988faa 99.96%);
+  background-image: linear-gradient(120deg, white 0%, lightblue 100%);
+  box-shadow: 0em 0.05em white;
 }
 
 .imgOnLeft {
@@ -33,14 +34,4 @@
   white-space: nowrap; /* Keeps the content on a single line  */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens  */
   letter-spacing: 0.15em; /* Adjust as needed  */
-  /* animation: typing 3s steps(40, end); */
 }
-
-/* @keyframes typing {
-  from {
-    width: 20%;
-  }
-  to {
-    width: 80%;
-  }
-} ; */

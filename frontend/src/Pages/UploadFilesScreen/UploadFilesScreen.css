@@ -1,6 +1,6 @@
 .uploadPageBodyContainer {
   height: 100vh;
-  background: linear-gradient(89.96deg, #b0eef7 0.04%, #988faa 99.96%);
+  background-image: linear-gradient(120deg, white 0%, lightblue 100%);
   overflow-y: auto;
 }
 
@@ -15,6 +15,12 @@
 .uploadBtn {
   border-radius: 20em;
   position: relative;
+}
+
+.submitbuttom {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5em;
 }
 
 .uploadBtn:hover {
@@ -35,17 +41,19 @@
   border-radius: 0.3em;
   cursor: pointer;
   display: inline-block;
-  padding: 0.8em 0.8em;
-  background: linear-gradient(
-    103deg,
-    rgba(228, 66, 61, 1) 0%,
-    rgba(215, 151, 47, 1) 99%,
-    rgba(215, 152, 47, 1) 100%
-  );
+  padding: 0.5em 0.6em;
+  background: #edf2f7;
+}
+
+label:hover,
+label:active,
+input:hover + label,
+input:active + label {
+  background: #e2e8f0;
 }
 
 .chooseBtnText {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 input[type="file"] {

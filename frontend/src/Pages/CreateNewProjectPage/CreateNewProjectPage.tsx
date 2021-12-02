@@ -14,6 +14,7 @@ class Create_New_Project_Page extends Component<any, any> {
     this.state = {
       project_name: String,
       description: String,
+      priority: String,
       redirect: false,
     };
     this.onsubmit = this.onsubmit.bind(this);
@@ -26,13 +27,19 @@ class Create_New_Project_Page extends Component<any, any> {
     let description = document.getElementById(
       "descriptionInput"
     ) as HTMLInputElement;
-    console.log(name);
-    console.log(description);
-    if (name.value === "" || description.value === "") {
-      alert("You cannot leave project name or description empty!");
+    let priority = document.getElementById("priority") as HTMLInputElement;
+    if (
+      name.value === "" ||
+      description.value === "" ||
+      priority.value === ""
+    ) {
+      alert(
+        "You cannot leave project name, description or project priority empty!"
+      );
       return;
     }
     this.setState({ project_name: name.value });
+    this.setState({ priority: priority.value });
     this.setState({ description: description.value }, this.send_data_backend);
   };
 
@@ -41,7 +48,8 @@ class Create_New_Project_Page extends Component<any, any> {
     let projectInfo = {
       project_name: this.state.project_name,
       description: this.state.description,
-      forms: [{placeholder: "This is a placeholder."}],
+      priority: this.state.priority,
+      forms: [{ placeholder: "This is a placeholder." }],
     };
     axios.post("http://localhost:8080/createProject", projectInfo);
     alert("Information successfully sent to the Backend!");
@@ -78,6 +86,14 @@ class Create_New_Project_Page extends Component<any, any> {
                   placeholder="Description"
                 />
                 <span className="newProjectDescriptionText"></span>
+              </div>
+              <label htmlFor="projects">Choose a priority:</label>
+              <div className="newProjectDescriptionContainer">
+                <select name="priority" id="priority">
+                  <option value="high">high (red)</option>
+                  <option value="medium">medium (yellow)</option>
+                  <option value="low">low (green)</option>
+                </select>
               </div>
               <div className="newProjectButtonsContainer">
                 <Link to="/">
