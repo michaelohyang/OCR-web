@@ -13,7 +13,7 @@
 }
 /* this is the style for whole div of information can be deleted */
 .textdiv {
-  margin-top: 1.5em;
+  margin-top: 1em;
   margin-bottom: 1em;
   column-gap: 0.1em;
   padding-bottom: 0.2em;
@@ -69,6 +69,7 @@
   justify-content: center;
   padding-bottom: 2em;
   padding-top: 2em;
+  column-gap: 5em;
 }
 
 /* this is the style for row position */
@@ -139,7 +140,7 @@
   transform: translateY(-50%);
 }
 .minus:hover {
-  opacity: 80%;
+  background-color: transparent;
 }
 
 /* the div contain attribute, attribute description, plus and minus buttons*/
@@ -181,4 +182,9 @@
   justify-content: center;
   flex-direction: column;
   overflow: auto;
+}
+
+.projsecondpart {
+  height: auto;
+  padding-left: 1em;
 }

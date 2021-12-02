@@ -30,6 +30,7 @@ class ConfirmDigitalForm extends Component<any, any> {
     this.addAttri = this.addAttri.bind(this);
     this.submit = this.submit.bind(this);
     this.deleteAttri1 = this.deleteAttri1.bind(this);
+    this.montprojectinfo = this.montprojectinfo.bind(this);
 
     // Calling the function getJson(): It is fetching the information from
     // the backend
@@ -45,12 +46,12 @@ class ConfirmDigitalForm extends Component<any, any> {
   getJson = () => {
     axios
       .get(
-        `http://localhost:8080/form?id=${this.state.selectedProjectId["projectID"]}`
+        `http://localhost:8080/form`
       )
       .then((response) => {
         this.setState({ digitalForm: response.data });
-        this.populateDict();
-        this.setState({ dic: this.state.dict });
+        // this.populateDict();
+        // this.setState({ dic: this.state.dict });
       });
   };
 
@@ -182,8 +183,32 @@ class ConfirmDigitalForm extends Component<any, any> {
     alert("Successful upload medical records!");
   };
 
+  montprojectinfo = (row: any) => {
+    this.getJson();
+    // var temp1: any = {
+    //   name: 17,
+    //   address: 9,
+    //   value1 : "what's up",
+    // };
+    let temp1 = this.state.digitalForm;
+    Object.keys(temp1).map(function(key: any) {
+      row.push(
+        <div>
+          {/* {key}:{temp1[key]} */}
+          <HStack className="textdiv">
+            <div className="firstpart">{key}:</div>
+            <div className="projsecondpart">
+              {temp1[key]}
+            </div>
+          </HStack>
+        </div>
+      );
+    });
+  };
+
   render() {
-    var rows = [];
+    var rows:any = [];
+    this.montprojectinfo(rows);
     for (var key in this.state.dict) {
       const k = key;
 
@@ -211,47 +236,49 @@ class ConfirmDigitalForm extends Component<any, any> {
     return (
       <div className="bodyContainer">
         <ChakraHeadbar />
-        <div>
-          <div className="rowdistance">
-            <div>{rows}</div>
-            <div className="addattr">
-              <ChakraButton
-                txtname={"Add Attribute"}
-                onClickFunction={() => this.inputAttri()}
-              />
-            </div>
-            <div>{this.state.newEntry}</div>
-            <div className="submitbuttom">
-              <Link
-                to={{
-                  pathname: "/upload",
-                  state: {
-                    projectID: this.state.selectedProjectId["projectID"],
-                  },
-                }}
-              >
+        <div className="mainbody">
+          <div className="exceptSubmit">
+            <div className="rows">{rows}</div>
+            <div className="exceptRowsAndSubmit">
+              <div>{this.state.newEntry}</div>
+              <div className="addattr">
                 <ChakraButton
                   txtname={"Add Attribute"}
                   onClickFunction={() => this.inputAttri()}
                 />
-              </Link>
-              <Link
-                to={{
-                  pathname: "/digitalForm",
-                  state: {
-                    form: this.state.dict,
-                    projectID: this.state.selectedProjectId["projectID"],
-                  },
-                }}
-              >
-                <ChakraButton
-                  txtname={"Submit"}
-                  onClickFunction={() =>
-                    this.submit(this.state.selectedProjectId["projectID"])
-                  }
-                />
-              </Link>
+              </div>
             </div>
+          </div>
+          <div className="submitbuttom">
+            <Link
+              to={{
+                pathname: "/upload",
+                state: {
+                  projectID: this.state.selectedProjectId["projectID"],
+                },
+              }}
+            >
+              <ChakraButton
+                txtname={"Add Attribute"}
+                onClickFunction={() => this.inputAttri()}
+              />
+            </Link>
+            <Link
+              to={{
+                pathname: "/digitalForm",
+                state: {
+                  form: this.state.dict,
+                  projectID: this.state.selectedProjectId["projectID"],
+                },
+              }}
+            >
+              <ChakraButton
+                txtname={"Submit"}
+                onClickFunction={() =>
+                  this.submit(this.state.selectedProjectId["projectID"])
+                }
+              />
+            </Link>
           </div>
         </div>
       </div>
