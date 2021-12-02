@@ -11,3 +11,17 @@
   /* flex-wrap: wrap; */
   /* background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%); */
 }
+
+.digitalFormsubmitbuttom {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2em;
+  padding-top: 2em;
+  column-gap: 5em;
+}
+
+.headertext {
+  display: flex;
+  justify-content: center;
+  font-size: 2em;
+}
