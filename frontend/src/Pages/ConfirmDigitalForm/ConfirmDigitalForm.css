@@ -32,17 +32,6 @@
   height: auto;
 }
 
-/* this is the style for addattribute buttom */
-.addattr {
-  margin-top: 2em;
-  margin-bottom: 0.5em;
-  height: 4em;
-  display: flex;
-  background: transparent;
-  justify-content: center;
-  align-items: center;
-}
-
 /* this is the style for poped overall div if add attribute clicked */
 .addattrbox {
   display: flex;
@@ -63,26 +52,10 @@
   box-shadow: 1px 1px #888888;
 }
 
-/* this is the style for submit buttom */
-.submitbuttom {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 2em;
-  padding-top: 2em;
-  column-gap: 5em;
-}
-
 /* this is the style for row position */
 .rowdistance {
   position: relative;
   top: 10%;
-}
-
-/* this is the style for rest space of background */
-.bodyContainer {
-  height: 100vh;
-  background: linear-gradient(120deg, white 0%, lightblue 100%);
-  overflow-y: auto;
 }
 
 /* add attr button */
@@ -148,8 +121,52 @@
   margin-top: 1em;
 }
 
+.projsecondpart {
+  height: auto;
+  padding-left: 1em;
+}
+
+/* --------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------*/
+
+/* this is the style for rest space of background */
+.confirmDigitalFormScreenContainer {
+  height: 100vh;
+  background: linear-gradient(120deg, white 0%, lightblue 100%);
+  overflow-y: auto;
+}
+
+/* the div contain all elements except headbar */
+.confirmmDigitalFormBodyContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: auto;
+}
+
+/* the div contain all elements except submit button, headbar */
+.confirmDigitalFormUpperViewPortContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  overflow-x: auto;
+  min-height: 30em;
+  margin-left: 0.5em;
+}
+
+/* this is the style for submit buttom */
+.confirmDigitalFormLowerViewPortContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 5.5em;
+  column-gap: 5em;
+}
+
 /* each row pushed div css */
-.rows {
+.confirmDigitalFormViewProjectContainer {
+  display: flex;
+  justify-content: center;
   background-color: white;
   width: 33%;
   margin-top: 3em;
@@ -160,31 +177,32 @@
   margin-bottom: 1em;
 }
 
+.confirmDigitalFormAttributeDisplay {
+  display: flex;
+  flex-direction: column;
+  /* margin-left: 10em;
+  margin-right: 10em; */
+}
+
+.viewProjectPortText {
+  font-size: large;
+  font-weight: bold;
+}
+
 /* the div contain all elements except rows headbar and submit button */
-.exceptRowsAndSubmit {
+.confirmDigitalFormAddAttributesContainer {
   margin-left: 10%;
   margin-top: 3em;
   width: 40em;
 }
 
-/* the div contain all elements except submit button, headbar */
-.exceptSubmit {
+/* this is the style for addattribute buttom */
+.confirmDigitalFormAddAttributeButton {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  height: 4em;
   display: flex;
-  flex-direction: row;
+  background: transparent;
   justify-content: center;
-  overflow-x: auto;
-  min-height: 30em;
-}
-
-/* the div contain all elements except headbar */
-.mainbody {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  overflow: auto;
-}
-
-.projsecondpart {
-  height: auto;
-  padding-left: 1em;
+  align-items: center;
 }

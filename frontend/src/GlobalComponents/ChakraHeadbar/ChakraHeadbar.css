@@ -1,5 +1,5 @@
 /* this method used for  header whole div */
-.container {
+.headBarContainer {
   position: sticky;
   top: 0em;
   z-index: 10;
