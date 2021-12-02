@@ -17,5 +17,3 @@ City
 State/Province
 30318
 Postal / Zip Code
-jiaxuan@gmail.com
-61 Park Street, Camden, ME, 04843, US

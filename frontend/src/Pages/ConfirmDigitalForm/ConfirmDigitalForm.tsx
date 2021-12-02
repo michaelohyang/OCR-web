@@ -20,6 +20,7 @@ class ConfirmDigitalForm extends Component<any, any> {
       count: 0,
       pendingCounts: [],
       selectedProjectId: {},
+      rows: []
     };
     this.getJson = this.getJson.bind(this);
     this.populateDict = this.populateDict.bind(this);
@@ -31,29 +32,19 @@ class ConfirmDigitalForm extends Component<any, any> {
     this.submit = this.submit.bind(this);
     this.deleteAttri1 = this.deleteAttri1.bind(this);
     this.montprojectinfo = this.montprojectinfo.bind(this);
+  }
 
-    // Calling the function getJson(): It is fetching the information from
-    // the backend
-    // this.getJson()
-
-    this.state.selectedProjectId["projectID"] =
-      this.props.location.state["projectID"];
-    this.setState({
-      selectedProjectId: this.state.selectedProjectId,
-    });
+  componentWillMount() {
+    this.montprojectinfo();
   }
 
   getJson = () => {
-    axios
-      .get(
-        `http://localhost:8080/form`
-      )
-      .then((response) => {
-        this.setState({ digitalForm: response.data });
-        // this.populateDict();
-        // this.setState({ dic: this.state.dict });
-      });
-  };
+    return new Promise((resolve, reject) => 
+              axios.get("http://localhost:8080/form")
+                .then((response) => {
+                    resolve(response.data);
+            }));
+  }
 
   populateDict = () => {
     let dictCopy = this.state.dict;
@@ -64,10 +55,6 @@ class ConfirmDigitalForm extends Component<any, any> {
       console.log("this is postpopulateDict", this.state.dict);
     });
   };
-
-  componentWillMount() {
-    console.log(this.state.newEntry);
-  }
 
   deleteAttri = (k: any) => {
     let deleteDictCopy = this.state.dict;
@@ -101,7 +88,8 @@ class ConfirmDigitalForm extends Component<any, any> {
     this.state.pendingCounts.push(thisCount);
     let newid = "added-attri" + thisCount.toString();
     let newval = "added-value" + thisCount.toString();
-    this.state.newEntry.push(
+    let temp_new_entry = this.state.newEntry;
+    temp_new_entry.push(
       <div id={thisCount} key={thisCount} className="addattrMainDiv">
         <div
           id={thisCount}
@@ -136,9 +124,10 @@ class ConfirmDigitalForm extends Component<any, any> {
       </div>
     );
     this.setState({
-      dic: this.state.dict,
+      dict: this.state.dict,
       count: this.state.count + 1,
       pendingCounts: this.state.pendingCounts,
+      newEntry: temp_new_entry,
     });
   };
 
@@ -183,36 +172,30 @@ class ConfirmDigitalForm extends Component<any, any> {
     alert("Successful upload medical records!");
   };
 
-  montprojectinfo = (row: any) => {
-    this.getJson();
-    // var temp1: any = {
-    //   name: 17,
-    //   address: 9,
-    //   value1 : "what's up",
-    // };
-    let temp1 = this.state.digitalForm;
-    Object.keys(temp1).map(function(key: any) {
-      row.push(
-        <div>
-          {/* {key}:{temp1[key]} */}
-          <HStack className="textdiv">
-            <div className="firstpart">{key}:</div>
-            <div className="projsecondpart">
-              {temp1[key]}
-            </div>
-          </HStack>
-        </div>
-      );
-    });
+  montprojectinfo = () => {
+    let row: any = [];
+    this.getJson().then((val: any) => {
+      Object.keys(val).map(function(key: any) {
+        row.push(
+          <div>
+            <HStack className="textdiv">
+              <div className="firstpart">{key}:</div>
+              <div className="projsecondpart">
+                {val[key]}
+              </div>
+            </HStack>
+          </div>
+        );
+      });
+    })
+    this.setState({rows: row}, () => console.log("the row is ", this.state.rows));
   };
 
   render() {
-    var rows:any = [];
-    this.montprojectinfo(rows);
     for (var key in this.state.dict) {
       const k = key;
 
-      rows.push(
+      this.state.rows.push(
         <div key={k}>
           <HStack className="textdiv">
             <div className="firstpart">{k}:</div>
@@ -221,7 +204,7 @@ class ConfirmDigitalForm extends Component<any, any> {
                 className="textarea"
                 id={k}
                 type="text"
-                defaultValue={this.state.dic[k]}
+                defaultValue={this.state.dict[k]}
                 onChange={(e: any) => this.updateContent(e, k)}
               ></input>
               <ChakraButton
@@ -233,12 +216,13 @@ class ConfirmDigitalForm extends Component<any, any> {
         </div>
       );
     }
+
     return (
       <div className="bodyContainer">
         <ChakraHeadbar />
         <div className="mainbody">
           <div className="exceptSubmit">
-            <div className="rows">{rows}</div>
+            <div className="rows">{this.state.rows}</div>
             <div className="exceptRowsAndSubmit">
               <div>{this.state.newEntry}</div>
               <div className="addattr">

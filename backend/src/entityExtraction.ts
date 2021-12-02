@@ -79,10 +79,6 @@ module.exports = {
     extractPhoneNumber
 };
 
-  let doc = nlp(text)
-  return doc.people().text()
-}
-
 //example
 try {
   const data = fs.readFileSync('./ConvertedFileToText/ocrResult.txt', 'utf8')

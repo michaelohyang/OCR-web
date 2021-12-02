@@ -1,3 +1,5 @@
+import { json } from "stream/consumers";
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
@@ -25,12 +27,20 @@ app.get('/form', async (req: any, res: any) => {
     if (err) {
       console.log('Unable to scan directory: ' + err);
     }
+
     files.forEach(async (file: any) => {
       let imagePath: string = "./uploads/" + file;
       await ocrScanner.getOCRtxt(imagePath);
       let textPath: string = "./src/ConvertedFileToText/ocrResult.txt"; 
-      let json_object: JSON = conversion.convertTextToJSON(textPath);
+      // let json_object: JSON = conversion.convertTextToJSON(textPath);
+      let json_object = {name: "Kevin", age: 12};
+      console.log("the backend is sending ", json_object);
       res.send(json_object);
+      try {
+        fileSys.unlinkSync(imagePath);
+      } catch(err) {
+        console.error(err);
+      }
     });
   });
 });
