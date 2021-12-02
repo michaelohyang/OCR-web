@@ -1,13 +1,11 @@
 import { Box } from "@chakra-ui/layout";
 import "../ViewProjectPage.css";
-import { Link, Redirect } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 import blue from "./blue.jpg";
 import yellow from "./yellow.jpg";
 import green from "./green.jpg";
 import red from "./red.jpg";
-import deleteIcon1 from "./deleteIcon.png";
-import { withRouter } from "react-router";
 
 interface ProjectModalInterface {
   projects: any;
@@ -33,7 +31,7 @@ function ProjectModal(props: ProjectModalInterface) {
           <img
             src={colors[Math.floor(Math.random() * colors.length)]}
             alt="imagePreview"
-            className="projectImageResize"
+            className="projectImage"
           />
           <Box p="4">
             <Box
@@ -61,17 +59,17 @@ function ProjectModal(props: ProjectModalInterface) {
             >
               {props.projects[props.k].description}
             </Box>
-            <div className="deleteButton">
-              <button
-                onClick={() => props.removeProject(props.k)}
-                className="deleteButtonText"
-              >
-                &times;
-                {/* <img src={deleteIcon1} /> */}
-              </button>
-            </div>
           </Box>
         </Link>
+        <div className="deleteButton">
+          <button
+            onClick={() => props.removeProject(props.k)}
+            className="deleteButtonText"
+          >
+            &times;
+            {/* <img src={deleteIcon1} /> */}
+          </button>
+        </div>
       </Box>
     </div>
   );

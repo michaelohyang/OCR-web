@@ -29,7 +29,7 @@ class ConfirmDigitalForm extends Component<any, any> {
     this.addAttri = this.addAttri.bind(this);
     this.submit = this.submit.bind(this);
     this.deleteAttri1 = this.deleteAttri1.bind(this);
-    
+
     // Calling the function getJson(): It is fetching the information from
     // the backend
     this.getJson();
@@ -42,7 +42,6 @@ class ConfirmDigitalForm extends Component<any, any> {
       this.setState({ dic: this.state.dict });
     });
   };
-  
 
   populateDict = () => {
     let dictCopy = this.state.dict;
@@ -56,9 +55,8 @@ class ConfirmDigitalForm extends Component<any, any> {
   };
 
   componentWillMount() {
-    console.log(this.state.newEntry)
+    console.log(this.state.newEntry);
   }
-
 
   deleteAttri = (k: any) => {
     let deleteDictCopy = this.state.dict;
@@ -87,17 +85,13 @@ class ConfirmDigitalForm extends Component<any, any> {
     });
   };
 
-  
   inputAttri = () => {
     const thisCount = this.state.count;
     this.state.pendingCounts.push(thisCount);
     let newid = "added-attri" + thisCount.toString();
     let newval = "added-value" + thisCount.toString();
     this.state.newEntry.push(
-      <div
-       id={thisCount}
-      key={thisCount} 
-      className="addattrMainDiv">
+      <div id={thisCount} key={thisCount} className="addattrMainDiv">
         <div
           id={thisCount}
           key={thisCount}
@@ -119,11 +113,14 @@ class ConfirmDigitalForm extends Component<any, any> {
             placeholder="Content"
             defaultValue=""
           ></input>
-          <div className="plus radius" onClick={() => this.addAttri(thisCount)} >
-          </div>
-          <div className="minus radius" onClick={() => this.deleteAttri1(thisCount)}>
-
-          </div>
+          <div
+            className="plus radius"
+            onClick={() => this.addAttri(thisCount)}
+          ></div>
+          <div
+            className="minus radius"
+            onClick={() => this.deleteAttri1(thisCount)}
+          ></div>
           {/* <div className="adjustbuttom_delete">
             <ChakraButton
               txtname={"Add"}
@@ -139,9 +136,8 @@ class ConfirmDigitalForm extends Component<any, any> {
       pendingCounts: this.state.pendingCounts,
     });
   };
-  
 
-  deleteAttri1 = (count:any) => {
+  deleteAttri1 = (count: any) => {
     this.setState({
       newEntry: this.state.newEntry.filter(
         (entr: any) => Number.parseInt(entr.key) !== count
@@ -198,7 +194,7 @@ class ConfirmDigitalForm extends Component<any, any> {
               ></input>
               <ChakraButton
                 txtname={"Delete"}
-                onClickFunc={() => this.deleteAttri(k)}
+                onClickFunction={() => this.deleteAttri(k)}
               />
             </div>
           </HStack>
@@ -216,7 +212,7 @@ class ConfirmDigitalForm extends Component<any, any> {
               <div className="addattr">
                 <ChakraButton
                   txtname={"Add Attribute"}
-                  onClickFunc={() => this.inputAttri()}
+                  onClickFunction={() => this.inputAttri()}
                 />
               </div>
             </div>
@@ -225,7 +221,7 @@ class ConfirmDigitalForm extends Component<any, any> {
           <div className="submitbuttom">
             <ChakraButton
               txtname={"Submit"}
-              onClickFunc={() => this.submit()}
+              onClickFunction={() => this.submit()}
             />
           </div>
         </div>

@@ -11,7 +11,7 @@ export default function DisplayForNoImageUpload(
   props: DisplayForNoImageUploadInterface
 ) {
   return (
-    <div className="bodyContainer">
+    <div className="uploadPageBodyContainer">
       <ChakraHeadbar />
       <div>
         <Grid templateRows="repeat(3)" height="43em" gap={3}>

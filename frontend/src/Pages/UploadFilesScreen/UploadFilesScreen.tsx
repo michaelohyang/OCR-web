@@ -8,6 +8,7 @@ import "./UploadFilesScreen.css";
 import { Link } from "react-router-dom";
 import DisplayForNoImageUpload from "./Components/CaseConditionForUpload/DisplayForNoImages";
 import { withRouter } from "react-router";
+import { Button } from "@chakra-ui/react";
 
 class UploadFilesScreen extends Component<any, any> {
   constructor(props: any) {
@@ -107,11 +108,13 @@ class UploadFilesScreen extends Component<any, any> {
                   <p className={"chooseBtnText"}> Choose Files </p>
                 </label>
                 <Link to="/confirm">
-                  <ChakraButton
-                    txtname={"Upload"}
-                    onClickFunc={this.uploadFilesFunction}
-                    cssDesign={"uploadBtn"}
-                  />
+                  <Button
+                    marginLeft="2.5em"
+                    _focus={{ outline: 0, boxShadow: "none" }}
+                    onClick={this.uploadFilesFunction}
+                  >
+                    Submit
+                  </Button>
                 </Link>
               </div>
             </Box>
