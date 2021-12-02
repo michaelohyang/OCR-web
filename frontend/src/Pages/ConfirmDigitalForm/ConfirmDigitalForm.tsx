@@ -230,19 +230,6 @@ class ConfirmDigitalForm extends Component<any, any> {
             <div className="submitbuttom">
               <Link
                 to={{
-                  pathname: "/upload",
-                  state: {
-                    projectID: this.state.selectedProjectId["projectID"],
-                  },
-                }}
-              >
-                <ChakraButton
-                  txtname={"Add Attribute"}
-                  onClickFunction={() => this.inputAttri()}
-                />
-              </Link>
-              <Link
-                to={{
                   pathname: "/digitalForm",
                   state: {
                     form: this.state.dict,
