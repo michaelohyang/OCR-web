@@ -7,6 +7,7 @@ import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
 import "./UploadFilesScreen.css";
 import { Link, withRouter } from "react-router-dom";
 import DisplayForNoImageUpload from "./Components/CaseConditionForUpload/DisplayForNoImages";
+import { Button } from "@chakra-ui/react";
 
 class UploadFilesScreen extends Component<any, any> {
   constructor(props: any) {
@@ -17,7 +18,8 @@ class UploadFilesScreen extends Component<any, any> {
       selectedProjectId: {},
     };
     console.log(this.props.location.state);
-    this.state.selectedProjectId["projectID"] = this.props.location.state["projectID"];
+    this.state.selectedProjectId["projectID"] =
+      this.props.location.state["projectID"];
     this.setState({
       selectedProjectId: this.state.selectedProjectId,
     });
@@ -27,6 +29,12 @@ class UploadFilesScreen extends Component<any, any> {
     this.uploadFilesFunction = this.uploadFilesFunction.bind(this);
   }
 
+  // componentDidMount() {
+  //   const location = this.props.location;
+  //   console.log(location);
+  //   // this.setState({ projectID: this.props.location.state.projectID });
+  // }
+
   uploadFilesFunction = () => {
     let formDataCopy = new FormData();
     for (let i = 0; i < this.state.arrayOfFiles.length; i++) {
@@ -34,7 +42,10 @@ class UploadFilesScreen extends Component<any, any> {
       formDataCopy.append("medical", this.state.arrayOfFiles[i]);
     }
     console.log(formDataCopy);
-    axios.post(`http://localhost:8080/upload/?projectID=${this.state.selectedProjectId["projectID"]}`, formDataCopy);
+    axios.post(
+      `http://localhost:8080/upload/?projectID=${this.state.selectedProjectId["projectID"]}`,
+      formDataCopy
+    );
     alert("Images Successfully Uploaded to The Database");
   };
 
@@ -59,14 +70,13 @@ class UploadFilesScreen extends Component<any, any> {
   // useEffect = only for functional component
 
   chooseFiles = (e: any) => {
-    console.log(e.target.files);
     let arrNewFiles = [];
     let fileLength = e.target.files.length;
     for (let i = 0; i < fileLength; i++) {
       if (e.target.files[i]["type"].split("/")[0] !== "image") {
         return;
       }
-    } 
+    }
     for (let i = 0; i < fileLength; i++) {
       arrNewFiles.push(e.target.files[i]);
     }
@@ -101,8 +111,15 @@ class UploadFilesScreen extends Component<any, any> {
             </Box>
             <Box>
               <div className="uploadPageBtnContainer">
-                <Link to={{pathname: "/existDigitalForm", state: {projectID: this.state.selectedProjectId["projectID"]}}}>
-                  <ChakraButton txtname={"Back"} cssDesign={"uploadBtn"}/>
+                <Link
+                  to={{
+                    pathname: "/existDigitalForm",
+                    state: {
+                      projectID: this.state.selectedProjectId["projectID"],
+                    },
+                  }}
+                >
+                  <ChakraButton txtname={"Back"} cssDesign={"uploadBtn"} />
                 </Link>
                 <label className={"chooseFileBtnContainer"}>
                   <input
@@ -113,12 +130,21 @@ class UploadFilesScreen extends Component<any, any> {
                   />
                   <p className={"chooseBtnText"}> Choose Files </p>
                 </label>
-                <Link to={{pathname: "/confirm", state: {projectID: this.state.selectedProjectId["projectID"]}}}>
-                  <ChakraButton
-                    txtname={"Upload"}
-                    onClickFunc={this.uploadFilesFunction}
-                    cssDesign={"uploadBtn"}
-                  />
+                <Link
+                  to={{
+                    pathname: "/confirm",
+                    state: {
+                      projectID: this.state.selectedProjectId["projectID"],
+                    },
+                  }}
+                >
+                  <Button
+                    marginLeft="2.5em"
+                    _focus={{ outline: 0, boxShadow: "none" }}
+                    onClick={this.uploadFilesFunction}
+                  >
+                    Submit
+                  </Button>
                 </Link>
               </div>
             </Box>
@@ -144,11 +170,12 @@ class UploadFilesScreen extends Component<any, any> {
         </div>
       </div>
     ) : (
-      <DisplayForNoImageUpload 
-      selectedProjectId={this.state.selectedProjectId}
-      chooseFilesFunction={this.chooseFiles} />
+      <DisplayForNoImageUpload
+        selectedProjectId={this.state.selectedProjectId}
+        chooseFilesFunction={this.chooseFiles}
+      />
     );
   }
 }
 
-export default withRouter(UploadFilesScreen)
+export default withRouter(UploadFilesScreen);

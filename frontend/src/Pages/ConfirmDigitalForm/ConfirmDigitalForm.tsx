@@ -1,12 +1,11 @@
-import { HStack} from "@chakra-ui/layout";
-import { Link, withRouter } from "react-router-dom";
+import { HStack } from "@chakra-ui/layout";
 import axios from "axios";
 import { Component } from "react";
 import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
+import { Link, withRouter } from "react-router-dom";
 import "./ConfirmDigitalForm.css";
 import * as React from "react";
-import Originpage from "./Originpage";
 
 class ConfirmDigitalForm extends Component<any, any> {
   myRef: React.RefObject<HTMLDivElement>;
@@ -31,26 +30,29 @@ class ConfirmDigitalForm extends Component<any, any> {
     this.addAttri = this.addAttri.bind(this);
     this.submit = this.submit.bind(this);
     this.deleteAttri1 = this.deleteAttri1.bind(this);
-    
+
     // Calling the function getJson(): It is fetching the information from
     // the backend
+    // this.getJson()
 
-    // this.getJson();
-    this.state.selectedProjectId["projectID"] = this.props.location.state["projectID"];
+    this.state.selectedProjectId["projectID"] =
+      this.props.location.state["projectID"];
     this.setState({
       selectedProjectId: this.state.selectedProjectId,
     });
-    console.log(this.state.selectedProjectId);
   }
 
   getJson = () => {
-    axios.get(`http://localhost:8080/form?id=${this.state.selectedProjectId["projectID"]}`).then((response) => {
-      this.setState({ digitalForm: response.data });
-      this.populateDict();
-      this.setState({ dic: this.state.dict });
-    });
+    axios
+      .get(
+        `http://localhost:8080/form?id=${this.state.selectedProjectId["projectID"]}`
+      )
+      .then((response) => {
+        this.setState({ digitalForm: response.data });
+        this.populateDict();
+        this.setState({ dic: this.state.dict });
+      });
   };
-  
 
   populateDict = () => {
     let dictCopy = this.state.dict;
@@ -63,12 +65,12 @@ class ConfirmDigitalForm extends Component<any, any> {
   };
 
   componentWillMount() {
-    console.log(this.state.newEntry)
+    console.log(this.state.newEntry);
   }
-
 
   deleteAttri = (k: any) => {
     let deleteDictCopy = this.state.dict;
+    console.log("this is predeleteAttri: ", deleteDictCopy);
     delete deleteDictCopy[k];
     // delete this.state.dict[k];
     this.setState({ dict: deleteDictCopy }, () => {
@@ -77,6 +79,7 @@ class ConfirmDigitalForm extends Component<any, any> {
   };
 
   updateAttri = (e: any, originalKey: any, content: any) => {
+    console.log("this is preupdatedAttri", this.state.dict);
     this.setState({ dict: this.state.dict }, () => {
       console.log("this is postupdatedAttri: ", this.state.dict);
     });
@@ -85,23 +88,20 @@ class ConfirmDigitalForm extends Component<any, any> {
   // function is not call correctly
   updateContent = (e: any, k: any) => {
     let updatedDictCopy = this.state.dict;
+    console.log("this is preupdatedContent: ", updatedDictCopy);
     updatedDictCopy[k] = e.target.value;
     this.setState({ dict: updatedDictCopy }, () => {
       console.log("this is postupdatedContent: ", this.state.dict);
     });
   };
 
-  
   inputAttri = () => {
     const thisCount = this.state.count;
     this.state.pendingCounts.push(thisCount);
     let newid = "added-attri" + thisCount.toString();
     let newval = "added-value" + thisCount.toString();
     this.state.newEntry.push(
-      <div
-       id={thisCount}
-      key={thisCount} 
-      className="addattrMainDiv">
+      <div id={thisCount} key={thisCount} className="addattrMainDiv">
         <div
           id={thisCount}
           key={thisCount}
@@ -123,17 +123,14 @@ class ConfirmDigitalForm extends Component<any, any> {
             placeholder="Content"
             defaultValue=""
           ></input>
-          <div className="plus radius" onClick={() => this.addAttri(thisCount)} >
-          </div>
-          <div className="minus radius" onClick={() => this.deleteAttri1(thisCount)}>
-
-          </div>
-          {/* <div className="adjustbuttom_delete">
-            <ChakraButton
-              txtname={"Add"}
-              onClickFunc={() => this.addAttri(thisCount)}
-            />
-          </div> */}
+          <div
+            className="plus radius"
+            onClick={() => this.addAttri(thisCount)}
+          ></div>
+          <div
+            className="minus radius"
+            onClick={() => this.deleteAttri1(thisCount)}
+          ></div>
         </div>
       </div>
     );
@@ -143,9 +140,8 @@ class ConfirmDigitalForm extends Component<any, any> {
       pendingCounts: this.state.pendingCounts,
     });
   };
-  
 
-  deleteAttri1 = (count:any) => {
+  deleteAttri1 = (count: any) => {
     this.setState({
       newEntry: this.state.newEntry.filter(
         (entr: any) => Number.parseInt(entr.key) !== count
@@ -169,6 +165,7 @@ class ConfirmDigitalForm extends Component<any, any> {
         (entr: any) => Number.parseInt(entr.key) !== count
       ),
     });
+    console.log("this is preaddedAttributeDictCopy: ", addedAttributeDictCopy);
     addedAttributeDictCopy[attri.value] = value.value;
     this.setState({ dict: addedAttributeDictCopy }, () => {
       console.log("this is postaddedAttributeDictCopy: ", this.state.dict);
@@ -176,9 +173,11 @@ class ConfirmDigitalForm extends Component<any, any> {
   };
 
   submit = (project_id: any) => {
-    console.log(this.state.dict);
     axios
-      .post(`http://localhost:8080/confirm/?projectID=${project_id}`, this.state.dict)
+      .post(
+        `http://localhost:8080/confirm/?projectID=${project_id}`,
+        this.state.dict
+      )
       .then((response) => console.log(response.data));
     alert("Successful upload medical records!");
   };
@@ -202,15 +201,14 @@ class ConfirmDigitalForm extends Component<any, any> {
               ></input>
               <ChakraButton
                 txtname={"Delete"}
-                onClickFunc={() => this.deleteAttri(k)}
+                onClickFunction={() => this.deleteAttri(k)}
               />
             </div>
           </HStack>
         </div>
       );
     }
-    console.log(rows);
-    return this.state.dict.length !== 0 ? (
+    return (
       <div className="bodyContainer">
         <ChakraHeadbar />
         <div>
@@ -219,39 +217,44 @@ class ConfirmDigitalForm extends Component<any, any> {
             <div className="addattr">
               <ChakraButton
                 txtname={"Add Attribute"}
-                onClickFunc={() => this.inputAttri()}
+                onClickFunction={() => this.inputAttri()}
               />
             </div>
             <div>{this.state.newEntry}</div>
             <div className="submitbuttom">
-              <Link to={{pathname: "/upload", state: {projectID: this.state.selectedProjectId["projectID"]}}}>
+              <Link
+                to={{
+                  pathname: "/upload",
+                  state: {
+                    projectID: this.state.selectedProjectId["projectID"],
+                  },
+                }}
+              >
                 <ChakraButton
-                  txtname={"Back"}
-                /> 
+                  txtname={"Add Attribute"}
+                  onClickFunction={() => this.inputAttri()}
+                />
               </Link>
-              <Link to={{pathname: "/digitalForm", 
-              state: {form: this.state.dict, 
-                      projectID: this.state.selectedProjectId["projectID"]}}}>
-                
-                    <ChakraButton
-                      txtname={"Submit"}
-                      onClickFunc={() => this.submit(this.state.selectedProjectId["projectID"])}
-                    />
-                
+              <Link
+                to={{
+                  pathname: "/digitalForm",
+                  state: {
+                    form: this.state.dict,
+                    projectID: this.state.selectedProjectId["projectID"],
+                  },
+                }}
+              >
+                <ChakraButton
+                  txtname={"Submit"}
+                  onClickFunction={() =>
+                    this.submit(this.state.selectedProjectId["projectID"])
+                  }
+                />
               </Link>
             </div>
           </div>
-
-          {/* <div className="submitbuttom">
-            <ChakraButton
-              txtname={"Submit"}
-              onClickFunc={() => this.submit(this.state.selectedProjectId["projectID"])}
-            />
-          </div> */}
         </div>
       </div>
-    ) : (
-      <Originpage AddAttribute={() => this.inputAttri()} />
     );
   }
 }

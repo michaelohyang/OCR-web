@@ -28,11 +28,14 @@ class Create_New_Project_Page extends Component<any, any> {
       "descriptionInput"
     ) as HTMLInputElement;
     let priority = document.getElementById("priority") as HTMLInputElement;
-    console.log(name);
-    console.log(description);
-    console.log(priority);
-    if (name.value === "" || description.value === "" || priority.value === "") {
-      alert("You cannot leave project name, description or project priority empty!");
+    if (
+      name.value === "" ||
+      description.value === "" ||
+      priority.value === ""
+    ) {
+      alert(
+        "You cannot leave project name, description or project priority empty!"
+      );
       return;
     }
     this.setState({ project_name: name.value });
@@ -46,7 +49,7 @@ class Create_New_Project_Page extends Component<any, any> {
       project_name: this.state.project_name,
       description: this.state.description,
       priority: this.state.priority,
-      forms: [{placeholder: "This is a placeholder."}],
+      forms: [{ placeholder: "This is a placeholder." }],
     };
     axios.post("http://localhost:8080/createProject", projectInfo);
     alert("Information successfully sent to the Backend!");
