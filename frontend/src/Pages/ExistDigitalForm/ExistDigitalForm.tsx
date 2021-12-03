@@ -65,26 +65,16 @@ class ExistDigitalForm extends Component<any, any> {
         console.log(key + ": " + rawJson[patient][key]);
         const k = key;
         eachform.push(
-<<<<<<< HEAD
-          <div key={countOfRows}>
-            <HStack>
-              <div>{k}</div>
-=======
           <div key={countOfRows} className="existinfo">
             <HStack overflowX="auto">
               <div className="textdiv1">{k}:</div>
->>>>>>> main
               <div>{rawJson[p][k]}</div>
             </HStack>
           </div>
         );
         countOfRows++;
       }
-      this.state.forms.push(
-        <div key={1000 + p}>
-          {eachform}
-        </div>
-      );
+      this.state.forms.push(<div key={1000 + p}>{eachform}</div>);
     }
     setTimeout(() => this.forceUpdate(), 3000);
   };
