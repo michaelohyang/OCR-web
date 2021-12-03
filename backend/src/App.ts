@@ -31,7 +31,7 @@ app.get('/form', async (req: any, res: any) => {
       let imagePath: string = "./uploads/" + file;
       await ocrScanner.getOCRtxt(imagePath);
       setTimeout(async () => {
-        let textPath: string = "/Users/shugefan/Desktop/OCR-web/backend/src/ConvertedF"; 
+        let textPath: string = "C:/Users/ohyan/Documents/GATech/CS 3312/OCR-web/OCR-web/backend/src/ConvertedF"; 
         let json_object = {};
         try {
           const data = fileSys.readFileSync(textPath, 'utf8');
