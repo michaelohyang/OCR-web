@@ -67,10 +67,13 @@ class ConfirmDigitalForm extends Component<any, any> {
       });
     });
 
-    this.setState({
-      availableProjectAttribute: fetchedAttributes,
-      projectAttributeCount: tempCount,
-    });
+    this.setState(
+      {
+        availableProjectAttribute: fetchedAttributes,
+        projectAttributeCount: tempCount,
+      },
+      () => setTimeout(() => this.forceUpdate(), 3000)
+    );
   };
 
   addAttributeToProject = (inputCount: number) => {
@@ -178,8 +181,6 @@ class ConfirmDigitalForm extends Component<any, any> {
   };
 
   render() {
-    // setTimeout(() => this.forceUpdate(), 7000);
-
     return (
       <div className="confirmDigitalFormScreenContainer">
         <ChakraHeadbar />
