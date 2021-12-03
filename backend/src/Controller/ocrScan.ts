@@ -11,7 +11,7 @@ const getOCRtxt = async (filePath: String) => {
   // TODO: modify path as necessary
 
   var logger = fs.createWriteStream( "../ConvertedFileToText/ocrResult.txt", {
-    flags: "a",
+    flags: "w",
   });
   logger.write(fullTextAnnotation.text);
   // fs.unlinkSync(filePath);
