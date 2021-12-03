@@ -1,6 +1,6 @@
 // Below uses google cloud vision api
 // TODO: set env var below  before running
-// export GOOGLE_APPLICATION_CREDENTIALS="'../secret/glossy-motif-327704-23cf5a80138d.json'"
+// export GOOGLE_APPLICATION_CREDENTIALS="/Users/shugefan/Desktop/OCR-web/backend/src/VisionAPISecret/glossy-motif-327704-23cf5a80138d.json"
 const vision = require("@google-cloud/vision");
 var fs = require("fs");
 

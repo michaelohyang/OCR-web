@@ -13,20 +13,20 @@ class ExistDigitalForm extends Component<any, any> {
     // this.ProjectModal;
     this.state = {
       rawJson: [
-        {
-          id: "1",
-          "First Name": "John",
-          "Last Name": "Johnson",
-          "hello word": "hello earth"
-        },
-        {
-          id: "2",
-          FirstName: "Sarah",
-          LastName: "Huang",
-          "First Name": "John",
-          "Last Name": "Johnson",
-          "hello word": "hello earth"
-        },
+        // {
+        //   id: "1",
+        //   "First Name": "John",
+        //   "Last Name": "Johnson",
+        //   "hello word": "hello earth"
+        // },
+        // {
+        //   id: "2",
+        //   FirstName: "Sarah",
+        //   LastName: "Huang",
+        //   "First Name": "John",
+        //   "Last Name": "Johnson",
+        //   "hello word": "hello earth"
+        // },
       ],
       form: [],
       forms: [],
@@ -38,13 +38,14 @@ class ExistDigitalForm extends Component<any, any> {
       selectedProjectId: this.state.selectedProjectId,
     });
     console.log(this.state.selectedProjectId);
+    this.getJson();
     this.pushExistForm(this.state.rawJson);
-    //getJson();
+
   }
   getJson = () => {
     axios
       .get(
-        `http://localhost:8080/existForm/?projectID=${this.state.selectedProjectId["projectID"]}`
+        `http://localhost:8080/allForms?id=${this.state.selectedProjectId["projectID"]}`
       )
       .then((response) => {
         this.setState({ rawJson: response.data });

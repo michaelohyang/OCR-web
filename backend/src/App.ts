@@ -6,6 +6,7 @@ const upload = require('./Controller/multer');
 const conversion = require('./Controller/convertTextToJSON');
 const ocrScanner = require('./Controller/ocrScan');
 const database = require('./Controller/firebase');
+const extract = require('./entityExtraction');
 const fileSys = require('fs');
 const { v4: uuidv4 } = require('uuid');
 
@@ -25,18 +26,41 @@ app.get('/form', async (req: any, res: any) => {
     if (err) {
       console.log('Unable to scan directory: ' + err);
     }
+
     files.forEach(async (file: any) => {
       let imagePath: string = "./uploads/" + file;
       await ocrScanner.getOCRtxt(imagePath);
       let textPath: string = "./src/ConvertedFileToText/ocrResult.txt"; 
-      let json_object: JSON = conversion.convertTextToJSON(textPath);
+      let json_object = {};
+      try {
+        const data = fileSys.readFileSync(textPath, 'utf8')
+        let phoneNumber = extract.extractPhoneNumber(data)
+        let name = extract.extractName(data) 
+        let address = extract.extractAddress(data)
+        let email = extract.extractEmail(data) 
+        json_object = {
+          phoneNumber: phoneNumber,
+          name: name,
+          address: address,
+          email: email
+        }
+        console.log(json_object);
+      } catch (err) {
+        console.error(err)
+      }
+      console.log("the backend is sending ", json_object);
       res.send(json_object);
+      try {
+        fileSys.unlinkSync(imagePath);
+      } catch(err) {
+        console.error(err);
+      }
     });
   });
 });
 
 // Receive the updated json objects from the front end
-app.post('/confirmForm?id=project_id', async (req: any, res: any) => {
+app.post('/confirmForm', async (req: any, res: any) => {
   var finalformInJSON = req.body;
   var project_id = req.query.id;
   let forms = await database.getJsonData(`Project/${project_id}/forms`);
@@ -57,10 +81,17 @@ app.get('/projects', async (req: any, res: any) => {
   res.send(projects);
 });
 
+// Send all forms of a project to the front end based on project id. 
+app.get('/allForms', async (req: any, res: any) => {
+  var project_id = req.query.id;
+  let projects = await database.getJsonData(`Project/${project_id}/forms`);
+  console.log(projects);
+  res.send(projects);
+});
+
 // Delete a project permanently using its ID
 app.post('/delete', (req: any, res: any) => {
   let projectId = req.query.id;
-  console.log(projectId);
   database.deleteData(`Project/${projectId}`);
 });
 

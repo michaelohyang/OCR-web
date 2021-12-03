@@ -58,19 +58,19 @@ function extractName(text: string) {
 }
 
 //example
-(async () => {
+// (async () => {
 
-    try {
-        const data = fs.readFileSync('./ConvertedFileToText/ocrResult.txt', 'utf8')
-        console.log(extractPhoneNumber(data)) // phone
-        console.log(extractName(data)) // name
-        console.log(extractEmail(data)) //email
-        console.log(await extractAddress(data)) // address
-    } catch (err) {
-        console.error(err)
-    }
+//     try {
+//         const data = fs.readFileSync('./src/ConvertedFileToText/ocrResult.txt', 'utf8')
+//         console.log(extractPhoneNumber(data)) // phone
+//         console.log(extractName(data)) // name
+//         console.log(extractEmail(data)) //email
+//         console.log(await extractAddress(data)) // address
+//     } catch (err) {
+//         console.error(err)
+//     }
 
-})()
+// })()
 
 module.exports = {
     extractAddress,
@@ -79,18 +79,14 @@ module.exports = {
     extractPhoneNumber
 };
 
-  let doc = nlp(text)
-  return doc.people().text()
-}
-
-//example
-try {
-  const data = fs.readFileSync('./ConvertedFileToText/ocrResult.txt', 'utf8')
-  console.log(extractPhoneNumber(data)) // phone
-  console.log(extractName(data)) // name
-  console.log(extractAddress(data))//address
-  console.log(extractEmail(data)) //email
-} catch (err) {
-  console.error(err)
-}
-module.exports = {extractAddress, extractEmail, extractName, extractPhoneNumber};
+// //example
+// try {
+//   const data = fs.readFileSync('./ConvertedFileToText/ocrResult.txt', 'utf8')
+//   console.log(extractPhoneNumber(data)) // phone
+//   console.log(extractName(data)) // name
+//   console.log(extractAddress(data))//address
+//   console.log(extractEmail(data)) //email
+// } catch (err) {
+//   console.error(err)
+// }
+// module.exports = {extractAddress, extractEmail, extractName, extractPhoneNumber};
