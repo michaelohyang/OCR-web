@@ -74,11 +74,13 @@ function extractName(text: string) {
 
 async function extractSentences(text: string) {
 
+    text = text.replace(/\n|\r/g, ". ")
+
     let sentences = await wink_nlp.string.sentences( text )
     let true_sentences = []
     for (let i = 0; i < sentences.length; i++) {
-        console.log(sentences[i].length)
-        if (sentences[i].length > 22) {
+        let s = sentences[i]
+        if (s.length > 22 && !s.includes("agree") && !s.includes("understand") && !s.includes("authoriz") ) {
             true_sentences.push(sentences[i])
         }
     }
