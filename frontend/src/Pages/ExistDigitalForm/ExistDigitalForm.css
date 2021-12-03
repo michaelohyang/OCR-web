@@ -22,12 +22,12 @@
 }
 
 .existinfo {
-  background-color: rgb(182, 241, 222);
+  background-color: white;
   margin-left: 3em;
   box-shadow: 2px 2px 2px 2px gray;
-  padding-left: 5%;
+  padding-left: 6%;
   padding-right: 1em;
-  padding-top: 2%;
+  padding-top: 6%;
   padding-bottom: 0.5em;
   border-radius: 10%;
   height: 25em;
@@ -41,4 +41,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.textdiv1 {
+  margin-right: 0.5em;
 }
