@@ -25,9 +25,9 @@
   background-color: white;
   margin-left: 3em;
   box-shadow: 2px 2px 2px 2px gray;
-  padding-left: 6%;
+  padding-left: 1%;
   padding-right: 1em;
-  padding-top: 6%;
+  padding-top: 1%;
   padding-bottom: 0.5em;
   border-radius: 10%;
   height: 25em;
@@ -45,4 +45,13 @@
 
 .textdiv1 {
   margin-right: 0.5em;
+  width: 7em;
+}
+.textdiv2 {
+  width: 12em;
+  align-items: left;
+}
+
+.adjustbetween {
+  margin-bottom: 1em;
 }
