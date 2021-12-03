@@ -78,19 +78,3 @@ module.exports = {
     extractName,
     extractPhoneNumber
 };
-
-  let doc = nlp(text)
-  return doc.people().text()
-}
-
-//example
-try {
-  const data = fs.readFileSync('./ConvertedFileToText/ocrResult.txt', 'utf8')
-  console.log(extractPhoneNumber(data)) // phone
-  console.log(extractName(data)) // name
-  console.log(extractAddress(data))//address
-  console.log(extractEmail(data)) //email
-} catch (err) {
-  console.error(err)
-}
-module.exports = {extractAddress, extractEmail, extractName, extractPhoneNumber};

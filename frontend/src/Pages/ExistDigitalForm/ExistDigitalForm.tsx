@@ -1,10 +1,11 @@
 import { Component } from "react";
-import { HStack, Stack } from "@chakra-ui/layout";
+import { HStack } from "@chakra-ui/layout";
 import axios from "axios";
 import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./ExistDigitalForm.css";
 import { Link, withRouter } from "react-router-dom";
+
 
 class ExistDigitalForm extends Component<any, any> {
   // selectedProjectId: any;
@@ -12,22 +13,7 @@ class ExistDigitalForm extends Component<any, any> {
     super(props);
     // this.ProjectModal;
     this.state = {
-      rawJson: [
-        {
-          id: "1",
-          "First Name": "John",
-          "Last Name": "Johnson",
-          "hello word": "hello earth"
-        },
-        {
-          id: "2",
-          FirstName: "Sarah",
-          LastName: "Huang",
-          "First Name": "John",
-          "Last Name": "Johnson",
-          "hello word": "hello earth"
-        },
-      ],
+      rawJson: [],
       form: [],
       forms: [],
       selectedProjectId: {},
@@ -38,22 +24,41 @@ class ExistDigitalForm extends Component<any, any> {
       selectedProjectId: this.state.selectedProjectId,
     });
     console.log(this.state.selectedProjectId);
-    this.pushExistForm(this.state.rawJson);
-    //getJson();
+    // this.getJson();
+    // this.pushExistForm(this.state.rawJson);
+    this.getJson = this.getJson.bind(this);
+    this.pushExistForm = this.pushExistForm.bind(this);
+    this.mountInfo = this.mountInfo.bind(this);
   }
-  getJson = () => {
+
+  componentWillMount() {
+    this.mountInfo();
+  }
+
+  getJson = () => {return new Promise((resolve, reject) => {
     axios
       .get(
-        "http://localhost:8080/allForms"
+        `http://localhost:8080/allForms?id=${this.state.selectedProjectId["projectID"]}`
       )
       .then((response) => {
-        this.setState({ rawJson: response.data });
-        //   this.setState({ dic: this.state.dic });
+        try {
+          resolve(response.data);
+        }
+        catch(error){
+          reject(error);
+        }
       });
-  };
+  })};
+
+  mountInfo = () => {
+    this.getJson().then((val:any) => {
+      console.log(val);
+      this.setState({rawJson : val}, () => this.pushExistForm(this.state.rawJson));
+    });
+  }
 
   pushExistForm = (rawJson: any) => {
-    console.log(this.state.selectedProjectId);
+    console.log("where is",this.state.rawJson);
     var eachform: any[] = [];
     for (let patient in rawJson) {
       eachform = [];
@@ -80,6 +85,7 @@ class ExistDigitalForm extends Component<any, any> {
         </div>
       );
     }
+    setTimeout(() => this.forceUpdate(),3000);
   };
 
   render() {
@@ -106,6 +112,7 @@ class ExistDigitalForm extends Component<any, any> {
             >
               <ChakraButton txtname={"Add New Medical Record"} />
             </Link>
+            <ChakraButton txtname={"test"} />
           </div>
         </div>
       </div>
