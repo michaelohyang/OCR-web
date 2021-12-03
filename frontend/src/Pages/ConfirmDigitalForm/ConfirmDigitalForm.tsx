@@ -110,6 +110,7 @@ class ConfirmDigitalForm extends Component<any, any> {
             {attributeID.value} : {attributeValue.value}
           </p>
         </div>
+
         <div className="viewProjectPortDeleteButtonContainer">
           <div
             className="deleteAttributeInput"
@@ -119,6 +120,7 @@ class ConfirmDigitalForm extends Component<any, any> {
             id={tempProjectAttributeCount.toString()}
           ></div>
         </div>
+        
       </div>
     );
     console.log(tempAvailableProjectAttributes);
