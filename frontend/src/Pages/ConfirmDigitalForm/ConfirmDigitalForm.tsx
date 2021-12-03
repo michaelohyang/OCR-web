@@ -17,6 +17,7 @@ class ConfirmDigitalForm extends Component<any, any> {
       newAttributeEntry: new Map(),
       attributeInputCount: 0,
       projectAttributeCount: 0,
+      projectID: this.props.location.state["projectID"],
     };
 
     this.getJson = this.getJson.bind(this);
@@ -201,17 +202,17 @@ class ConfirmDigitalForm extends Component<any, any> {
             </div>
           </div>
           <div className="confirmDigitalFormLowerViewPortContainer">
-            {/* <Link
+            <Link
               to={{
                 pathname: "/digitalForm",
                 state: {
-                  form: this.state.dict,
-                  projectID: this.state.selectedProjectId["projectID"],
+                  form: this.state.availableProjectAttribute,
+                  projectID: this.state.projectID,
                 },
               }}
-            > */}
-            <ChakraButton txtname={"Submit"} marginTop="1em" />
-            {/* </Link> */}
+            >
+              <ChakraButton txtname={"Submit"} marginTop="1em" />
+            </Link>
           </div>
         </div>
       </div>
