@@ -5,6 +5,7 @@ import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./ExistDigitalForm.css";
 import { Link, withRouter } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 class ExistDigitalForm extends Component<any, any> {
   // selectedProjectId: any;
@@ -85,10 +86,18 @@ class ExistDigitalForm extends Component<any, any> {
       <div className="existbodyContainer">
         <ChakraHeadbar />
         <div className="existmainbody">
-          <div className="extraformstyle">{this.state.forms}</div>
+          <div className="extraformstyle">
+            {this.state.forms.length === 0 ? (
+              <div>
+                <ClipLoader color={"#000000"} loading={true} size={150} />
+              </div>
+            ) : (
+              <div>{this.state.forms}</div>
+            )}
+          </div>
           <div className="existsubmitbuttom">
             <Link to="/">
-              <ChakraButton txtname={"Return to View Project Page"} />
+              <ChakraButton txtname={"Return Project Page"} />
             </Link>
             <br />
             <Link

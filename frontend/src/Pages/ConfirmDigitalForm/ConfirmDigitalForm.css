@@ -50,6 +50,12 @@
   flex-direction: column;
 }
 
+.loadingSpinner {
+  position: relative;
+  margin-left: 9em;
+  margin-top: 7em;
+}
+
 .viewProjectPortContainer {
   display: flex;
   justify-content: flex-start;
