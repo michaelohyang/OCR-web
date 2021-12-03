@@ -5,7 +5,7 @@ input {
 
 .newProjectScreenContainer {
   height: 100vh;
-  background: linear-gradient(89.96deg, #b0eef7 0.04%, #988faa 99.96%);
+  background-image: linear-gradient(120deg, white 0%, lightblue 100%);
   overflow-y: auto;
   overflow-x: auto;
 }
@@ -123,6 +123,7 @@ input {
 .newProjectDescriptionContainer {
   width: 100%;
   margin-top: 4em;
+  margin-bottom: 1em;
   border-bottom: 2px solid #adadad;
   position: relative;
 }
@@ -176,4 +177,11 @@ input {
   display: flex;
   justify-content: center;
   margin-top: 6em;
+}
+
+.prioritySelector {
+  color: #a2b0c1;
+  font-family: "Poppins-Regular";
+  background: transparent;
+  font-size: medium;
 }

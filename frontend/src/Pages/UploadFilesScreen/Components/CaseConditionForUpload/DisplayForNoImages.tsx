@@ -3,7 +3,7 @@ import ChakraHeadbar from "../../../../GlobalComponents/ChakraHeadbar/ChakraHead
 import imageLogo from "./addIcon.png";
 import "../../UploadFilesScreen.css";
 import { Link } from "react-router-dom";
-import ChakraButton from "../../../../GlobalComponents/ChakraButton";
+import { Button } from "@chakra-ui/react";
 
 interface DisplayForNoImageUploadInterface {
   selectedProjectId: any;
@@ -46,7 +46,13 @@ export default function DisplayForNoImageUpload(
                 state: { projectID: props.selectedProjectId["projectID"] },
               }}
             >
-              <ChakraButton txtname={"Back"} cssDesign={"uploadBtn"} />
+              <Button
+                _focus={{ outline: 0, boxShadow: "none" }}
+                paddingLeft="2em"
+                paddingRight="2em"
+              >
+                Back
+              </Button>
             </Link>
           </div>
           <Box>
