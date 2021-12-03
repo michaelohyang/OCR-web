@@ -81,6 +81,7 @@ async function extractSentences(text: string) {
     for (let i = 0; i < sentences.length; i++) {
         let s = sentences[i]
         if (s.length > 22 && !s.includes("agree") && !s.includes("understand") && !s.includes("authoriz") ) {
+
             true_sentences.push(sentences[i])
         }
     }

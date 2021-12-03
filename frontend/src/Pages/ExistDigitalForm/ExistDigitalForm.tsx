@@ -1,10 +1,11 @@
 import { Component } from "react";
-import { HStack, Stack } from "@chakra-ui/layout";
+import { HStack } from "@chakra-ui/layout";
 import axios from "axios";
 import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./ExistDigitalForm.css";
 import { Link, withRouter } from "react-router-dom";
+
 
 class ExistDigitalForm extends Component<any, any> {
   // selectedProjectId: any;
@@ -22,24 +23,37 @@ class ExistDigitalForm extends Component<any, any> {
     this.setState({
       selectedProjectId: this.state.selectedProjectId,
     });
-    console.log(this.state.selectedProjectId);
-    this.getJson();
-    this.pushExistForm(this.state.rawJson);
-
+    this.getJson = this.getJson.bind(this);
+    this.pushExistForm = this.pushExistForm.bind(this);
+    this.mountInfo = this.mountInfo.bind(this);
   }
-  getJson = () => {
+
+  componentWillMount() {
+    this.mountInfo();
+  }
+
+  getJson = () => {return new Promise((resolve, reject) => {
     axios
       .get(
         `http://localhost:8080/allForms?id=${this.state.selectedProjectId["projectID"]}`
       )
       .then((response) => {
-        this.setState({ rawJson: response.data });
-        //   this.setState({ dic: this.state.dic });
+        try {
+          resolve(response.data);
+        }
+        catch(error){
+          reject(error);
+        }
       });
-  };
+  })};
+
+  mountInfo = () => {
+    this.getJson().then((val:any) => {
+      this.setState({rawJson : val}, () => this.pushExistForm(this.state.rawJson));
+    });
+  }
 
   pushExistForm = (rawJson: any) => {
-    console.log(this.state.selectedProjectId);
     var eachform: any[] = [];
     for (let patient in rawJson) {
       eachform = [];
@@ -60,12 +74,11 @@ class ExistDigitalForm extends Component<any, any> {
       }
       this.state.forms.push(
         <div key={1000 + p} className="existinfo">
-          {/* <Center bg="tomato" h="100px" w="200px" color="white"> */}
           {eachform}
-          {/* </Center>  */}
         </div>
       );
     }
+    setTimeout(() => this.forceUpdate(),3000);
   };
 
   render() {
@@ -77,9 +90,6 @@ class ExistDigitalForm extends Component<any, any> {
             {this.state.forms}
           </div>
           <div className="existsubmitbuttom">
-            {/* <Link to={{pathname: "/existDigitalForm", 
-                      state: {projectID: props.k}}} 
-                      onClick={() => props.selectProject(props.k)}> */}
             <Link to="/">
               <ChakraButton txtname={"return to project main"} />
             </Link>

@@ -37,7 +37,7 @@ class UploadFilesScreen extends Component<any, any> {
     }
     console.log(formDataCopy);
     axios.post(
-      `http://localhost:8080/upload/?projectID=${this.state.selectedProjectId["projectID"]}`,
+      `http://localhost:8080/upload`,
       formDataCopy
     );
     alert("Images Successfully Uploaded to The Database");
