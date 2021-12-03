@@ -30,36 +30,38 @@ app.get('/form', async (req: any, res: any) => {
     files.map(async (file: any) => {
       let imagePath: string = "./uploads/" + file;
       await ocrScanner.getOCRtxt(imagePath);
-      let textPath: string = "/Users/daichenyu/Desktop/jd_web/OCR-web/backend/src/ConvertedFileToText/ocrResult.txt"; 
-      let json_object = {};
-      try {
-        const data = fileSys.readFileSync(textPath, 'utf8');
-        let phoneNumber = extract.extractPhoneNumber(data);
-        let name = extract.extractName(data); 
-        let address = await extract.extractAddress(data);
-        let email = extract.extractEmail(data); 
-        let gender = await extract.extractGender(data);
-        let medicalFact = await extract.extractSentences(data);
-        json_object = {
-          Phone: phoneNumber,
-          Name: name,
-          Address: address,
-          Email: email,
-          Gender: gender,
-          MedicalFact: medicalFact
+      setTimeout(async () => {
+        let textPath: string = "/Users/shugefan/Desktop/OCR-web/backend/src/ConvertedF"; 
+        let json_object = {};
+        try {
+          const data = fileSys.readFileSync(textPath, 'utf8');
+          let phoneNumber = extract.extractPhoneNumber(data);
+          let name = extract.extractName(data); 
+          let address = await extract.extractAddress(data);
+          let email = extract.extractEmail(data); 
+          let gender = await extract.extractGender(data);
+          let medicalFact = await extract.extractSentences(data);
+          json_object = {
+            Phone: phoneNumber,
+            Name: name,
+            Address: address,
+            Email: email,
+            Gender: gender,
+            MedicalFact: medicalFact
+          }
+        } catch (err) {
+          console.error(err)
         }
-      } catch (err) {
-        console.error(err)
-      }
-      console.log("the backend is sending ", json_object);
-      res.send(json_object);
-      try {
-        fileSys.unlinkSync(imagePath);
-      } catch(err) {
-        console.error(err);
-      }
+        console.log("the backend is sending ", json_object);
+        res.send(json_object);
+        try {
+          fileSys.unlinkSync(imagePath);
+        } catch(err) {
+          console.error(err);
+        }
+      }, 3000);
     });
-  });
+  })   
 });
 
 // Receive the updated json objects from the front end
