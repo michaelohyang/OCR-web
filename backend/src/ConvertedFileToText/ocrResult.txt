@@ -17,41 +17,77 @@ City
 State/Province
 30318
 Postal / Zip Code
-Job Application
-Please complete the form below to apply a position with us.
-Name
-Josh
-Chen
-First name
-Last name
+jiaxuan@gmail.com
+61 Park Street, Camden, ME, 04843, USGRRS
+MEDICAL
+600 N. Jackson St, Suite 104
+Media, PA 19063
+P: 484.468.1299
+F: 484.468.1247
+mrr@rrsmedical.com
+AUTHORIZATION TO OBTAIN OR RELEASE MEDICAL RECORDS
+PATIENT INFORMATION
+Maiden/Alias
+Date of Birth
+Phone
+Email Josh example@gmail.com
+Patient's Name
 Address
-123
-v ust kidding st
-Street line
-Street line 2
-what's
-up
-GA
-City
-State/Province
-30318
-Postal / Zip Code
-Job Application
-Please complete the form below to apply a position with us.
-Name
-Josh
-Chen
-First name
-Last name
+Apt/Unit/Suite
+City, State,ZIP
+RELEASE INFORMATION FROM
+I authorize the release of information FROM:
+PHILADELPHIA
+HAND TO SHOULDER
+CENTER
+RELEASE INFORMATION TO
+I authorize the release of information TO:
+Facility/Company/Person
 Address
-123
-v ust kidding st
-Street line
-Street line 2
-what's
-up
-GA
-City
-State/Province
-30318
-Postal / Zip Code
+City, State,ZIP
+Phone
+Fax #
+Email
+DELIVERY METHOD
+O Electronic Access (preferred)
+Fax
+Paper-USPS Mail
+OCD-USPS Mail
+Note: if electronic access is checked, an email will be sent from info@rrsmedical.com. Please make sure to check your bulk/spam
+boxes. If Imaging Films is checked in the box below, the default delivery method is CD-USPS Mail, unless otherwise specified.
+Continuing Care
+Legal
+PURPOSE OF RELEASE
+Transfer of Care
+D Referral
+Insurance
+O Disability
+INFORMATION TO BE RELEASED
+O Personal
+O Other
+Dates of Service Requested:
+FROM
+TO
+0 Entire Chart
+Imaging Films
+0 Itemized Billing
+O Office Notes
+O Medications
+O Other
+DO
+Consults
+0 Immunizations
+:
+Lab Reports O Radiology Reports
+Operative Reports a Physical Therapy
+I authorize the release of information or references to the existence of and/or treatment for drug/alcohol abuse, mental health,
+sexually transmitted diseases, genetics, Hepatitis B or C, HIV/AIDS. This information will be released unless I indicate by checking
+below that I do not want such information released.
+O DO NOT RELEASE
+I authorize the disclosure of the health information for the above-named patient. This authorization is valid for 12 months from
+the date of signature. I understand that I may cancel this request by written notification, but that it will not affect any
+information released prior to notification of cancellation. I understand that the information used or disclosed may be subject to
+re-disclosure by the person or class of person or facility receiving it and would then no longer be protected by federal
+regulations. I understand that the medical provider by whom this authorization is furnished may not condition their treatment
+of me on whether or not I sign the authorization. There may be a charge for your records; please have facility discuss pricing as
+indicated.
