@@ -17,6 +17,7 @@ class ConfirmDigitalForm extends Component<any, any> {
       attributeInputCount: 0,
       projectAttributeCount: 0,
       projectID: this.props.location.state["projectID"],
+      infoJSONobject: {},
     };
 
     this.getJson = this.getJson.bind(this);
@@ -24,6 +25,8 @@ class ConfirmDigitalForm extends Component<any, any> {
     this.addInput = this.addInput.bind(this);
     this.deleteInput = this.deleteInput.bind(this);
     this.addAttributeToProject = this.addAttributeToProject.bind(this);
+    this.deleteAttributeFromProject =
+      this.deleteAttributeFromProject.bind(this);
     this.submit = this.submit.bind(this);
   }
 
@@ -46,32 +49,42 @@ class ConfirmDigitalForm extends Component<any, any> {
   mountProjectInfo = () => {
     let fetchedAttributes = new Map();
     let tempCount = 0;
+    let mapLength = 0;
+    let json_object = this.state.infoJSONobject;
     this.getJson().then((val: any) => {
+      mapLength = Object.keys(val).length;
       Object.keys(val).map((key: any) => {
+        json_object[key] = val[key];
         fetchedAttributes.set(
           tempCount,
-          <div className="viewProjectPortContainer">
+          <div className="viewProjectPortContainer" id={"project" + tempCount}>
             <div className="viewProjectPortTextContainer">
-              <p key={"key" + tempCount.toString()}>
+              <p key={"key:" + tempCount.toString()}>
                 {key} : {val[key]}
               </p>
             </div>
             <div className="viewProjectPortDeleteButtonContainer">
               <div
                 className="deleteAttributeInput"
-                onClick={() => this.deleteAttributeFromProject(tempCount)}
+                onClick={(e: any) => {
+                  this.deleteAttributeFromProject(e);
+                }}
+                id={tempCount.toString()}
               ></div>
             </div>
           </div>
         );
         tempCount += 1;
       });
+      this.setState(
+        {
+          availableProjectAttribute: fetchedAttributes,
+          projectAttributeCount: mapLength,
+          infoJSONobject: json_object,
+        },
+        () => setTimeout(() => this.forceUpdate(), 3000)
+      );
     });
-
-    this.setState({
-      availableProjectAttribute: fetchedAttributes,
-      projectAttributeCount: tempCount,
-    }, () => setTimeout(() => this.forceUpdate(), 3000));
   };
 
   addAttributeToProject = (inputCount: number) => {
@@ -82,23 +95,27 @@ class ConfirmDigitalForm extends Component<any, any> {
       "added_value" + inputCount.toString()
     ) as HTMLInputElement;
     let tempProjectAttributeCount = this.state.projectAttributeCount;
+    console.log(tempProjectAttributeCount);
     let tempAvailableProjectAttributes = this.state.availableProjectAttribute;
     let tempAttributeEntry = this.state.newAttributeEntry;
+    let json_object = this.state.infoJSONobject;
+    json_object[attributeID.value] = attributeValue.value;
     tempAttributeEntry.delete(inputCount);
     tempAvailableProjectAttributes.set(
       tempProjectAttributeCount,
       <div className="viewProjectPortContainer">
         <div className="viewProjectPortTextContainer">
-          <p key={"key" + tempProjectAttributeCount.toString()}>
+          <p key={"key:" + tempProjectAttributeCount.toString()}>
             {attributeID.value} : {attributeValue.value}
           </p>
         </div>
         <div className="viewProjectPortDeleteButtonContainer">
           <div
             className="deleteAttributeInput"
-            onClick={() =>
-              this.deleteAttributeFromProject(tempProjectAttributeCount)
-            }
+            onClick={(e: any) => {
+              this.deleteAttributeFromProject(e);
+            }}
+            id={tempProjectAttributeCount.toString()}
           ></div>
         </div>
       </div>
@@ -110,34 +127,27 @@ class ConfirmDigitalForm extends Component<any, any> {
       availableProjectAttribute: tempAvailableProjectAttributes,
       newAttributeEntry: tempAttributeEntry,
       projectAttributeCount: tempProjectAttributeCount + 1,
+      infoJSONobject: json_object,
     });
   };
 
-  deleteAttributeFromProject = (projectCount: number) => {
+  deleteAttributeFromProject = (e: any) => {
+    let projectID = parseInt(e.target.id);
     let tempAvailableProjectAttributes = this.state.availableProjectAttribute;
-    tempAvailableProjectAttributes.delete(projectCount);
-    console.log("The project count is ", projectCount);
-    console.log("The tempAvailableProjectAttributes is ", tempAvailableProjectAttributes);
-    this.setState({
-      availableProjectAttribute: tempAvailableProjectAttributes,
-      projectAttributeCount: this.state.projectAttributeCount - 1,
-    });
-  };
+    tempAvailableProjectAttributes.delete(projectID);
 
-  submit = () => {
-    // let json_object = JSON.stringify(this.state.availableProjectAttribute);
-    let json_object = {};
-    // this.state.availableProjectAttribute.forEach((value: any, key: any) => {
-    //   json_object[key] = value;
-    // });
-    const result = Object.fromEntries(this.state.availableProjectAttribute);
-    console.log("Result is ", result);
-    axios.post(
-      `http://localhost:8080/confirmForm?id=${this.state.projectID}`,
-      result
+    this.setState(
+      {
+        availableProjectAttribute: tempAvailableProjectAttributes,
+        projectAttributeCount: this.state.projectAttributeCount,
+      },
+      () =>
+        console.log(
+          "this is after Deletion: ",
+          this.state.projectAttributeCount
+        )
     );
-    alert("Sucessful upload digital form!");
-  }
+  };
 
   addInput = () => {
     const tempCount = this.state.attributeInputCount;
@@ -195,6 +205,15 @@ class ConfirmDigitalForm extends Component<any, any> {
     });
   };
 
+  submit = () => {
+    let json_object = this.state.infoJSONobject;
+    axios.post(
+      `http://localhost:8080/confirmForm?id=${this.state.projectID}`,
+      json_object
+    );
+    alert("Sucessful upload digital form!");
+  };
+
   render() {
     setTimeout(() => this.forceUpdate(), 10000);
     return (
@@ -218,8 +237,12 @@ class ConfirmDigitalForm extends Component<any, any> {
             </div>
           </div>
           <div className="confirmDigitalFormLowerViewPortContainer">
-            <Link to= "/">           
-                <ChakraButton txtname={"Submit"} marginTop="1em" onClickFunction={() => this.submit()}/>
+            <Link to="/">
+              <ChakraButton
+                txtname={"Submit"}
+                marginTop="1em"
+                onClickFunction={() => this.submit()}
+              />
             </Link>
           </div>
         </div>
