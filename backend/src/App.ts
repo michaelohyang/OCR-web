@@ -62,9 +62,9 @@ app.get('/form', async (req: any, res: any) => {
 app.post('/confirmForm', async (req: any, res: any) => {
   var finalformInJSON = req.body;
   var project_id = req.query.id;
-  let forms = await database.getJsonData(`Project/${project_id}/forms`);
-  console.log(forms);
-  forms.push(finalformInJSON);
+  console.log(`Project/${project_id}/forms`);
+  console.log("the final json object is ", finalformInJSON);
+  database.writeNewPost(`Project/${project_id}/forms`, uuidv4(), finalformInJSON);
 });
 
 // Send the new project information to the backend database
