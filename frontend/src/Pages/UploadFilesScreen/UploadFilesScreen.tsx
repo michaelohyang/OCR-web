@@ -29,12 +29,6 @@ class UploadFilesScreen extends Component<any, any> {
     this.uploadFilesFunction = this.uploadFilesFunction.bind(this);
   }
 
-  // componentDidMount() {
-  //   const location = this.props.location;
-  //   console.log(location);
-  //   // this.setState({ projectID: this.props.location.state.projectID });
-  // }
-
   uploadFilesFunction = () => {
     let formDataCopy = new FormData();
     for (let i = 0; i < this.state.arrayOfFiles.length; i++) {

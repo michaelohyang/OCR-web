@@ -23,9 +23,6 @@ class ExistDigitalForm extends Component<any, any> {
     this.setState({
       selectedProjectId: this.state.selectedProjectId,
     });
-    // console.log(this.state.selectedProjectId);
-    // this.getJson();
-    // this.pushExistForm(this.state.rawJson);
     this.getJson = this.getJson.bind(this);
     this.pushExistForm = this.pushExistForm.bind(this);
     this.mountInfo = this.mountInfo.bind(this);
@@ -77,9 +74,7 @@ class ExistDigitalForm extends Component<any, any> {
       }
       this.state.forms.push(
         <div key={1000 + p} className="existinfo">
-          {/* <Center bg="tomato" h="100px" w="200px" color="white"> */}
           {eachform}
-          {/* </Center>  */}
         </div>
       );
     }
@@ -95,9 +90,6 @@ class ExistDigitalForm extends Component<any, any> {
             {this.state.forms}
           </div>
           <div className="existsubmitbuttom">
-            {/* <Link to={{pathname: "/existDigitalForm", 
-                      state: {projectID: props.k}}} 
-                      onClick={() => props.selectProject(props.k)}> */}
             <Link to="/">
               <ChakraButton txtname={"return to project main"} />
             </Link>
