@@ -10,7 +10,7 @@ const getOCRtxt = async (filePath: String) => {
   const fullTextAnnotation = result.fullTextAnnotation;
   // TODO: modify path as necessary
 
-  var logger = fs.createWriteStream( "./src/ConvertedFileToText/ocrResult.txt", {
+  var logger = fs.createWriteStream( "../ConvertedFileToText/ocrResult.txt", {
     flags: "a",
   });
   logger.write(fullTextAnnotation.text);
@@ -20,3 +20,5 @@ const getOCRtxt = async (filePath: String) => {
 module.exports = {
   getOCRtxt
 };
+
+getOCRtxt("../test.png")
