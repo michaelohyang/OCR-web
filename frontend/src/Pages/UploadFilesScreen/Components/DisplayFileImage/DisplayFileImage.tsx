@@ -8,11 +8,11 @@ interface DisplayFileImageProps {
 
 export default function DisplayFileImage(props: DisplayFileImageProps) {
   const [defaultImages, setDefaultImages] = useState<boolean>(true);
+  const [clickedImage, setClickedImage] = useState<any>();
 
-  let showExpandedImage = (url: any, e: any) => {
-    console.log(url);
-    console.log(e);
+  let showExpandedImage = (image: any) => {
     if (defaultImages === true) {
+      setClickedImage(image);
       setDefaultImages(false);
     } else {
       setDefaultImages(true);
@@ -21,29 +21,29 @@ export default function DisplayFileImage(props: DisplayFileImageProps) {
 
   return (
     <div>
-      {(props.fileArray || []).map((url: any, id: any) =>
+      {(props.fileArray || []).map((image: any, id: any) =>
         defaultImages ? (
-          <div className="resizeImage">
+          <div className="resizeImage" key={id}>
             <img
               className="picture"
-              src={url.image}
+              src={URL.createObjectURL(image)}
               alt="medicalImage"
-              onClick={(e) => showExpandedImage(url, e)}
+              onClick={(e) => showExpandedImage(image)}
             />
             <div className="deleteBtn">
-              <button onClick={() => props.removeImage(url.id)}>&times;</button>
+              <button onClick={() => props.removeImage(id)}>&times;</button>
             </div>
           </div>
         ) : (
-          <div id="myModal" className="modal">
+          <div id="myModal" className="modal" key={id}>
             <span
               className="closeExpandedImage"
-              onClick={(e) => showExpandedImage(url, e)}
+              onClick={(e) => showExpandedImage(image)}
             >
               &times;
             </span>
             <img
-              src={url.image}
+              src={URL.createObjectURL(clickedImage)}
               className="modal-content"
               alt="expandedImage"
             />

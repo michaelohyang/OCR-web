@@ -5,7 +5,6 @@
   display: inline-flex;
   justify-content: space-evenly;
   position: relative;
-  /* margin-bottom: 2em; */
   margin: 0.5em;
 }
 
@@ -42,7 +41,7 @@
 .modal {
   display: block; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 11; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
@@ -58,7 +57,7 @@
   margin: auto;
   display: block;
   width: 80%;
-  max-width: 50em;
+  max-width: 40em;
 }
 
 @keyframes zoom {

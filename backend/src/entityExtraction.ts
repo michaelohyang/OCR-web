@@ -17,7 +17,6 @@ async function extractGender(firstName: string) {
 
 
 
-
 async function extractAddress(text: string) {
     let regex = new RegExp("[0-9]{1,3} .+, .+, [A-Z]{2} [0-9]{5}"); // full address with state and zip code
     let result = text.match(regex)
@@ -72,6 +71,7 @@ function extractName(text: string) {
     return doc.people().text()
 }
 
+
 async function extractSentences(text: string) {
 
     text = text.replace(/\n|\r/g, ". ")
@@ -102,6 +102,7 @@ async function extractSentences(text: string) {
         console.error(err)
     }
 })()
+
 
 module.exports = {
     extractAddress,
