@@ -30,19 +30,23 @@ app.get('/form', async (req: any, res: any) => {
     files.map(async (file: any) => {
       let imagePath: string = "./uploads/" + file;
       await ocrScanner.getOCRtxt(imagePath);
-      let textPath: string = "./src/ConvertedFileToText/ocrResult.txt"; 
+      let textPath: string = "C:/Users/ohyan/Documents/GATech/CS 3312/OCR-web/OCR-web/backend/src/ConvertedFileToText/ocrResult.txt"; 
       let json_object = {};
       try {
-        const data = fileSys.readFileSync(textPath, 'utf8')
-        let phoneNumber = extract.extractPhoneNumber(data)
-        let name = extract.extractName(data) 
-        let address = await extract.extractAddress(data)
-        let email = extract.extractEmail(data) 
+        const data = fileSys.readFileSync(textPath, 'utf8');
+        let phoneNumber = extract.extractPhoneNumber(data);
+        let name = extract.extractName(data); 
+        let address = await extract.extractAddress(data);
+        let email = extract.extractEmail(data); 
+        let gender = await extract.extractGender(data);
+        let medicalFact = await extract.extractSentences(data);
         json_object = {
-          phoneNumber: phoneNumber,
-          name: name,
-          address: address,
-          email: email
+          Phone: phoneNumber,
+          Name: name,
+          Address: address,
+          Email: email,
+          Gender: gender,
+          MedicalFact: medicalFact
         }
       } catch (err) {
         console.error(err)

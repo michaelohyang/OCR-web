@@ -34,7 +34,7 @@ class ViewProjectPage extends Component<any, any> {
               projects={projects}
               k={k}
               removeProject={this.removeProject}
-              selectProject = {this.selectProject}
+              selectProject={this.selectProject}
             />
           </div>
         );
@@ -58,41 +58,11 @@ class ViewProjectPage extends Component<any, any> {
   };
 
   selectProject = (projectId: any) => {
-    <ExistDigitalForm
-    selectedProjectId = {projectId}
-    />
-    console.log(projectId);
+    <ExistDigitalForm selectedProjectId={projectId} />;
     this.setState({
-      selectedProjectId: projectId
-    }, () => {
-      console.log(projectId);
-    //   <ExistDigitalForm
-    //   selectedProjectId = {this.state.selectedProjectId}
-    // />
-    console.log(projectId);
-    const t = this.state.selectedProjectId;
-    console.log(t);
+      selectedProjectId: projectId,
     });
-    // <ExistDigitalForm
-    //   selectedProjectId = {this.state.selectedProjectId}
-    // />
-  }
-
-  // postSelectedProject = (id: any) => {
-  //   console.log("selected project: " + id);
-  //   this.setState({
-  //     selectedProjectid: id,
-  //   });
-  //   axios
-  //     .post("http://localhost:8080/projectMain", this.state.selectedProjectId)
-  //     .then((response) => console.log(response.data));
-  // };
-
-  // postProject = () => {
-  //   axios
-  //     .post("http://localhost:8080/projectMain", this.state.projects)
-  //     .then((response) => console.log(response.data));
-  // };
+  };
 
   getJson = () => {
     axios.get("http://localhost:8080/projects").then((response) => {
