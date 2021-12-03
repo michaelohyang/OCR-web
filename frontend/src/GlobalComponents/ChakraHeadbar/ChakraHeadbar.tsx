@@ -6,7 +6,7 @@ import { Text } from "@chakra-ui/react";
 export default class ChakraHeadbar extends React.Component {
   render() {
     return (
-      <div className="container">
+      <div className="headBarContainer">
         <div className="imgOnLeft">
           <LogoImage />
         </div>
