@@ -17,11 +17,15 @@ class ExistDigitalForm extends Component<any, any> {
           id: "1",
           "First Name": "John",
           "Last Name": "Johnson",
+          "hello word": "hello earth"
         },
         {
           id: "2",
           FirstName: "Sarah",
           LastName: "Huang",
+          "First Name": "John",
+          "Last Name": "Johnson",
+          "hello word": "hello earth"
         },
       ],
       form: [],
@@ -60,16 +64,16 @@ class ExistDigitalForm extends Component<any, any> {
         const k = key;
         eachform.push(
           <div key={countOfRows}>
-            <HStack className="textdiv">
-              <div className="firstpart">{k}</div>
-              <div className="secondpart">{rawJson[p][k]}</div>
+            <HStack >
+              <div>{k}</div>
+              <div>{rawJson[p][k]}</div>
             </HStack>
           </div>
         );
         countOfRows++;
       }
       this.state.forms.push(
-        <div key={1000 + p}>
+        <div key={1000 + p} className="existinfo">
           {/* <Center bg="tomato" h="100px" w="200px" color="white"> */}
           {eachform}
           {/* </Center>  */}
@@ -80,27 +84,29 @@ class ExistDigitalForm extends Component<any, any> {
 
   render() {
     return (
-      <div className="overallbg">
+      <div className="existbodyContainer">
         <ChakraHeadbar />
-        <Stack direction={"row"} className="projectBox" alignItems="center">
-          {this.state.forms}
-        </Stack>
-        <div className="submitbuttom">
-          {/* <Link to={{pathname: "/existDigitalForm", 
-                    state: {projectID: props.k}}} 
-                    onClick={() => props.selectProject(props.k)}> */}
-          <Link to="/">
-            <ChakraButton txtname={"return to project main"} />
-          </Link>
-          <br />
-          <Link
-            to={{
-              pathname: "/upload",
-              state: { projectID: this.state.selectedProjectId["projectID"] },
-            }}
-          >
-            <ChakraButton txtname={"Add New Medical Record"} />
-          </Link>
+        <div className="existmainbody">
+          <div className="extraformstyle">
+            {this.state.forms}
+          </div>
+          <div className="existsubmitbuttom">
+            {/* <Link to={{pathname: "/existDigitalForm", 
+                      state: {projectID: props.k}}} 
+                      onClick={() => props.selectProject(props.k)}> */}
+            <Link to="/">
+              <ChakraButton txtname={"return to project main"} />
+            </Link>
+            <br />
+            <Link
+              to={{
+                pathname: "/upload",
+                state: { projectID: this.state.selectedProjectId["projectID"] },
+              }}
+            >
+              <ChakraButton txtname={"Add New Medical Record"} />
+            </Link>
+          </div>
         </div>
       </div>
     );

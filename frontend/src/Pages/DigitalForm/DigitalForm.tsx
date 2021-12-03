@@ -42,31 +42,35 @@ class digitalForm extends Component<any, any> {
       );
     }
     return (
-      <div className="overallbg">
-        <ChakraHeadbar />
-        Digital form
-        <div>{rows}</div>
-        <Link
-          to={{
-            pathname: "/confirm",
-            state: { projectID: this.state.selectedProjectId["projectID"] },
-          }}
-        >
-          <div className="submitbuttom">
-            <ChakraButton
-              txtname={"Back"}
-              // onClickFunc={() => this.submit(1234)}
-            />
+      <div className="bodyContainer">
+        <div className="mainbody">
+          <ChakraHeadbar />
+          <div className="headertext">Digital form</div>
+          <div>{rows}</div>
+          <div className="digitalFormsubmitbuttom">
+            <Link
+              to={{
+                pathname: "/confirm",
+                state: { projectID: this.state.selectedProjectId["projectID"] },
+              }}
+            >
+              <div className="submitbuttom">
+                <ChakraButton
+                  txtname={"Back"}
+                  // onClickFunc={() => this.submit(1234)}
+                />
+              </div>
+            </Link>
+            <Link to={{ pathname: "/" }}>
+              <div className="submitbuttom">
+                <ChakraButton
+                  txtname={"Submit"}
+                  onClickFunction={() => this.submit()}
+                />
+              </div>
+            </Link>
           </div>
-        </Link>
-        <Link to={{ pathname: "/" }}>
-          <div className="submitbuttom">
-            <ChakraButton
-              txtname={"Submit"}
-              onClickFunction={() => this.submit()}
-            />
-          </div>
-        </Link>
+        </div>
       </div>
     );
   }
