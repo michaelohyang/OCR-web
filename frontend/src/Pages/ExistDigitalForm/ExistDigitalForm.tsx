@@ -110,7 +110,6 @@ class ExistDigitalForm extends Component<any, any> {
             >
               <ChakraButton txtname={"Add New Medical Record"} />
             </Link>
-            <ChakraButton txtname={"test"} />
           </div>
         </div>
       </div>
