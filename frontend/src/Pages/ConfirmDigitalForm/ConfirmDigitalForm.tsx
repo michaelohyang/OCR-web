@@ -8,15 +8,22 @@ import "./ConfirmDigitalForm.css";
 import * as React from "react";
 
 class ConfirmDigitalForm extends Component<any, any> {
+  objectRef: React.RefObject<HTMLDivElement>;
   constructor(props: any) {
     super(props);
+    this.objectRef = React.createRef();
     this.state = {
-      availableProjectAttribute: [],
+      availableProjectAttribute: new Map(),
+      newAttributeEntry: new Map(),
+      attributeInputCount: 0,
+      projectAttributeCount: 0,
     };
 
     this.getJson = this.getJson.bind(this);
     this.mountProjectInfo = this.mountProjectInfo.bind(this);
-    this.addAttributeInput = this.addAttributeInput.bind(this);
+    this.addInput = this.addInput.bind(this);
+    this.deleteInput = this.deleteInput.bind(this);
+    this.addAttributeToProject = this.addAttributeToProject.bind(this);
   }
 
   componentWillMount() {
@@ -26,33 +33,152 @@ class ConfirmDigitalForm extends Component<any, any> {
   getJson = () => {
     return new Promise((resolve, reject) =>
       axios.get("http://localhost:8080/form").then((response) => {
-        resolve(response.data);
+        try {
+          resolve(response.data);
+        } catch (err) {
+          reject(err);
+        }
       })
     );
   };
 
   mountProjectInfo = () => {
-    let fetchedAttributes: any[] = [];
+    let fetchedAttributes = new Map();
+    let tempCount = 0;
     this.getJson().then((val: any) => {
-      console.log(val);
       Object.keys(val).map((key: any) => {
-        fetchedAttributes.push(
-          <HStack>
-            <p className="viewProjectPortText">
-              {key} : {val[key]}
-            </p>
-          </HStack>
+        fetchedAttributes.set(
+          tempCount,
+          <div className="viewProjectPortContainer">
+            <div className="viewProjectPortTextContainer">
+              <p key={"key" + tempCount.toString()}>
+                {key} : {val[key]}
+              </p>
+            </div>
+            <div className="viewProjectPortDeleteButtonContainer">
+              <div
+                className="deleteAttributeInput"
+                onClick={() => this.deleteAttributeFromProject(tempCount)}
+              ></div>
+            </div>
+          </div>
         );
+        tempCount += 1;
       });
     });
 
-    this.setState({ availableProjectAttribute: fetchedAttributes });
+    this.setState({
+      availableProjectAttribute: fetchedAttributes,
+      projectAttributeCount: tempCount,
+    });
   };
 
-  addAttributeInput = () => {};
+  addAttributeToProject = (inputCount: number) => {
+    const attributeID = document.getElementById(
+      "added_attribute" + inputCount.toString()
+    ) as HTMLInputElement;
+    const attributeValue = document.getElementById(
+      "added_value" + inputCount.toString()
+    ) as HTMLInputElement;
+    let tempProjectAttributeCount = this.state.projectAttributeCount;
+    let tempAvailableProjectAttributes = this.state.availableProjectAttribute;
+    let tempAttributeEntry = this.state.newAttributeEntry;
+    tempAttributeEntry.delete(inputCount);
+    tempAvailableProjectAttributes.set(
+      tempProjectAttributeCount,
+      <div className="viewProjectPortContainer">
+        <div className="viewProjectPortTextContainer">
+          <p key={"key" + tempProjectAttributeCount.toString()}>
+            {attributeID.value} : {attributeValue.value}
+          </p>
+        </div>
+        <div className="viewProjectPortDeleteButtonContainer">
+          <div
+            className="deleteAttributeInput"
+            onClick={() =>
+              this.deleteAttributeFromProject(tempProjectAttributeCount)
+            }
+          ></div>
+        </div>
+      </div>
+    );
+    console.log(tempAvailableProjectAttributes);
+
+    this.setState({
+      attributeInputCount: this.state.attributeInputCount - 1,
+      availableProjectAttribute: tempAvailableProjectAttributes,
+      newAttributeEntry: tempAttributeEntry,
+      projectAttributeCount: tempProjectAttributeCount + 1,
+    });
+  };
+
+  deleteAttributeFromProject = (projectCount: number) => {
+    let tempAvailableProjectAttributes = this.state.availableProjectAttribute;
+    tempAvailableProjectAttributes.delete(projectCount);
+    this.setState({
+      availableProjectAttribute: tempAvailableProjectAttributes,
+      projectAttributeCount: this.state.projectAttributeCount - 1,
+    });
+  };
+
+  addInput = () => {
+    const tempCount = this.state.attributeInputCount;
+    console.log(tempCount);
+    const newID = "added_attribute" + tempCount.toString();
+    const newValue = "added_value" + tempCount.toString();
+    let tempAttributeEntry = this.state.newAttributeEntry;
+    tempAttributeEntry.set(
+      tempCount,
+      <div id={tempCount} key={tempCount} className="addedAttributeContainer">
+        <div
+          id={tempCount}
+          key={tempCount}
+          className="addedAttributeInnerBoxContainer"
+          ref={this.objectRef}
+        >
+          <input
+            className="addedAttributeIDBox"
+            id={newID}
+            type="text"
+            placeholder={"Attribute"}
+            defaultValue=""
+          ></input>
+          :
+          <input
+            className="addedAttributeIDBox"
+            id={newValue}
+            type="text"
+            placeholder="Content"
+            defaultValue=""
+          ></input>
+          <div
+            className="addMoreAttributeInput"
+            onClick={() => this.addAttributeToProject(tempCount)}
+          ></div>
+          <div
+            className="deleteAttributeInput"
+            onClick={() => this.deleteInput(tempCount)}
+          ></div>
+        </div>
+      </div>
+    );
+    this.setState({
+      attributeInputCount: tempCount + 1,
+      newAttributeEntry: tempAttributeEntry,
+    });
+  };
+
+  deleteInput = (count: any) => {
+    let tempAttributeEntry = this.state.newAttributeEntry;
+    tempAttributeEntry.delete(count);
+    this.setState({
+      newAttributeEntry: tempAttributeEntry,
+      attributeInputCount: this.state.attributeInputCount - 1,
+    });
+  };
 
   render() {
-    setTimeout(() => this.forceUpdate(), 3000);
+    // setTimeout(() => this.forceUpdate(), 7000);
 
     return (
       <div className="confirmDigitalFormScreenContainer">
@@ -61,30 +187,20 @@ class ConfirmDigitalForm extends Component<any, any> {
           <div className="confirmDigitalFormUpperViewPortContainer">
             <div className="confirmDigitalFormViewProjectContainer">
               <div className="confirmDigitalFormAttributeDisplay">
-                {this.state.availableProjectAttribute}
+                {Array.from(this.state.availableProjectAttribute.values())}
               </div>
             </div>
             <div className="confirmDigitalFormAddAttributesContainer">
-              <div>{}</div>
+              <div>{Array.from(this.state.newAttributeEntry.values())}</div>
               <div className="confirmDigitalFormAddAttributeButton">
                 <ChakraButton
                   txtname={"Add Attribute"}
-                  onClickFunction={this.addAttributeInput}
+                  onClickFunction={this.addInput}
                 />
               </div>
             </div>
           </div>
           <div className="confirmDigitalFormLowerViewPortContainer">
-            {/* <Link
-              to={{
-                pathname: "/upload",
-                state: {
-                  projectID: this.state.selectedProjectId["projectID"],
-                },
-              }}
-            > */}
-            <ChakraButton txtname={"Add Attribute"} />
-            {/* </Link> */}
             {/* <Link
               to={{
                 pathname: "/digitalForm",
@@ -94,7 +210,7 @@ class ConfirmDigitalForm extends Component<any, any> {
                 },
               }}
             > */}
-            <ChakraButton txtname={"Submit"} />
+            <ChakraButton txtname={"Submit"} marginTop="1em" />
             {/* </Link> */}
           </div>
         </div>

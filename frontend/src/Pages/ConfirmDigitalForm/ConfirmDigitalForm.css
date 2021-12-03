@@ -1,135 +1,3 @@
-/* this is style for textarea */
-.textarea {
-  /* background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);*/
-  background: #e6e7e8;
-  font-family: monospace;
-  font-weight: bolder;
-  border-radius: 0.6em;
-  border-width: 0.05em;
-  height: 3.5em;
-  border-color: blueviolet;
-  box-shadow: 1px 1px #b0edf1;
-  margin-right: 1em;
-}
-/* this is the style for whole div of information can be deleted */
-.textdiv {
-  margin-top: 1em;
-  margin-bottom: 1em;
-  column-gap: 0.1em;
-  padding-bottom: 0.2em;
-}
-
-/* left part of semicolomn */
-.firstpart {
-  padding-left: 1.5em;
-  width: 20%;
-  text-align: right;
-}
-
-/* textarea div */
-.secondpart {
-  padding-left: 0em;
-  height: auto;
-}
-
-/* this is the style for poped overall div if add attribute clicked */
-.addattrbox {
-  display: flex;
-  justify-content: center;
-  background: transparent;
-  align-items: center;
-  flex-wrap: wrap;
-  column-gap: 1em;
-  margin-top: 0.3em;
-}
-
-/* this is the style for poped text area if add attribute clicked */
-.addattrtext {
-  background: whitesmoke;
-  border-radius: 0.2em;
-  border-width: 0.05em;
-  border-color: grey;
-  box-shadow: 1px 1px #888888;
-}
-
-/* this is the style for row position */
-.rowdistance {
-  position: relative;
-  top: 10%;
-}
-
-/* add attr button */
-.plus {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  background: black;
-}
-.plus:before,
-.plus:after {
-  content: "";
-  position: absolute;
-  background: #fff;
-}
-.plus:before {
-  left: 50%;
-  top: 4px;
-  bottom: 4px;
-  width: 2px;
-  transform: translateX(-50%);
-}
-.plus:after {
-  top: 50%;
-  left: 4px;
-  right: 4px;
-  height: 2px;
-  transform: translateY(-50%);
-}
-.plus:hover {
-  background-color: transparent;
-}
-.radius {
-  border-radius: 50%;
-}
-
-/* minus attr button */
-.minus {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  background: black;
-}
-.minus:before,
-.minus:after {
-  content: "";
-  position: absolute;
-  background: #fff;
-}
-.minus:before {
-  top: 50%;
-  left: 4px;
-  right: 4px;
-  height: 2px;
-  transform: translateY(-50%);
-}
-.minus:hover {
-  background-color: transparent;
-}
-
-/* the div contain attribute, attribute description, plus and minus buttons*/
-.addattrMainDiv {
-  margin-top: 1em;
-}
-
-.projsecondpart {
-  height: auto;
-  padding-left: 1em;
-}
-
-/* --------------------------------------------------------------------------
------------------------------------------------------------------------------
------------------------------------------------------------------------------*/
-
 /* this is the style for rest space of background */
 .confirmDigitalFormScreenContainer {
   height: 100vh;
@@ -166,7 +34,7 @@
 /* each row pushed div css */
 .confirmDigitalFormViewProjectContainer {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   background-color: white;
   width: 33%;
   margin-top: 3em;
@@ -180,13 +48,25 @@
 .confirmDigitalFormAttributeDisplay {
   display: flex;
   flex-direction: column;
-  /* margin-left: 10em;
-  margin-right: 10em; */
 }
 
-.viewProjectPortText {
+.viewProjectPortContainer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.viewProjectPortTextContainer {
+  margin-top: 0.3em;
   font-size: large;
   font-weight: bold;
+  margin-left: 1.5em;
+  max-width: 18em;
+  overflow-wrap: break-word;
+}
+
+.viewProjectPortDeleteButtonContainer {
+  margin-left: 25em;
+  position: absolute;
 }
 
 /* the div contain all elements except rows headbar and submit button */
@@ -205,4 +85,86 @@
   background: transparent;
   justify-content: center;
   align-items: center;
+}
+
+/* the div contain attribute, attribute description, plus and minus buttons*/
+.addedAttributeContainer {
+  margin-top: 1em;
+}
+
+/* this is the style for poped overall div if add attribute clicked */
+.addedAttributeInnerBoxContainer {
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 1em;
+  margin-top: 0.3em;
+}
+
+/* this is the style for poped text area if add attribute clicked */
+.addedAttributeIDBox {
+  background: whitesmoke;
+  border-radius: 0.2em;
+  border-width: 0.05em;
+  border-color: grey;
+  box-shadow: 1px 1px #888888;
+}
+
+/* add attr button */
+.addMoreAttributeInput {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: black;
+  border-radius: 1em;
+}
+.addMoreAttributeInput:before,
+.addMoreAttributeInput:after {
+  content: "";
+  position: absolute;
+  background: #fff;
+}
+.addMoreAttributeInput:before {
+  left: 50%;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  transform: translateX(-50%);
+}
+.addMoreAttributeInput:after {
+  top: 50%;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  transform: translateY(-50%);
+}
+.addMoreAttributeInput:hover {
+  opacity: 70%;
+}
+
+/* minus attr button */
+.deleteAttributeInput {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: black;
+  border-radius: 1em;
+}
+.deleteAttributeInput:before,
+.deleteAttributeInput:after {
+  content: "";
+  position: absolute;
+  background: #fff;
+}
+.deleteAttributeInput:before {
+  top: 50%;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  transform: translateY(-50%);
+}
+.deleteAttributeInput:hover {
+  opacity: 70%;
 }
