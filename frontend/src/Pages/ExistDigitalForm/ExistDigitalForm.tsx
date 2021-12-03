@@ -65,9 +65,9 @@ class ExistDigitalForm extends Component<any, any> {
         console.log(key + ": " + rawJson[patient][key]);
         const k = key;
         eachform.push(
-          <div key={countOfRows}>
-            <HStack>
-              <div>{k}</div>
+          <div key={countOfRows} className="existinfo">
+            <HStack overflowX="auto">
+              <div className="textdiv1">{k}:</div>
               <div>{rawJson[p][k]}</div>
             </HStack>
           </div>
@@ -75,7 +75,7 @@ class ExistDigitalForm extends Component<any, any> {
         countOfRows++;
       }
       this.state.forms.push(
-        <div key={1000 + p} className="existinfo">
+        <div key={1000 + p}>
           {eachform}
         </div>
       );
