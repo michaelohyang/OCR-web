@@ -24,6 +24,7 @@ class ConfirmDigitalForm extends Component<any, any> {
     this.addInput = this.addInput.bind(this);
     this.deleteInput = this.deleteInput.bind(this);
     this.addAttributeToProject = this.addAttributeToProject.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   componentWillMount() {
@@ -118,10 +119,30 @@ class ConfirmDigitalForm extends Component<any, any> {
   deleteAttributeFromProject = (projectCount: number) => {
     let tempAvailableProjectAttributes = this.state.availableProjectAttribute;
     tempAvailableProjectAttributes.delete(projectCount);
+    console.log("The project count is ", projectCount);
+    console.log(
+      "The tempAvailableProjectAttributes is ",
+      tempAvailableProjectAttributes
+    );
     this.setState({
       availableProjectAttribute: tempAvailableProjectAttributes,
       projectAttributeCount: this.state.projectAttributeCount - 1,
     });
+  };
+
+  submit = () => {
+    // let json_object = JSON.stringify(this.state.availableProjectAttribute);
+    let json_object = {};
+    // this.state.availableProjectAttribute.forEach((value: any, key: any) => {
+    //   json_object[key] = value;
+    // });
+    const result = Object.fromEntries(this.state.availableProjectAttribute);
+    console.log("Result is ", result);
+    axios.post(
+      `http://localhost:8080/confirmForm?id=${this.state.projectID}`,
+      result
+    );
+    alert("Sucessful upload digital form!");
   };
 
   addInput = () => {
@@ -181,6 +202,7 @@ class ConfirmDigitalForm extends Component<any, any> {
   };
 
   render() {
+    setTimeout(() => this.forceUpdate(), 10000);
     return (
       <div className="confirmDigitalFormScreenContainer">
         <ChakraHeadbar />
@@ -202,16 +224,12 @@ class ConfirmDigitalForm extends Component<any, any> {
             </div>
           </div>
           <div className="confirmDigitalFormLowerViewPortContainer">
-            <Link
-              to={{
-                pathname: "/digitalForm",
-                state: {
-                  form: this.state.availableProjectAttribute,
-                  projectID: this.state.projectID,
-                },
-              }}
-            >
-              <ChakraButton txtname={"Submit"} marginTop="1em" />
+            <Link to="/">
+              <ChakraButton
+                txtname={"Submit"}
+                marginTop="1em"
+                onClickFunction={() => this.submit()}
+              />
             </Link>
           </div>
         </div>
