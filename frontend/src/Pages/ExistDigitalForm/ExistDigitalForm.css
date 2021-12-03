@@ -33,6 +33,7 @@
   height: 25em;
   width: 20em;
   overflow-y: auto;
+  font-weight: bold;
 }
 .extraformstyle {
   margin-top: 2em;
