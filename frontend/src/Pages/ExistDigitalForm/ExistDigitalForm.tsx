@@ -6,7 +6,6 @@ import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./ExistDigitalForm.css";
 import { Link, withRouter } from "react-router-dom";
 
-
 class ExistDigitalForm extends Component<any, any> {
   // selectedProjectId: any;
   constructor(props: any) {
@@ -32,26 +31,29 @@ class ExistDigitalForm extends Component<any, any> {
     this.mountInfo();
   }
 
-  getJson = () => {return new Promise((resolve, reject) => {
-    axios
-      .get(
-        `http://localhost:8080/allForms?id=${this.state.selectedProjectId["projectID"]}`
-      )
-      .then((response) => {
-        try {
-          resolve(response.data);
-        }
-        catch(error){
-          reject(error);
-        }
-      });
-  })};
+  getJson = () => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(
+          `http://localhost:8080/allForms?id=${this.state.selectedProjectId["projectID"]}`
+        )
+        .then((response) => {
+          try {
+            resolve(response.data);
+          } catch (error) {
+            reject(error);
+          }
+        });
+    });
+  };
 
   mountInfo = () => {
-    this.getJson().then((val:any) => {
-      this.setState({rawJson : val}, () => this.pushExistForm(this.state.rawJson));
+    this.getJson().then((val: any) => {
+      this.setState({ rawJson: val }, () =>
+        this.pushExistForm(this.state.rawJson)
+      );
     });
-  }
+  };
 
   pushExistForm = (rawJson: any) => {
     var eachform: any[] = [];
@@ -64,7 +66,7 @@ class ExistDigitalForm extends Component<any, any> {
         const k = key;
         eachform.push(
           <div key={countOfRows}>
-            <HStack >
+            <HStack>
               <div>{k}</div>
               <div>{rawJson[p][k]}</div>
             </HStack>
@@ -78,20 +80,19 @@ class ExistDigitalForm extends Component<any, any> {
         </div>
       );
     }
-    setTimeout(() => this.forceUpdate(),3000);
+    setTimeout(() => this.forceUpdate(), 3000);
   };
 
   render() {
+    setTimeout(() => this.forceUpdate(), 8000);
     return (
       <div className="existbodyContainer">
         <ChakraHeadbar />
         <div className="existmainbody">
-          <div className="extraformstyle">
-            {this.state.forms}
-          </div>
+          <div className="extraformstyle">{this.state.forms}</div>
           <div className="existsubmitbuttom">
             <Link to="/">
-              <ChakraButton txtname={"return to project main"} />
+              <ChakraButton txtname={"Return to View Project Page"} />
             </Link>
             <br />
             <Link
