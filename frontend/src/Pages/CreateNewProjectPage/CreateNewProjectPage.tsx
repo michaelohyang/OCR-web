@@ -87,12 +87,15 @@ class Create_New_Project_Page extends Component<any, any> {
                 />
                 <span className="newProjectDescriptionText"></span>
               </div>
-              <label htmlFor="projects">Choose a priority:</label>
               <div className="newProjectDescriptionContainer">
-                <select name="priority" id="priority">
-                  <option value="high">high (red)</option>
-                  <option value="medium">medium (yellow)</option>
-                  <option value="low">low (green)</option>
+                <select
+                  name="priority"
+                  id="priority"
+                  className="prioritySelector"
+                >
+                  <option value="high">High (red)</option>
+                  <option value="medium">Medium (yellow)</option>
+                  <option value="low">Low (green)</option>
                 </select>
               </div>
               <div className="newProjectButtonsContainer">

@@ -1,7 +1,6 @@
 import { Box, Grid } from "@chakra-ui/layout";
 import axios from "axios";
 import { Component } from "react";
-import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import DisplayFileImage from "./Components/DisplayFileImage/DisplayFileImage";
 import "./UploadFilesScreen.css";
@@ -17,13 +16,11 @@ class UploadFilesScreen extends Component<any, any> {
       numberOfAddedFiles: 0,
       selectedProjectId: {},
     };
-    console.log(this.props.location.state);
     this.state.selectedProjectId["projectID"] =
       this.props.location.state["projectID"];
     this.setState({
       selectedProjectId: this.state.selectedProjectId,
     });
-    console.log(this.state.selectedProjectId);
     this.chooseFiles = this.chooseFiles.bind(this);
     this.removeImage = this.removeImage.bind(this);
     this.uploadFilesFunction = this.uploadFilesFunction.bind(this);
@@ -32,26 +29,18 @@ class UploadFilesScreen extends Component<any, any> {
   uploadFilesFunction = () => {
     let formDataCopy = new FormData();
     for (let i = 0; i < this.state.arrayOfFiles.length; i++) {
-      console.log(this.state.arrayOfFiles[i]);
       formDataCopy.append("medical", this.state.arrayOfFiles[i]);
     }
-    console.log(formDataCopy);
-    axios.post(
-      `http://localhost:8080/upload`,
-      formDataCopy
-    );
+    axios.post(`http://localhost:8080/upload`, formDataCopy);
     alert("Images Successfully Uploaded to The Database");
   };
 
   removeImage = (id: any) => {
-    console.log(id);
-    console.log(this.state.arrayOfFiles);
     let tempArrFilesFront = this.state.arrayOfFiles.slice(0, id);
     let tempArrFilesBack = this.state.arrayOfFiles.slice(
       id + 1,
       this.state.arrayOfFiles.length - 1
     );
-    console.log(tempArrFilesFront, tempArrFilesBack);
     this.setState({
       arrayOfFiles: tempArrFilesFront.concat(tempArrFilesBack),
     });
@@ -86,7 +75,6 @@ class UploadFilesScreen extends Component<any, any> {
   };
 
   render() {
-    console.log(this.state.arrayOfFiles);
     return this.state.arrayOfFiles.length !== 0 ? (
       <div className="uploadPageBodyContainer">
         <ChakraHeadbar />
@@ -113,7 +101,14 @@ class UploadFilesScreen extends Component<any, any> {
                     },
                   }}
                 >
-                  <ChakraButton txtname={"Back"} cssDesign={"uploadBtn"} />
+                  <Button
+                    marginRight="2.5em"
+                    _focus={{ outline: 0, boxShadow: "none" }}
+                    paddingLeft="2em"
+                    paddingRight="2em"
+                  >
+                    Back
+                  </Button>
                 </Link>
                 <label className={"chooseFileBtnContainer"}>
                   <input

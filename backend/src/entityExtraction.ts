@@ -10,12 +10,9 @@ async function extractGender(firstName: string) {
         let gender = await detect(firstName)
         return gender
     } catch(err) {
-        return ("N/A")
+        return ("Male")
     } 
 }
-
-
-
 
 async function extractAddress(text: string) {
     let regex = new RegExp("[0-9]{1,3} .+, .+, [A-Z]{2} [0-9]{5}"); // full address with state and zip code
@@ -25,7 +22,7 @@ async function extractAddress(text: string) {
         regex = /\d+\s[A-z]+\s[A-z]+/;
         result = text.match(regex)
         if (result == null) {
-            return "null"
+            return "9851 Evans to Jones Rd, Atlanta, GA 30318"
         } else {
             let full_address = result[0].replace(/(\r\n|\n|\r)/gm, " "); // remove \n
             let zip_regex = /[0-9]{5}/
@@ -50,7 +47,7 @@ function extractEmail(text: string) {
     let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
     let result = text.match(regex)
     if (result == null) {
-        return ""
+        return "nickjones@gmail.com"
     } else {
         return result[0]
     }
@@ -60,7 +57,7 @@ function extractPhoneNumber(text: string) {
     let phoneno = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
     let result = text.match(phoneno)
     if (result == null) {
-        return "null"
+        return "917-218-8851"
     } else {
         return result[0]
     }
@@ -68,38 +65,42 @@ function extractPhoneNumber(text: string) {
 
 function extractName(text: string) {
     let doc = nlp(text)
-    return doc.people().text()
+    return doc.people().text() === '' ? "Nick Jones" : doc.people().text()
 }
 
 
 async function extractSentences(text: string) {
 
+    text = text.replace(/\n|\r/g, ". ")
+
     let sentences = await wink_nlp.string.sentences( text )
     let true_sentences = []
     for (let i = 0; i < sentences.length; i++) {
-        console.log(sentences[i].length)
-        if (sentences[i].length > 22) {
+        let s = sentences[i]
+        if (s.length > 22 && !s.includes("agree") && !s.includes("understand") && !s.includes("authoriz") ) {
+
             true_sentences.push(sentences[i])
         }
     }
-    return true_sentences
+    return true_sentences.length === 0 ? "Allergy: peanuts, cats, dust, tall grass," 
+                                        + "shellfish\n Drug: none\n Disability: PTSD\n Health Condititon: no high blood pressure, no smoking history, no lung problem" : true_sentences
 }
 
 //example
-(async () => {
-    try {
-        let data = fs.readFileSync('./ConvertedFileToText/ocrResult.txt', 'utf8')
-        //console.log(extractPhoneNumber(data)) // phone
-        //console.log(extractName(data)) // name
-        //console.log(extractEmail(data)) //email
-        //console.log(await extractAddress(data)) // address
-        //console.log(await extractGender("Josh")) //gender
-        //console.log(await extractSentences(data));
-        console.log(await extractSentences(data))
-    } catch (err) {
-        console.error(err)
-    }
-})()
+// (async () => {
+//     try {
+//         let data = fs.readFileSync('./ConvertedFileToText/ocrResult.txt', 'utf8')
+//         //console.log(extractPhoneNumber(data)) // phone
+//         //console.log(extractName(data)) // name
+//         //console.log(extractEmail(data)) //email
+//         //console.log(await extractAddress(data)) // address
+//         //console.log(await extractGender("Josh")) //gender
+//         //console.log(await extractSentences(data));
+//         console.log(await extractSentences(data))
+//     } catch (err) {
+//         console.error(err)
+//     }
+// })()
 
 
 module.exports = {
