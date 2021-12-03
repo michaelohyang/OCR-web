@@ -11,7 +11,7 @@ const getOCRtxt = async (filePath: String) => {
   const fullTextAnnotation = result.fullTextAnnotation;
   // TODO: modify path as necessary
 
-  var logger = fs.createWriteStream( "C:/Users/ohyan/Documents/GATech/CS 3312/OCR-web/OCR-web/backend/src/ConvertedF", {
+  var logger = fs.createWriteStream( "/Users/shugefan/Desktop/OCR-web/backend/src/ConvertedF", {
     flags: "w",
   });
   logger.write(fullTextAnnotation.text);
