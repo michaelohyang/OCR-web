@@ -1,207 +1,224 @@
-import { HStack } from "@chakra-ui/layout";
 import axios from "axios";
 import { Component } from "react";
 import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
+import { Link, withRouter } from "react-router-dom";
 import "./ConfirmDigitalForm.css";
 import * as React from "react";
 
 class ConfirmDigitalForm extends Component<any, any> {
-  myRef: React.RefObject<HTMLDivElement>;
+  objectRef: React.RefObject<HTMLDivElement>;
   constructor(props: any) {
     super(props);
-    this.myRef = React.createRef();
+    this.objectRef = React.createRef();
     this.state = {
-      digitalForm: {},
-      dict: {},
-      newEntry: [],
-      updateDic: false,
-      count: 0,
-      pendingCounts: [],
+      availableProjectAttribute: new Map(),
+      newAttributeEntry: new Map(),
+      attributeInputCount: 0,
+      projectAttributeCount: 0,
+      projectID: this.props.location.state["projectID"],
     };
-    this.getJson = this.getJson.bind(this);
-    this.populateDict = this.populateDict.bind(this);
-    this.deleteAttri = this.deleteAttri.bind(this);
-    this.updateAttri = this.updateAttri.bind(this);
-    this.updateContent = this.updateContent.bind(this);
-    this.inputAttri = this.inputAttri.bind(this);
-    this.addAttri = this.addAttri.bind(this);
-    this.submit = this.submit.bind(this);
 
-    // Calling the function getJson(): It is fetching the information from
-    // the backend
-    this.getJson();
+    this.getJson = this.getJson.bind(this);
+    this.mountProjectInfo = this.mountProjectInfo.bind(this);
+    this.addInput = this.addInput.bind(this);
+    this.deleteInput = this.deleteInput.bind(this);
+    this.addAttributeToProject = this.addAttributeToProject.bind(this);
+  }
+
+  componentWillMount() {
+    this.mountProjectInfo();
   }
 
   getJson = () => {
-    axios.get("http://localhost:8080/form").then((response) => {
-      this.setState({ digitalForm: response.data });
-      this.populateDict();
-      this.setState({ dic: this.state.dict });
+    return new Promise((resolve, reject) =>
+      axios.get("http://localhost:8080/form").then((response) => {
+        try {
+          resolve(response.data);
+        } catch (err) {
+          reject(err);
+        }
+      })
+    );
+  };
+
+  mountProjectInfo = () => {
+    let fetchedAttributes = new Map();
+    let tempCount = 0;
+    this.getJson().then((val: any) => {
+      Object.keys(val).map((key: any) => {
+        fetchedAttributes.set(
+          tempCount,
+          <div className="viewProjectPortContainer">
+            <div className="viewProjectPortTextContainer">
+              <p key={"key" + tempCount.toString()}>
+                {key} : {val[key]}
+              </p>
+            </div>
+            <div className="viewProjectPortDeleteButtonContainer">
+              <div
+                className="deleteAttributeInput"
+                onClick={() => this.deleteAttributeFromProject(tempCount)}
+              ></div>
+            </div>
+          </div>
+        );
+        tempCount += 1;
+      });
+    });
+
+    this.setState({
+      availableProjectAttribute: fetchedAttributes,
+      projectAttributeCount: tempCount,
     });
   };
 
-  populateDict = () => {
-    let dictCopy = this.state.dict;
-    console.log("this is prepopulateDict: ", dictCopy);
-    for (var key in this.state.digitalForm) {
-      dictCopy[key] = this.state.digitalForm[key];
-    }
-    this.setState({ dict: dictCopy }, () => {
-      console.log("this is postpopulateDict", this.state.dict);
+  addAttributeToProject = (inputCount: number) => {
+    const attributeID = document.getElementById(
+      "added_attribute" + inputCount.toString()
+    ) as HTMLInputElement;
+    const attributeValue = document.getElementById(
+      "added_value" + inputCount.toString()
+    ) as HTMLInputElement;
+    let tempProjectAttributeCount = this.state.projectAttributeCount;
+    let tempAvailableProjectAttributes = this.state.availableProjectAttribute;
+    let tempAttributeEntry = this.state.newAttributeEntry;
+    tempAttributeEntry.delete(inputCount);
+    tempAvailableProjectAttributes.set(
+      tempProjectAttributeCount,
+      <div className="viewProjectPortContainer">
+        <div className="viewProjectPortTextContainer">
+          <p key={"key" + tempProjectAttributeCount.toString()}>
+            {attributeID.value} : {attributeValue.value}
+          </p>
+        </div>
+        <div className="viewProjectPortDeleteButtonContainer">
+          <div
+            className="deleteAttributeInput"
+            onClick={() =>
+              this.deleteAttributeFromProject(tempProjectAttributeCount)
+            }
+          ></div>
+        </div>
+      </div>
+    );
+    console.log(tempAvailableProjectAttributes);
+
+    this.setState({
+      attributeInputCount: this.state.attributeInputCount - 1,
+      availableProjectAttribute: tempAvailableProjectAttributes,
+      newAttributeEntry: tempAttributeEntry,
+      projectAttributeCount: tempProjectAttributeCount + 1,
     });
   };
 
-  deleteAttri = (k: any) => {
-    let deleteDictCopy = this.state.dict;
-    console.log("this is predeleteAttri: ", deleteDictCopy);
-    delete deleteDictCopy[k];
-    // delete this.state.dict[k];
-    this.setState({ dict: deleteDictCopy }, () => {
-      console.log("this is postpopulateDict: ", this.state.dict);
+  deleteAttributeFromProject = (projectCount: number) => {
+    let tempAvailableProjectAttributes = this.state.availableProjectAttribute;
+    tempAvailableProjectAttributes.delete(projectCount);
+    console.log("The project count is ", projectCount);
+    console.log("The tempAvailableProjectAttributes is ", tempAvailableProjectAttributes);
+    this.setState({
+      availableProjectAttribute: tempAvailableProjectAttributes,
+      projectAttributeCount: this.state.projectAttributeCount - 1,
     });
   };
 
-  updateAttri = (e: any, originalKey: any, content: any) => {
-    console.log("this is preupdatedAttri", this.state.dict);
-    this.setState({ dict: this.state.dict }, () => {
-      console.log("this is postupdatedAttri: ", this.state.dict);
-    });
-  };
-
-  // function is not call correctly
-  updateContent = (e: any, k: any) => {
-    let updatedDictCopy = this.state.dict;
-    console.log("this is preupdatedContent: ", updatedDictCopy);
-    updatedDictCopy[k] = e.target.value;
-    this.setState({ dict: updatedDictCopy }, () => {
-      console.log("this is postupdatedContent: ", this.state.dict);
-    });
-  };
-
-  inputAttri = () => {
-    const thisCount = this.state.count;
-    this.state.pendingCounts.push(thisCount);
-    let newid = "added-attri" + thisCount.toString();
-    let newval = "added-value" + thisCount.toString();
-    console.log(thisCount);
-    this.state.newEntry.push(
-      <div
-        id={thisCount}
-        key={thisCount}
-        className="addattrbox"
-        ref={this.myRef}
-      >
-        <input
-          className="addattrtext"
-          id={newid}
-          type="text"
-          placeholder={thisCount}
-          defaultValue=""
-        ></input>
-        :
-        <input
-          className="addattrtext"
-          id={newval}
-          type="text"
-          placeholder="content"
-          defaultValue=""
-        ></input>
-        <div className="adjustbuttom_delete">
-          <ChakraButton
-            txtname={"Add"}
-            onClickFunc={() => this.addAttri(thisCount)}
-          />
+  addInput = () => {
+    const tempCount = this.state.attributeInputCount;
+    console.log(tempCount);
+    const newID = "added_attribute" + tempCount.toString();
+    const newValue = "added_value" + tempCount.toString();
+    let tempAttributeEntry = this.state.newAttributeEntry;
+    tempAttributeEntry.set(
+      tempCount,
+      <div id={tempCount} key={tempCount} className="addedAttributeContainer">
+        <div
+          id={tempCount}
+          key={tempCount}
+          className="addedAttributeInnerBoxContainer"
+          ref={this.objectRef}
+        >
+          <input
+            className="addedAttributeIDBox"
+            id={newID}
+            type="text"
+            placeholder={"Attribute"}
+            defaultValue=""
+          ></input>
+          :
+          <input
+            className="addedAttributeIDBox"
+            id={newValue}
+            type="text"
+            placeholder="Content"
+            defaultValue=""
+          ></input>
+          <div
+            className="addMoreAttributeInput"
+            onClick={() => this.addAttributeToProject(tempCount)}
+          ></div>
+          <div
+            className="deleteAttributeInput"
+            onClick={() => this.deleteInput(tempCount)}
+          ></div>
         </div>
       </div>
     );
     this.setState({
-      dic: this.state.dict,
-      count: this.state.count + 1,
-      pendingCounts: this.state.pendingCounts,
+      attributeInputCount: tempCount + 1,
+      newAttributeEntry: tempAttributeEntry,
     });
   };
 
-  addAttri = (count: any) => {
-    let tempid = "added-attri" + count.toString();
-    let tempval = "added-value" + count.toString();
-    var attri = document.getElementById(tempid) as HTMLInputElement;
-    var value = document.getElementById(tempval) as HTMLInputElement;
-    let addedAttributeDictCopy = this.state.dict;
-    const node = this.myRef.current;
-
-    let tempNewEntry = [];
-    tempNewEntry.push(node);
-
+  deleteInput = (count: any) => {
+    let tempAttributeEntry = this.state.newAttributeEntry;
+    tempAttributeEntry.delete(count);
     this.setState({
-      newEntry: this.state.newEntry.filter(
-        (entr: any) => Number.parseInt(entr.key) !== count
-      ),
+      newAttributeEntry: tempAttributeEntry,
+      attributeInputCount: this.state.attributeInputCount - 1,
     });
-    console.log("this is preaddedAttributeDictCopy: ", addedAttributeDictCopy);
-    addedAttributeDictCopy[attri.value] = value.value;
-    this.setState({ dict: addedAttributeDictCopy }, () => {
-      console.log("this is postaddedAttributeDictCopy: ", this.state.dict);
-    });
-  };
-
-  submit = () => {
-    axios
-      .post("http://localhost:8080/confirmForm", this.state.dict)
-      .then((response) => console.log(response.data));
-    alert("Successful upload medical records!");
   };
 
   render() {
-    var rows = [];
-    this.state.newEntry.push(<div></div>);
-    for (var key in this.state.dict) {
-      const k = key;
+    setTimeout(() => this.forceUpdate(), 3000);
 
-      rows.push(
-        <div key={k}>
-          <HStack className="textdiv">
-            <div className="firstpart">{k}:</div>
-            <div className="secondpart">
-              <input
-                className="textarea"
-                id={k}
-                type="text"
-                defaultValue={this.state.dic[k]}
-                onChange={(e: any) => this.updateContent(e, k)}
-              ></input>
-              <ChakraButton
-                txtname={"Delete"}
-                onClickFunc={() => this.deleteAttri(k)}
-              />
-            </div>
-          </HStack>
-        </div>
-      );
-    }
     return (
-      <div className="bodyContainer">
+      <div className="confirmDigitalFormScreenContainer">
         <ChakraHeadbar />
-        <div>
-          <div className="rowdistance">
-            <div>{rows}</div>
-            <div className="addattr">
-              <ChakraButton
-                txtname={"Add Attribute"}
-                onClickFunc={() => this.inputAttri()}
-              />
+        <div className="confirmDigitalFormBodyContainer">
+          <div className="confirmDigitalFormUpperViewPortContainer">
+            <div className="confirmDigitalFormViewProjectContainer">
+              <div className="confirmDigitalFormAttributeDisplay">
+                {Array.from(this.state.availableProjectAttribute.values())}
+              </div>
             </div>
-            <div>{this.state.newEntry}</div>
-            <div className="submitbuttom">
-              <ChakraButton
-                txtname={"Submit"}
-                onClickFunc={() => this.submit()}
-              />
+            <div className="confirmDigitalFormAddAttributesContainer">
+              <div>{Array.from(this.state.newAttributeEntry.values())}</div>
+              <div className="confirmDigitalFormAddAttributeButton">
+                <ChakraButton
+                  txtname={"Add Attribute"}
+                  onClickFunction={this.addInput}
+                />
+              </div>
             </div>
+          </div>
+          <div className="confirmDigitalFormLowerViewPortContainer">
+            <Link
+              to={{
+                pathname: "/digitalForm",
+                state: {
+                  form: this.state.availableProjectAttribute,
+                  projectID: this.state.projectID,
+                },
+              }}
+            >
+              <ChakraButton txtname={"Submit"} marginTop="1em" />
+            </Link>
           </div>
         </div>
       </div>
     );
   }
 }
-export default ConfirmDigitalForm;
+
+export default withRouter(ConfirmDigitalForm);

@@ -6,6 +6,7 @@ import "./ViewProjectPage.css";
 import ProjectModal from "./Components/ProjectModal";
 import imageLogo from "./Components/addIcon.png";
 import { Link } from "react-router-dom";
+import ExistDigitalForm from "../ExistDigitalForm/ExistDigitalForm";
 
 class ViewProjectPage extends Component<any, any> {
   constructor(props: any) {
@@ -33,6 +34,7 @@ class ViewProjectPage extends Component<any, any> {
               projects={projects}
               k={k}
               removeProject={this.removeProject}
+              selectProject = {this.selectProject}
             />
           </div>
         );
@@ -47,29 +49,50 @@ class ViewProjectPage extends Component<any, any> {
       let remainingProjects = this.state.projects.filter(
         (item: any) => item.key !== id
       );
-
-      axios.post(`http://localhost:8080/delete?id=${id}`).then((response) => console.log(response));
-
-      this.setState({ projects: remainingProjects });
+      this.setState({ projects: remainingProjects }, () => {
+        axios
+          .post(`http://localhost:8080/delete?id=${id}`)
+          .then((response) => console.log(response));
+      });
     }
   };
 
-  postSelectedProject = (id: any) => {
-    console.log("selected project: " + id);
+  selectProject = (projectId: any) => {
+    <ExistDigitalForm
+    selectedProjectId = {projectId}
+    />
+    console.log(projectId);
     this.setState({
-      selectedProjectid: id,
+      selectedProjectId: projectId
+    }, () => {
+      console.log(projectId);
+    //   <ExistDigitalForm
+    //   selectedProjectId = {this.state.selectedProjectId}
+    // />
+    console.log(projectId);
+    const t = this.state.selectedProjectId;
+    console.log(t);
     });
-    axios
-      .post("http://localhost:8080/projectMain", this.state.selectedProjectId)
-      .then((response) => console.log(response.data));
-  };
+    // <ExistDigitalForm
+    //   selectedProjectId = {this.state.selectedProjectId}
+    // />
+  }
 
-  postProject = () => {
-    axios
-      .post("http://localhost:8080/projectMain", this.state.projects)
-      .then((response) => console.log(response.data));
-    // alert("Successful upload medical records!");
-  };
+  // postSelectedProject = (id: any) => {
+  //   console.log("selected project: " + id);
+  //   this.setState({
+  //     selectedProjectid: id,
+  //   });
+  //   axios
+  //     .post("http://localhost:8080/projectMain", this.state.selectedProjectId)
+  //     .then((response) => console.log(response.data));
+  // };
+
+  // postProject = () => {
+  //   axios
+  //     .post("http://localhost:8080/projectMain", this.state.projects)
+  //     .then((response) => console.log(response.data));
+  // };
 
   getJson = () => {
     axios.get("http://localhost:8080/projects").then((response) => {
@@ -79,9 +102,7 @@ class ViewProjectPage extends Component<any, any> {
 
   updateProject = (updatedInfo: []) => {
     if (!this.arraysEqual(this.state.projects, updatedInfo)) {
-      this.setState({ projects: updatedInfo }, () => {
-        console.log(this.state.projects);
-      });
+      this.setState({ projects: updatedInfo });
     }
   };
 

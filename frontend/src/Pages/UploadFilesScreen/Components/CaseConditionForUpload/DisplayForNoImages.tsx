@@ -2,8 +2,11 @@ import { Box, Grid } from "@chakra-ui/layout";
 import ChakraHeadbar from "../../../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import imageLogo from "./addIcon.png";
 import "../../UploadFilesScreen.css";
+import { Link } from "react-router-dom";
+import ChakraButton from "../../../../GlobalComponents/ChakraButton";
 
 interface DisplayForNoImageUploadInterface {
+  selectedProjectId: any;
   chooseFilesFunction: Function;
 }
 
@@ -11,7 +14,7 @@ export default function DisplayForNoImageUpload(
   props: DisplayForNoImageUploadInterface
 ) {
   return (
-    <div className="bodyContainer">
+    <div className="uploadPageBodyContainer">
       <ChakraHeadbar />
       <div>
         <Grid templateRows="repeat(3)" height="43em" gap={3}>
@@ -36,6 +39,16 @@ export default function DisplayForNoImageUpload(
               />
             </label>
           </Box>
+          <div className="submitbuttom">
+            <Link
+              to={{
+                pathname: "/existDigitalForm",
+                state: { projectID: props.selectedProjectId["projectID"] },
+              }}
+            >
+              <ChakraButton txtname={"Back"} cssDesign={"uploadBtn"} />
+            </Link>
+          </div>
           <Box>
             <Grid
               templateColumns="repeat(4, 3fr)"
