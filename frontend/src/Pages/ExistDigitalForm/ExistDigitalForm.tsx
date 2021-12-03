@@ -23,7 +23,7 @@ class ExistDigitalForm extends Component<any, any> {
     this.setState({
       selectedProjectId: this.state.selectedProjectId,
     });
-    console.log(this.state.selectedProjectId);
+    // console.log(this.state.selectedProjectId);
     // this.getJson();
     // this.pushExistForm(this.state.rawJson);
     this.getJson = this.getJson.bind(this);
@@ -52,13 +52,11 @@ class ExistDigitalForm extends Component<any, any> {
 
   mountInfo = () => {
     this.getJson().then((val:any) => {
-      console.log(val);
       this.setState({rawJson : val}, () => this.pushExistForm(this.state.rawJson));
     });
   }
 
   pushExistForm = (rawJson: any) => {
-    console.log("where is",this.state.rawJson);
     var eachform: any[] = [];
     for (let patient in rawJson) {
       eachform = [];
