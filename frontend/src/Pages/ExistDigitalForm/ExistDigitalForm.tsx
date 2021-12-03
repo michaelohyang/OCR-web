@@ -12,22 +12,7 @@ class ExistDigitalForm extends Component<any, any> {
     super(props);
     // this.ProjectModal;
     this.state = {
-      rawJson: [
-        // {
-        //   id: "1",
-        //   "First Name": "John",
-        //   "Last Name": "Johnson",
-        //   "hello word": "hello earth"
-        // },
-        // {
-        //   id: "2",
-        //   FirstName: "Sarah",
-        //   LastName: "Huang",
-        //   "First Name": "John",
-        //   "Last Name": "Johnson",
-        //   "hello word": "hello earth"
-        // },
-      ],
+      rawJson: [],
       form: [],
       forms: [],
       selectedProjectId: {},

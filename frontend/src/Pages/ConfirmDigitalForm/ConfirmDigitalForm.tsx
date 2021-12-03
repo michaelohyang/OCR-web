@@ -115,6 +115,8 @@ class ConfirmDigitalForm extends Component<any, any> {
   deleteAttributeFromProject = (projectCount: number) => {
     let tempAvailableProjectAttributes = this.state.availableProjectAttribute;
     tempAvailableProjectAttributes.delete(projectCount);
+    console.log("The project count is ", projectCount);
+    console.log("The tempAvailableProjectAttributes is ", tempAvailableProjectAttributes);
     this.setState({
       availableProjectAttribute: tempAvailableProjectAttributes,
       projectAttributeCount: this.state.projectAttributeCount - 1,
@@ -178,7 +180,7 @@ class ConfirmDigitalForm extends Component<any, any> {
   };
 
   render() {
-    // setTimeout(() => this.forceUpdate(), 7000);
+    setTimeout(() => this.forceUpdate(), 3000);
 
     return (
       <div className="confirmDigitalFormScreenContainer">

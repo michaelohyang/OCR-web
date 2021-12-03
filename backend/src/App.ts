@@ -27,7 +27,7 @@ app.get('/form', async (req: any, res: any) => {
       console.log('Unable to scan directory: ' + err);
     }
 
-    files.forEach(async (file: any) => {
+    files.map(async (file: any) => {
       let imagePath: string = "./uploads/" + file;
       await ocrScanner.getOCRtxt(imagePath);
       let textPath: string = "./src/ConvertedFileToText/ocrResult.txt"; 
@@ -36,7 +36,7 @@ app.get('/form', async (req: any, res: any) => {
         const data = fileSys.readFileSync(textPath, 'utf8')
         let phoneNumber = extract.extractPhoneNumber(data)
         let name = extract.extractName(data) 
-        let address = extract.extractAddress(data)
+        let address = await extract.extractAddress(data)
         let email = extract.extractEmail(data) 
         json_object = {
           phoneNumber: phoneNumber,
@@ -44,7 +44,6 @@ app.get('/form', async (req: any, res: any) => {
           address: address,
           email: email
         }
-        console.log(json_object);
       } catch (err) {
         console.error(err)
       }
