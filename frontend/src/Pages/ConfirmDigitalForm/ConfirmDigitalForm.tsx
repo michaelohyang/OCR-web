@@ -54,6 +54,7 @@ class ConfirmDigitalForm extends Component<any, any> {
     let json_object = this.state.infoJSONobject;
     this.getJson().then((val: any) => {
       mapLength = Object.keys(val).length;
+      // eslint-disable-next-line
       Object.keys(val).map((key: any) => {
         json_object[key] = val[key];
         fetchedAttributes.set(
@@ -120,7 +121,6 @@ class ConfirmDigitalForm extends Component<any, any> {
             id={tempProjectAttributeCount.toString()}
           ></div>
         </div>
-        
       </div>
     );
     console.log(tempAvailableProjectAttributes);
