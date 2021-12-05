@@ -90,28 +90,6 @@ input {
   background: -webkit-linear-gradient(left, #21d4fd, #b721ff);
 }
 
-/* .newProjectNameText::after {
-  font-family: Poppins-Regular;
-  font-size: 1em;
-  color: #999999;
-  line-height: 1em;
-  content: attr(data-placeholder);
-  display: block;
-  width: 100%;
-  position: absolute;
-  top: 1.5em;
-  left: 0em;
-  padding-left: 5px;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
-} */
-
-/* .newProjectNameInput:focus + .newProjectNameText::after {
-  top: -0.3em;
-} */
-
 .newProjectNameInput:focus + .newProjectNameText::before {
   width: 100%;
 }
