@@ -2,6 +2,10 @@ const multer = require("multer");
 const backendConstant = require("../Util/constant");
 var fs = require("fs");
 
+/**
+ * The disk storage engine gives you full control on storing files to disk.
+ * 
+ */
 const storage = multer.diskStorage({
   destination: (req: any, file: any, cb: any) => {
     const rootDir = `${backendConstant.defaultFolder}`;
