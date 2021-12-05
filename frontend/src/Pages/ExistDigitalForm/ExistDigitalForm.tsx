@@ -5,6 +5,7 @@ import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./ExistDigitalForm.css";
 import { Link, withRouter } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 class ExistDigitalForm extends Component<any, any> {
   // selectedProjectId: any;
@@ -62,20 +63,21 @@ class ExistDigitalForm extends Component<any, any> {
       const p = patient;
       let countOfRows = 0;
       for (let key in rawJson[patient]) {
-        console.log(key + ": " + rawJson[patient][key]);
+        console.log(patient + key + ": " + rawJson[patient][key]);
         const k = key;
         eachform.push(
-          <div key={countOfRows} className="existinfo">
-            <HStack overflowX="auto">
+          <div key={countOfRows}>
+            <HStack overflowX="auto" className="adjustbetween">
               <div className="textdiv1">{k}:</div>
-              <div>{rawJson[p][k]}</div>
+              <div className="textdiv2">{rawJson[p][k]}</div>
             </HStack>
           </div>
         );
+
         countOfRows++;
       }
       this.state.forms.push(
-        <div key={1000 + p}>
+        <div key={1000 + p} className="existinfo">
           {eachform}
         </div>
       );
@@ -89,10 +91,18 @@ class ExistDigitalForm extends Component<any, any> {
       <div className="existbodyContainer">
         <ChakraHeadbar />
         <div className="existmainbody">
-          <div className="extraformstyle">{this.state.forms}</div>
+          <div className="extraformstyle">
+            {this.state.forms.length === 0 ? (
+              <div>
+                <ClipLoader color={"#000000"} loading={true} size={150} />
+              </div>
+            ) : (
+              <div>{this.state.forms}</div>
+            )}
+          </div>
           <div className="existsubmitbuttom">
             <Link to="/">
-              <ChakraButton txtname={"Return to View Project Page"} />
+              <ChakraButton txtname={"Return Project Page"} />
             </Link>
             <br />
             <Link

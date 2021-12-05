@@ -5,6 +5,7 @@ import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import { Link, withRouter } from "react-router-dom";
 import "./ConfirmDigitalForm.css";
 import * as React from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 class ConfirmDigitalForm extends Component<any, any> {
   objectRef: React.RefObject<HTMLDivElement>;
@@ -109,6 +110,7 @@ class ConfirmDigitalForm extends Component<any, any> {
             {attributeID.value} : {attributeValue.value}
           </p>
         </div>
+
         <div className="viewProjectPortDeleteButtonContainer">
           <div
             className="deleteAttributeInput"
@@ -118,6 +120,7 @@ class ConfirmDigitalForm extends Component<any, any> {
             id={tempProjectAttributeCount.toString()}
           ></div>
         </div>
+        
       </div>
     );
     console.log(tempAvailableProjectAttributes);
@@ -215,7 +218,7 @@ class ConfirmDigitalForm extends Component<any, any> {
   };
 
   render() {
-    setTimeout(() => this.forceUpdate(), 10000);
+    setTimeout(() => this.forceUpdate(), 5000);
     return (
       <div className="confirmDigitalFormScreenContainer">
         <ChakraHeadbar />
@@ -223,7 +226,28 @@ class ConfirmDigitalForm extends Component<any, any> {
           <div className="confirmDigitalFormUpperViewPortContainer">
             <div className="confirmDigitalFormViewProjectContainer">
               <div className="confirmDigitalFormAttributeDisplay">
-                {Array.from(this.state.availableProjectAttribute.values())}
+                {/* {Object.keys(this.state.availableProjectAttribute).length ===
+                0 ? (
+                  // <ClipLoader color={"#000000"} loading={true} size={150} />
+                  <div></div>
+                ) : (
+                  <div>
+                    {Array.from(this.state.availableProjectAttribute.values())}
+                  </div>
+                )} */}
+                <div>
+                  {this.state.projectAttributeCount === 0 ? (
+                    <div className="loadingSpinner">
+                      <ClipLoader color={"#000000"} loading={true} size={150} />
+                    </div>
+                  ) : (
+                    <div>
+                      {Array.from(
+                        this.state.availableProjectAttribute.values()
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
             <div className="confirmDigitalFormAddAttributesContainer">
