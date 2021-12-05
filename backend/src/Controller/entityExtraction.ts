@@ -62,8 +62,16 @@ function extractPhoneNumber(text: string) {
 }
 
 function extractName(text: string) {
-    let doc = nlp(text)
-    return doc.people().text() === '' ? "Nick Jones" : doc.people().text()
+    let doc = nlp(text);
+    let names = doc.people().json();
+    let output = ""
+    for (let i=0; i < names.length; i++) {
+        if (i>1) {
+            break;
+        }
+        output += names[i].text + " ";
+    }
+    return output;
 }
 
 
