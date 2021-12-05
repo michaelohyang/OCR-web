@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="200" src="https://flyclipart.com/thumb2/react-logo-import-io-221727.png">
+    <img width="200" src="https://tryolabs.com/assets/blog/2015-04-21-drag-and-drop-in-react/react.png">
 </p>
 
 <h1 align="center" style="margin-top: 0px;">StudyFind Front End Development </h1>
