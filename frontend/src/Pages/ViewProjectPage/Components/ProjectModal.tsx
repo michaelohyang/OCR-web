@@ -29,7 +29,7 @@ function ProjectModal(props: ProjectModalInterface) {
         className="modalBox"
       >
         <Link
-          to={{ pathname: "/existDigitalForm", state: { projectID: props.k } }}
+          to={{ pathname: "/projectDigitalForm", state: { projectID: props.k } }}
           onClick={() => props.selectProject(props.k)}
         >
           <img

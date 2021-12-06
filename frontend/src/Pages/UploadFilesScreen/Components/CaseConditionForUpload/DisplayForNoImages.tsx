@@ -42,7 +42,7 @@ export default function DisplayForNoImageUpload(
           <div className="submitbuttom">
             <Link
               to={{
-                pathname: "/existDigitalForm",
+                pathname: "/projectDigitalForm",
                 state: { projectID: props.selectedProjectId["projectID"] },
               }}
             >

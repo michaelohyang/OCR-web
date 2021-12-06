@@ -95,7 +95,7 @@ class UploadFilesScreen extends Component<any, any> {
               <div className="uploadPageBtnContainer">
                 <Link
                   to={{
-                    pathname: "/existDigitalForm",
+                    pathname: "/projectDigitalForm",
                     state: {
                       projectID: this.state.selectedProjectId["projectID"],
                     },

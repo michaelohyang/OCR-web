@@ -6,7 +6,7 @@ import "./ViewProjectPage.css";
 import ProjectModal from "./Components/ProjectModal";
 import imageLogo from "./Components/addIcon.png";
 import { Link } from "react-router-dom";
-import ExistDigitalForm from "../ExistDigitalForm/ExistDigitalForm";
+import ProjectDigitalForm from "../ProjectDigitalForm/ProjectDigitalForm";
 
 class ViewProjectPage extends Component<any, any> {
   constructor(props: any) {
@@ -58,7 +58,7 @@ class ViewProjectPage extends Component<any, any> {
   };
 
   selectProject = (projectId: any) => {
-    <ExistDigitalForm selectedProjectId={projectId} />;
+    <ProjectDigitalForm selectedProjectId={projectId} />;
     this.setState({
       selectedProjectId: projectId,
     });
