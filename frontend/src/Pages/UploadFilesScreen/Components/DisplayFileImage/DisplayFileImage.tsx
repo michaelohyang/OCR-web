@@ -6,10 +6,20 @@ interface DisplayFileImageProps {
   removeImage: (id: any) => void;
 }
 
+/**
+ * Shows the images that has been uploaded onto the UI
+ * @param props interface that allows this function to use properties from its parent
+ * @returns a TSX element
+ */
 export default function DisplayFileImage(props: DisplayFileImageProps) {
   const [defaultImages, setDefaultImages] = useState<boolean>(true);
   const [clickedImage, setClickedImage] = useState<any>();
 
+  /**
+   * When clicked, it will either expand or minimize a image
+   * @param image event handler (the image to be expanded or minimized)
+   * @returns void
+   */
   let showExpandedImage = (image: any) => {
     if (defaultImages === true) {
       setClickedImage(image);

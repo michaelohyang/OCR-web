@@ -4,10 +4,16 @@ import { Component } from "react";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
 import "./ViewProjectPage.css";
 import ProjectModal from "./Components/ProjectModal";
-import imageLogo from "./Components/addIcon.png";
+import imageLogo from "./Components/images/addIcon.png";
 import { Link } from "react-router-dom";
 import ProjectDigitalForm from "../ProjectDigitalForm/ProjectDigitalForm";
 
+/**
+ * This is the first page of the application.
+ * You are able to view available projects for each client.
+ * You can create new project for new client as well.
+ * @returns TSX element
+ */
 class ViewProjectPage extends Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -34,7 +40,6 @@ class ViewProjectPage extends Component<any, any> {
               projects={projects}
               k={k}
               removeProject={this.removeProject}
-              selectProject={this.selectProject}
             />
           </div>
         );
@@ -43,7 +48,12 @@ class ViewProjectPage extends Component<any, any> {
     });
   }
 
-  removeProject = (id: any) => {
+  /**
+   * Remove an existing project from the dashboard
+   * @param id a string of projectID, which is a unique key assigned to each project
+   * @returns void
+   */
+  removeProject = (id: string) => {
     var remove = window.confirm("FATAL! Deleted project will be permanate!");
     if (remove) {
       let remainingProjects = this.state.projects.filter(
@@ -64,18 +74,34 @@ class ViewProjectPage extends Component<any, any> {
     });
   };
 
+  /**
+   * Fetch the data from Firebase to load the existing projects
+   * @returns void
+   */
   getJson = () => {
     axios.get("http://localhost:8080/projects").then((response) => {
       this.setState({ projects: response.data });
     });
   };
 
+  /**
+   * Update the current array that contains current exisitng project to
+   * reflect changes when new projects are added frin the database
+   * @param updatedInfo  the array that contains all the existing + new projects
+   * @returns void
+   */
   updateProject = (updatedInfo: []) => {
     if (!this.arraysEqual(this.state.projects, updatedInfo)) {
       this.setState({ projects: updatedInfo });
     }
   };
 
+  /**
+   *  Checks two see if two arrays are equal
+   * @param a an array
+   * @param b an array
+   * @returns a boolean statement
+   */
   arraysEqual = (a: [], b: []) => {
     if (a === b) return true;
     if (a == null || b == null) return false;

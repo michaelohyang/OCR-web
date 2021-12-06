@@ -6,6 +6,9 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { Button } from "@chakra-ui/button";
 
+/**
+ * This page allows the user to create a new project for a new client
+ */
 class Create_New_Project_Page extends Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -21,7 +24,11 @@ class Create_New_Project_Page extends Component<any, any> {
     this.send_data_backend = this.send_data_backend.bind(this);
   }
 
-  // this function will put the information that user pass in into this.state.
+  /**
+   * Saves the information about the project name and the project description
+   * when the user clicks the submit button
+   * @returns void
+   */
   onsubmit = () => {
     let name = document.getElementById("nameInput") as HTMLInputElement;
     let description = document.getElementById(
@@ -43,7 +50,11 @@ class Create_New_Project_Page extends Component<any, any> {
     this.setState({ description: description.value }, this.send_data_backend);
   };
 
-  // this function will send all of information contained in state
+  /**
+   * Sends the information(project name and description) about the new project to the
+   * backend so that information can be saved on Firebase
+   * @returns void
+   */
   send_data_backend = () => {
     let projectInfo = {
       project_name: this.state.project_name,

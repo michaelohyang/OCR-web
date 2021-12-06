@@ -1,5 +1,5 @@
 {
-  "name": "package.json",
+  "name": "back-end-application",
   "version": "1.0.0",
   "main": "App.ts",
   "private": true,

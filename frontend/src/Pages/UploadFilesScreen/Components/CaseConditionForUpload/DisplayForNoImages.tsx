@@ -10,6 +10,12 @@ interface DisplayForNoImageUploadInterface {
   chooseFilesFunction: Function;
 }
 
+/**
+ * Condition where the user has not uploaded any images.
+ * Allows UI to be shown differently
+ * @param props interface that allows this function to use properties from its parent class
+ * @returns a TSX element
+ */
 export default function DisplayForNoImageUpload(
   props: DisplayForNoImageUploadInterface
 ) {
