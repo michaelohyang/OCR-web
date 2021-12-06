@@ -28,7 +28,7 @@ There are a total of 4 pages in the Controller folder. More information of each 
 - `multer.ts`: This file is used to implement 'multer' package which is used to receive the image uploaded from the front end. 
 - `ocrScan.ts`: <TODO HERE>
 
-There is one more page called `constant.ts` in Util folder. This files stores some constants used in the backend files. 
+There is one more page called `constant.ts` in the Util folder. This files stores some constants used in the backend files. 
 
 ## How To Set Up Firebase
 <TO DO HERE>
