@@ -23,15 +23,16 @@ The main page is `app.js`. This page is used to store and execute all endpoints 
 
 There are a total of 4 pages in the Controller folder. More information of each page can be found below:
 
-- `entityExtraction.ts`: <TODO HERE>
-- `firebase.ts`: <TODO HERE>
+- `entityExtraction.ts`: This file contains operations that extracts street address, email, phone number, name, and other sentences from a text string. Please note that extractAddress uses api key that needs to be replaced with a new one. Currently api key is being stored as a variable in the file, which is a bad practice, so we suggest removing it and declaring it as a env varaible.
+- `firebase.ts`: This file is used to connect to firebase, currently it's only using firebase realtime storage service. It contains operations that fetches data, write data, overwrite data, and delete data at the input reference location. Notice that it's currently using an api key that needs to be replaced with a new one. Currently api key is being stored as a variable(firebaseConfig) in the file, which is a bad practice, so we suggest removing it and declaring it as a env varaible.
 - `multer.ts`: This file is used to implement 'multer' package which is used to receive the image uploaded from the front end. 
-- `ocrScan.ts`: <TODO HERE>
+- `ocrScan.ts`: This file is used to scan the input image(png, jpg, jpeg, etc) that outputs a string such that each entry scanned in sparated by a new line '\n'. Please note that this file uses google vision api key that needs to be replaced with a new one. Currently api key is being stored as a variable in the file, which is a bad practice, so we suggest removing it and declaring it as a env varaible.
 
 There is one more page called `constant.ts` in the Util folder. This files stores some constants used in the backend files. 
 
 ## How To Set Up Firebase
-<TO DO HERE>
+Step 1. Delete firebaseConfig content from firebase.ts and get a new one. Instruction for how to find your own firebaseConfig can be found in https://firebase.google.com/docs/web/setup.
+Step 2. Save your firebaseConfig as a env variable or some kind of secret and reference it to firebaseConfig in firebase.ts.
 
 ## How To Set Up The Backend
 Step 1. After setting up the firebase, run `export GOOGLE_APPLICATION_CREDENTIALS="./VisionAPISecret/glossy-motif-327704-23cf5a80138d.json"` to set up the Google API OCR Scanner.
