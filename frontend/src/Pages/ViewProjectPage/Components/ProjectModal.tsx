@@ -2,18 +2,23 @@ import { Box } from "@chakra-ui/layout";
 import "../ViewProjectPage.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import blue from "./blue.jpg";
-import yellow from "./yellow.jpg";
-import green from "./green.jpg";
-import red from "./red.jpg";
+import blue from "./images/blue.jpg";
+import yellow from "./images/yellow.jpg";
+import green from "./images/green.jpg";
+import red from "./images/red.jpg";
 
 interface ProjectModalInterface {
   projects: any;
   k: string;
   removeProject: Function;
-  selectProject: Function;
 }
 
+/**
+ * The modal that composes the project box with information on the
+ * project name and the project description
+ * @param props an interface for the project modal to use properties from its parent class
+ * @returns TSX element
+ */
 function ProjectModal(props: ProjectModalInterface) {
   const [colors] = useState<string[]>([blue, yellow, green, red]);
 
@@ -30,7 +35,6 @@ function ProjectModal(props: ProjectModalInterface) {
       >
         <Link
           to={{ pathname: "/existDigitalForm", state: { projectID: props.k } }}
-          onClick={() => props.selectProject(props.k)}
         >
           <img
             src={colors[Math.floor(Math.random() * colors.length)]}

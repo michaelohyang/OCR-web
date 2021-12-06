@@ -8,6 +8,12 @@ import { Link, withRouter } from "react-router-dom";
 import DisplayForNoImageUpload from "./Components/CaseConditionForUpload/DisplayForNoImages";
 import { Button } from "@chakra-ui/react";
 
+/**
+ * This page allows the user to upload one or multiple medical images
+ * to a individual client's project so that the OCR algorithm can
+ * process the image(s)
+ * @returns TSX element
+ */
 class UploadFilesScreen extends Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -26,6 +32,11 @@ class UploadFilesScreen extends Component<any, any> {
     this.uploadFilesFunction = this.uploadFilesFunction.bind(this);
   }
 
+  /**
+   * Uploads the medical record images to the backend
+   * so that the backend can run the algorithm
+   * @returns void
+   */
   uploadFilesFunction = () => {
     let formDataCopy = new FormData();
     for (let i = 0; i < this.state.arrayOfFiles.length; i++) {
@@ -35,7 +46,12 @@ class UploadFilesScreen extends Component<any, any> {
     alert("Images Successfully Uploaded to The Database");
   };
 
-  removeImage = (id: any) => {
+  /**
+   * Remove unwanted images that the user have uploaded
+   * @param id number of the imageID
+   * @returns void
+   */
+  removeImage = (id: number) => {
     let tempArrFilesFront = this.state.arrayOfFiles.slice(0, id);
     let tempArrFilesBack = this.state.arrayOfFiles.slice(
       id + 1,
@@ -46,12 +62,12 @@ class UploadFilesScreen extends Component<any, any> {
     });
   };
 
-  // Callback after setState - easiest -> current implementation
-  // await throught asynchronous call - second easiest
-  // Promise execution using .then -> writing your own Promise -> very rare case -> only use it if other solution fails
-  // Use window.addEventListerner -> slightly more complicated
-  // useEffect = only for functional component
-
+  /**
+   * Allows the user to choose medical record images and save that image temporarily on the UI.
+   * Allows the images to be shown on the UI
+   * @param e event handler
+   * @returns void
+   */
   chooseFiles = (e: any) => {
     let arrNewFiles = [];
     let fileLength = e.target.files.length;

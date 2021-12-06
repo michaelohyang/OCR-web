@@ -5,7 +5,7 @@ const projectConstant = require('./Util/constant');
 const upload = require('./Controller/multer');
 const ocrScanner = require('./Controller/ocrScan');
 const database = require('./Controller/firebase');
-const extract = require('./entityExtraction');
+const extract = require('./Controller/entityExtraction');
 const fileSys = require('fs');
 const { v4: uuidv4 } = require('uuid');
 
@@ -36,7 +36,7 @@ app.get('/form', async (req: any, res: any) => {
       let imagePath: string = "./uploads/" + file;
       await ocrScanner.getOCRtxt(imagePath);
       setTimeout(async () => {
-        let textPath: string = "C:/Users/ohyan/Documents/GATech/CS 3312/OCR-web/OCR-web/backend/src/ConvertedF"; 
+        let textPath: string = process.cwd() + "/src/ConvertedFile"; 
         let json_object = {};
         try {
           const data = fileSys.readFileSync(textPath, 'utf8');
@@ -121,5 +121,5 @@ app.post('/delete', (req: any, res: any) => {
  * 
  */
 app.listen(projectConstant.PORT, () =>
-  console.log(`App listening on port ${projectConstant.PORT}!`),
+  console.log(`App listening on port ${projectConstant.PORT}!`)
 );
