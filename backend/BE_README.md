@@ -4,8 +4,6 @@
 
 <h1 align="center" style="margin-top: 0px;">StudyFind Back End Development </h1>
 
-[![Build and Test React OCR BackEnd](https://github.com/michaelohyang/OCR-web/actions/workflows/client.yml/badge.svg)](https://github.com/michaelohyang/OCR-web/actions/workflows/client.yml)
-
 ## Installation
 
 This module is created and runs via [npm][npm] which is bunder with [node][node], therefore please ensure that you have node and npm installed. For more information on the dependecies, you can check it out in the package.json file. Please ensure that you are in the backend directory in your terminal and run the following commands:
