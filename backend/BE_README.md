@@ -32,7 +32,7 @@ There is one more page called `constant.ts` in the Util folder. This files store
 
 ## How To Set Up Firebase
 Step 1. Delete firebaseConfig content from firebase.ts and get a new one. Instruction for how to find your own firebaseConfig can be found in https://firebase.google.com/docs/web/setup.
-Step 2. Save your firebaseConfig as a env variable or some kind of secret and reference it to firebaseConfig in firebase.ts
+Step 2. Save your firebaseConfig as a env variable or some kind of secret and reference it to firebaseConfig in firebase.ts.
 
 ## How To Set Up The Backend
 Step 1. After setting up the firebase, run `export GOOGLE_APPLICATION_CREDENTIALS="./VisionAPISecret/glossy-motif-327704-23cf5a80138d.json"` to set up the Google API OCR Scanner.
