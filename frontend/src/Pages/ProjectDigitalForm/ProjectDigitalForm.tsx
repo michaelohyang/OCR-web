@@ -53,6 +53,10 @@ class ProjectDigitalForm extends Component<any, any> {
     });
   };
 
+  /**
+   * This function formats and displays the JSON received from backend to the screen.
+   * 
+   */
   pushExistForm = (rawJson: any) => {
     var eachform: any[] = [];
     for (let patient in rawJson) {
