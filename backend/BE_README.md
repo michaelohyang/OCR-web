@@ -31,13 +31,13 @@ There are a total of 4 pages in the Controller folder. More information of each 
 There is one more page called `constant.ts` in the Util folder. This files stores some constants used in the backend files. 
 
 ## How To Set Up Firebase
-Step 1. Delete firebaseConfig content from firebase.ts and get a new one. Instruction for how to find your own firebaseConfig can be found in https://firebase.google.com/docs/web/setup.
-Step 2. Save your firebaseConfig as a env variable or some kind of secret and reference it to firebaseConfig in firebase.ts.
+1. Delete firebaseConfig content from firebase.ts and get a new one. Instruction for how to find your own firebaseConfig can be found in https://firebase.google.com/docs/web/setup.
+2. Save your firebaseConfig as a env variable or some kind of secret and reference it to firebaseConfig in firebase.ts.
 
 ## How To Set Up The Backend
-Step 1. After setting up the firebase, run `export GOOGLE_APPLICATION_CREDENTIALS="./VisionAPISecret/glossy-motif-327704-23cf5a80138d.json"` to set up the Google API OCR Scanner.
-Step 2. Boot up our application by running the command above. 
-Step 3. If you see the message `App listening on port <PORT NUMBER>!` in the console, you are all set!
+1. After setting up the firebase, run `export GOOGLE_APPLICATION_CREDENTIALS="./VisionAPISecret/glossy-motif-327704-23cf5a80138d.json"` to set up the Google API OCR Scanner.
+2. Boot up our application by running the command above. 
+3. If you see the message `App listening on port <PORT NUMBER>!` in the console, you are all set!
 
 ## Credits
 
