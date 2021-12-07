@@ -6,6 +6,7 @@ import "./ViewProjectPage.css";
 import ProjectModal from "./Components/ProjectModal";
 import imageLogo from "./Components/images/addIcon.png";
 import { Link } from "react-router-dom";
+import ProjectDigitalForm from "../ProjectDigitalForm/ProjectDigitalForm";
 
 /**
  * This is the first page of the application.

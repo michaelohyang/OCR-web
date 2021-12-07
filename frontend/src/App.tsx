@@ -5,7 +5,8 @@ import UploadFilesScreen from "./Pages/UploadFilesScreen/UploadFilesScreen";
 import ConfirmFilesScreen from "./Pages/ConfirmDigitalForm/ConfirmDigitalForm";
 import ViewProjectPage from "./Pages/ViewProjectPage/ViewProjectPage";
 import CreateProject from "./Pages/CreateNewProjectPage/CreateNewProjectPage";
-import ExistDigitalForm from "./Pages/ExistDigitalForm/ExistDigitalForm";
+import ProjectDigitalForm from "./Pages/ProjectDigitalForm/ProjectDigitalForm";
+
 
 class App extends Component {
   render() {
@@ -19,8 +20,8 @@ class App extends Component {
             <Route path="/createProject">
               <CreateProject />
             </Route>
-            <Route path="/existDigitalForm">
-              <ExistDigitalForm />
+            <Route path="/projectDigitalForm">
+              <ProjectDigitalForm />
             </Route>
             <Route path="/upload">
               <UploadFilesScreen />

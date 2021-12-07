@@ -3,23 +3,20 @@ import { HStack } from "@chakra-ui/layout";
 import axios from "axios";
 import ChakraButton from "../../GlobalComponents/ChakraButton";
 import ChakraHeadbar from "../../GlobalComponents/ChakraHeadbar/ChakraHeadbar";
-import "./ExistDigitalForm.css";
+import "./ProjectDigitalForm.css";
 import { Link, withRouter } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 
-class ExistDigitalForm extends Component<any, any> {
-  // selectedProjectId: any;
+class ProjectDigitalForm extends Component<any, any> {
   constructor(props: any) {
     super(props);
-    // this.ProjectModal;
     this.state = {
       rawJson: [],
       form: [],
       forms: [],
       selectedProjectId: {},
     };
-    this.state.selectedProjectId["projectID"] =
-      this.props.location.state["projectID"];
+    this.state.selectedProjectId["projectID"] = this.props.location.state["projectID"];
     this.setState({
       selectedProjectId: this.state.selectedProjectId,
     });
@@ -56,6 +53,10 @@ class ExistDigitalForm extends Component<any, any> {
     });
   };
 
+  /**
+   * This function formats and displays the JSON received from backend to the screen.
+   * 
+   */
   pushExistForm = (rawJson: any) => {
     var eachform: any[] = [];
     for (let patient in rawJson) {
@@ -63,7 +64,6 @@ class ExistDigitalForm extends Component<any, any> {
       const p = patient;
       let countOfRows = 0;
       for (let key in rawJson[patient]) {
-        console.log(patient + key + ": " + rawJson[patient][key]);
         const k = key;
         eachform.push(
           <div key={countOfRows}>
@@ -73,7 +73,6 @@ class ExistDigitalForm extends Component<any, any> {
             </HStack>
           </div>
         );
-
         countOfRows++;
       }
       this.state.forms.push(
@@ -120,4 +119,4 @@ class ExistDigitalForm extends Component<any, any> {
   }
 }
 
-export default withRouter(ExistDigitalForm);
+export default withRouter(ProjectDigitalForm);
