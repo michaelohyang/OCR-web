@@ -19,17 +19,14 @@ class App extends Component {
             <Route path="/createProject">
               <CreateProject />
             </Route>
+            <Route path="/projectDigitalForm">
+              <ProjectDigitalForm />
+            </Route>
             <Route path="/upload">
               <UploadFilesScreen />
             </Route>
             <Route path="/confirm">
               <ConfirmFilesScreen />
-            </Route>
-            <Route path="/projectDigitalForm">
-              <ProjectDigitalForm />
-            </Route>
-            <Route>
-              <UploadFilesScreen />
             </Route>
           </Switch>
         </div>
