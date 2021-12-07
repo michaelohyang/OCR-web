@@ -45,7 +45,7 @@ export default function DisplayForNoImageUpload(
               />
             </label>
           </Box>
-          <div className="submitbuttom">
+          <div className="goBackButton">
             <Link
               to={{
                 pathname: "/projectDigitalForm",

@@ -17,7 +17,7 @@
   position: relative;
 }
 
-.submitbuttom {
+.goBackButton {
   display: flex;
   justify-content: center;
   margin-top: 2.5em;
