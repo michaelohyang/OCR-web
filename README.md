@@ -4,7 +4,8 @@ Jiaxuan Chen, Chenyu Dai, Shuge Fan, Michael Oh-Yang, Peiqi Zhao
 
 # Workflow
 
-https://github.com/michaelohyang/OCR-web/actions/workflows/client.yml
+[![Build and Test React OCR FrontEnd](https://github.com/michaelohyang/OCR-web/actions/workflows/client.yml/badge.svg)](https://github.com/michaelohyang/OCR-web/actions/workflows/client.yml)
+[![Build and Test React OCR Backend](https://github.com/michaelohyang/OCR-web/actions/workflows/server.yml/badge.svg)](https://github.com/michaelohyang/OCR-web/actions/workflows/server.yml)
 
 # About
 
