@@ -67,13 +67,6 @@ class ViewProjectPage extends Component<any, any> {
     }
   };
 
-  selectProject = (projectId: any) => {
-    <ProjectDigitalForm selectedProjectId={projectId} />;
-    this.setState({
-      selectedProjectId: projectId,
-    });
-  };
-
   /**
    * Fetch the data from Firebase to load the existing projects
    * @returns void
