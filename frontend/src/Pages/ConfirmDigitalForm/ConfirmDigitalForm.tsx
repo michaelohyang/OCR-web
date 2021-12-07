@@ -27,7 +27,7 @@ class ConfirmDigitalForm extends Component<any, any> {
     this.deleteInput = this.deleteInput.bind(this);
     this.addAttributeToProject = this.addAttributeToProject.bind(this);
     this.deleteAttributeFromProject =
-      this.deleteAttributeFromProject.bind(this);
+    this.deleteAttributeFromProject.bind(this);
     this.submit = this.submit.bind(this);
   }
 
@@ -89,6 +89,11 @@ class ConfirmDigitalForm extends Component<any, any> {
     });
   };
 
+  /**
+   * Take the OCR generated attributes and convert into HTML element for display on web page. 
+   * @param inputCount counter stands for key of REACT child element
+   * @returns void
+   */
   addAttributeToProject = (inputCount: number) => {
     const attributeID = document.getElementById(
       "added_attribute" + inputCount.toString()
@@ -134,6 +139,11 @@ class ConfirmDigitalForm extends Component<any, any> {
     });
   };
 
+  /**
+   * Activated by deleting an attribute
+   * @param e event handler
+   * @returns void
+   */
   deleteAttributeFromProject = (e: any) => {
     let projectID = parseInt(e.target.id);
     let tempAvailableProjectAttributes = this.state.availableProjectAttribute;
@@ -152,6 +162,11 @@ class ConfirmDigitalForm extends Component<any, any> {
     );
   };
 
+  /**
+   * This function is called when clicking on "Add" icon and manually inputted text are added.
+   * Take the content of input box and push the content into availableProjectAttribute
+   * @returns void
+   */
   addInput = () => {
     const tempCount = this.state.attributeInputCount;
     console.log(tempCount);
@@ -199,6 +214,11 @@ class ConfirmDigitalForm extends Component<any, any> {
     });
   };
 
+  /**
+   * Delete a row of input box on the right side of page.
+   * @param count current number of empty input boxes
+   * @returns void
+   */
   deleteInput = (count: any) => {
     let tempAttributeEntry = this.state.newAttributeEntry;
     tempAttributeEntry.delete(count);
