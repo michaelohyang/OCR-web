@@ -19,14 +19,13 @@ npm start
 
 ## Page Components
 
-There are a total of 6 pages in the src folder. More information of each page can be found below:
+There are a total of 5 pages in the src folder. More information of each page can be found below:
 
 - `ViewProjectPage`: First page of the web application. You can view available projects of each client in this page.
 - `CreateNewProjectPage`: Create a project for a new client.
 - `ExistDigitalForm`: You can view existing project information for a existing individual client.
 - `UploadFilesScreen`: You are able to upload digital medical record images for the individual client.
 - `ConfirmDigitalForm`: You are able to modify the attributes of the parsed information from the medical record images
-- `DigitalForm`: Yet to integrate into our application
 
 ## How To Use Our Web Application
 
