@@ -2,6 +2,9 @@
 
 Jiaxuan Chen, Chenyu Dai, Shuge Fan, Michael Oh-Yang, Peiqi Zhao
 
+# Technologies
+This web application mainly focus on exploring Optical Character Recognitin (OCR) algorithm aiming to transfering hand-written documents into PDFs. In addition, React Native, Javascript/Typescript, HTML and CSS are used to build a user-friendly frontend UI/UX. Team uses AWS non-relational database to store and update documents transfered by OCR algorithm.  
+
 # Workflow
 
 [![Build and Test React OCR FrontEnd](https://github.com/michaelohyang/OCR-web/actions/workflows/client.yml/badge.svg)](https://github.com/michaelohyang/OCR-web/actions/workflows/client.yml)
